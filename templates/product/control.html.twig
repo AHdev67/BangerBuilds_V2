@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product control{% endblock %}
+
+{% block body %}
+<main>
+    <h1>Product control</h1>
+
+    {# <a href="{{ path('process_json') }}">
+        <button>Process Json data</button>
+    </a> #}
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Data operation</th>
+                <th>Product count</th>
+            </tr>
+        </thead>
+        {% for category in categories %}
+        <tbody>
+             <tr>
+                <td>{{category.name}}</td>
+                <td>
+                    <a href="{{ path('process_json', {'categoryId': category.id}) }}">
+                        <button>Process Json data</button>
+                    </a>
+                </td>
+                <td>{{ category.nbProducts }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+        <tfoot>
+            <tr>
+                <td colspan="2">Total number of products :</td>
+                <td>{{ products|length }}</td>
+            </tr>
+        </tfoot>
+    </table>
+    
+</main>
+{% endblock %}

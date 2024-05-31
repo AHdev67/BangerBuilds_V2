@@ -1,3 +1,445 @@
-body {
-    background-color: skyblue;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    vertical-align: top;
+    font-family: var(--police);
+}
+
+
+:root{
+    --police : "Montserrat", sans-serif, Arial, sans-serif;
+    --bgColor : #393939;
+    --secColor : #eee3cf;
+    --mainColor : #e7c253;
+    --cardColor : #b4a581;
+}
+
+#wrapper{
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--secColor);
+}
+
+main{
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+input {
+    outline:none;
+   }
+
+/* --------------------------------NAVBAR-------------------------------- */
+header{
+    position: fixed; top: 0px;
+    width: 100%;
+    background-color: var(--bgColor);
+    z-index: 99;
+    /* box-shadow: 0px -10px 20px 20px #000000; */
+}
+
+nav{
+    display: grid;
+    justify-content: space-between ;
+    align-items: center;
+    padding-left: 25px;
+    padding-right: 25px;
+    width: 100%;
+}
+
+    /* ----------------------------NAVBAR TITLE---------------------------- */
+    #navTitle{
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    #navLogo{
+        color: var(--mainColor);
+        width: 55px;
+        height: 55px;
+    }
+
+    #navTitle a{
+        font-size: 60px;
+        font-weight: bolder;
+        color: white;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    #titleText {
+        display: flex;
+        gap: 10px;
+    }
+
+    /* ----------------------------USER BUTTONS---------------------------- */
+    #userOptions{
+        grid-column: 3;
+        grid-row: 1;
+        display: flex;
+        gap: 30px;
+    }
+
+    /* ----------------------------SEARCHBAR---------------------------- */
+    #search{
+        grid-column: 1/4;
+        grid-row: 2;
+        display: flex;
+        width: 100%;
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+
+    #searchbar{
+        height: 75px;
+        width: 100%;
+        font-size: 40px;
+        border-style: none;
+        text-align: center;
+        color: white;
+        background-color: black;
+    }
+
+    #searchButton{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 75px;
+        width: 75px;
+        font-size: 50px;
+        border-style: none;
+        background-color: #d4d4d4;
+        color: var(--bgColor);
+    }
+
+    /* ----------------------------BURGER MENU---------------------------- */
+    #burger{
+        grid-column: 1;
+        grid-row: 1;
+        cursor: pointer;
+        height: 75px;
+        width: 75px;
+        font-size: 30px;
+        margin-right: 10px;
+        border-style: none;
+        background-color: var(--bgColor);
+    }
+
+    #menuIcon{
+        font-size: 200%;
+        color: white;
+    }
+
+    #closeIcon{
+        display: none;
+        font-size: 200%;
+        color: white;
+    }
+
+    #menu{
+        position: fixed;
+        transition: transform 0.2s;
+        top: 200px;
+        left: 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--bgColor);
+        list-style: none;
+        padding: 20px;
+        width: 50%;
+        border-bottom-right-radius: 50px;
+        /* box-shadow: 10px 10px 20px -3px #000000; */
+    }
+
+    .hideMenu {
+        transform: translateX(-150%);
+    }
+
+    #menu li{
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .menuItem{
+        color: white;
+        font-size: 50px;
+    }
+
+    .menuItem button{
+        font-size: 50px;
+    }
+
+/* --------------------------------FLASH ALERTS-------------------------------- */
+.flashes .success{
+    background-color: rgb(110, 202, 94);
+    margin: 15px;
+    padding: 15px;
+    font-size: larger;
+    text-align: center;
+    border-radius: 7px;
+}
+
+/* --------------------------------MAIN-------------------------------- */
+main{
+    margin-top: 250px;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding: 10px;
+    min-height: 100vh;
+}
+h1{
+    background-color: inherit;
+    margin-bottom: 10px;
+}
+
+button{
+    padding: 5px;
+}
+
+table{
+    background-color: inherit;
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+table tr td{
+    background-color: inherit;
+    border: 1px solid;
+    padding: 5px;
+}
+
+/* --------------------------------FOOTER-------------------------------- */
+footer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--bgColor);
+    color: white;
+    padding: 10px;
+    font-family: Montserrat;
+}
+
+footer a{
+    text-decoration: none;
+    color: white;
+}
+
+footer h2{
+    font-size: medium;
+}
+
+#footer1 h2{
+    margin-bottom: 5px;
+}
+
+#footer1 p{
+    font-weight: lighter;
+    font-size: small;
+    line-height: 20px;
+}
+
+#footer2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#footer2 p{
+    font-weight: lighter;
+    font-size: small;
+    line-height: 20px;
+}
+
+#footer3 p{
+    display: flex;
+    justify-content: space-around;
+    font-size: 150%;
+    margin-top: 10px;
+}
+
+/* --------------------------------DESKTOP-------------------------------- */
+@media only screen and (min-device-width : 1290px){
+
+    
+
+    /* --------------------------------HEADER-------------------------------- */
+    nav{
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+        /* ----------------------------NAVBAR TITLE---------------------------- */
+        #navTitle{
+            grid-column: 1;
+            grid-row: 1;
+        }
+        
+        #navlogo{
+            color: var(--mainColor);
+            margin-left: 15px;
+            padding-right: 5px;
+        }
+        
+        #navTitle a{
+            font-size: 25px;
+            font-weight: bolder;
+            color: white;
+        }
+
+        #titleText {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        /* ----------------------------USER BUTTONS---------------------------- */
+        #userOptions{
+            grid-column: 3;
+            grid-row: 1;
+        }
+
+        /* ----------------------------SEARCHBAR---------------------------- */
+        #search{
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        #searchbar{
+            height: 30px;
+            width: 800px;
+            border-style: none;
+            text-align: center;
+            font-size: 20px;
+            color: white;
+            background-color: black;
+        }
+        
+        #searchButton{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            width: 30px;
+            font-size: 20px;
+            border-style: none;
+            color: var(--bgColor);
+        }
+        
+        /* ----------------------------BURGER MENU---------------------------- */
+        #burger{
+            cursor: pointer;
+            height: 30px;
+            width: 30px;
+            margin-right: 10px;
+            border-style: none;
+            background-color: var(--bgColor);
+            display: none;
+        }
+        
+        #menu{
+            grid-column: 1/4;
+            grid-row: 2;
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            top: 0px;
+            right: 0px;
+            background-color: var(--bgColor);
+            list-style: none;
+            padding-top: 25px;
+            padding-bottom: 25px;
+            padding-left: 0;
+            padding-right: 0;
+            width: 100%;
+            box-shadow: none;
+        }
+        
+        .hideMenu {
+            transform: translateX(0);
+        }
+        
+        #menu li{
+            padding-top: 0px;
+            padding-bottom: 0px;
+            margin-left: 25px;
+            margin-right: 25px;
+        }
+        
+        .menuItem{
+            color: white;
+            font-size: larger;
+        }
+
+    /* --------------------------------MAIN-------------------------------- */
+    main{
+        margin-top: 200px;
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+
+    /* --------------------------------INFO PAGE-------------------------------- */
+
+    /* --------------------------------FORMS-------------------------------- */
+   
+    /* --------------------------------FOOTER-------------------------------- */
+    footer{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: var(--bgColor);
+        color: white;
+        padding: 10px;
+    }
+    
+    footer a{
+        text-decoration: none;
+        color: white;
+    }
+    
+    footer h2{
+        font-size: larger;
+    }
+    
+    #footer1 h2{
+        margin-bottom: 5px;
+    }
+    
+    #footer1 p{
+        font-weight: lighter;
+        font-size: medium;
+        line-height: 20px;
+    }
+    
+    #footer2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    #footer2 p{
+        font-weight: lighter;
+        font-size: m;
+        line-height: 20px;
+    }
+    
+    #footer3 p{
+        display: flex;
+        justify-content: space-around;
+        font-size: 150%;
+        margin-top: 10px;
+    }
 }

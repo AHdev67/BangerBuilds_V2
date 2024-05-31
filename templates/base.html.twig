@@ -5,13 +5,116 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
         {% endblock %}
     </head>
+
     <body>
+        <header>
+            <nav>
+                <div id="navTitle">
+                    <a href="{{ path('app_home') }}">
+                        {# <img id="navLogo" src="{{ asset('images/BANGER.png') }}" alt="website logo"> #}
+                        <span id="titleText">
+                            <div>BANGER</div>
+                            <div>BUILDS</div>
+                        </span>
+                    </a>
+                </div>
+
+                <div id="userOptions">
+                    <a href="" class="menuItem"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="" class="menuItem"><i class="fa-solid fa-user"></i></a>
+                    <a href="" class="menuItem"><i class="fa-solid fa-cart-shopping"></i></a>
+                </div>
+
+                <button id="burger" aria-label="burger menu button">
+                    <i id="menuIcon" class="fa-solid fa-bars"></i>
+                    <i id="closeIcon" class="fa-solid fa-xmark"></i>
+                </button>
+
+                <ul id="menu" class="hideMenu">
+
+                    <li>
+                        <a href="{{ path('app_category') }}" class="menuItem"><i class="fa-solid fa-microchip"></i> COMPONENTS & ACCESSORIES</a>
+                    </li>                
+                    <li>
+                        <a href="" class="menuItem"><i class="fa-solid fa-screwdriver-wrench"></i> PC BUILDER</a>
+                    </li>
+                    <li>
+                        <a href="" class="menuItem"><i class="fa-solid fa-computer"></i> PREBUILTS</a>
+                    </li>
+                    <li>
+                        <a href="" class="menuItem"><i class="fa-solid fa-toolbox"></i> SERVICES</a>
+                    </li>
+                    <li>
+                        <a href="" class="menuItem">NEED HELP ?</a>
+                    </li>
+                </ul>
+                
+                <div id="search">
+                    <input type="text" placeholder="search" id="searchbar"></input>
+                    <a id="searchButton" href="" aria-label="search"><i class="fa-solid fa-magnifying-glass"></i></a>
+                </div>
+            </nav>
+        </header>
+
+        <div class="flashes">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="{{label}}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+
         {% block body %}{% endblock %}
+
+        <footer>
+            <div id="footer1">
+                <h2>CONTACT</h2>
+                <p>
+                    <a href="">bangerbuilds@contact.com</a>
+                </p>
+
+                <p>
+                    06 83 00 69 42
+                </p>  
+            </div>
+
+            <div id="footer2">
+            <p>
+                <a href="">Frequently asked questions</a>
+            </p>
+            <p>
+                <a href="">Privacy policy</a>
+            </p>
+            </div>
+
+            <div id="footer3">
+                <h2>FOLLOW US</h2>
+
+                <p>
+                    <span id="insta" class="socialIcon">
+                        <a href="" aria-label="instagram"><i class="fa-brands fa-instagram"></i></a>
+                    </span>
+
+                    <span id="twitter" class="socialIcon">
+                        <a href="" aria-label="twitter"><i class="fa-brands fa-square-twitter"></i></a>
+                    </span>
+
+                    <span id="fb" class="socialIcon">
+                        <a href="" aria-label="facebook"><i class="fa-brands fa-square-facebook"></i></a>
+                    </span>
+                </p>
+            </div>
+        </footer>
+
+        {% block javascripts %}
+            <script src="https://kit.fontawesome.com/b28c0a82b5.js" crossorigin="anonymous"></script>
+            <script src="{{ asset('app.js') }}"></script>
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
     </body>
 </html>

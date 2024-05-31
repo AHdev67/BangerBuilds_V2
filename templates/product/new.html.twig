@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add new product{% endblock %}
+
+{% block body %}
+<main>
+    {% if edit %}
+    <h1 class="display-5 fw-bold text-body-emphasis mb-5">Modify product information</h1>
+    {% else %}
+        <h1 class="display-5 fw-bold text-body-emphasis mb-5">Add new product :</h1>
+    {% endif %}
+    
+</main>
+{% endblock %}
