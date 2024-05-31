@@ -22,9 +22,15 @@
                     </a>
                 </div>
 
-                <div id="userOptions">
-                    <a href="" class="menuItem"><i class="fa-solid fa-location-dot"></i></a>
-                    <a href="" class="menuItem"><i class="fa-solid fa-user"></i></a>
+                <div id="sideMenu">
+                    {% if app.user %}
+                        <a href="{{ path('app_logout') }}" class="menuItem"><i class="fa-solid fa-right-from-bracket"></i></a>
+                        <a href="" class="menuItem"><i class="fa-solid fa-user"></i></a>
+                    {% else %}
+                        <a href="{{ path('app_login') }}" class="menuItem"><i class="fa-solid fa-right-to-bracket"></i></a>
+                        <a href="{{ path('app_register') }}" class="menuItem"><i class="fa-solid fa-user-plus"></i></a>
+                    {% endif %}
+                    {# <a href="" class="menuItem"><i class="fa-solid fa-right-from-bracket"></i></a> #}
                     <a href="" class="menuItem"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
 
