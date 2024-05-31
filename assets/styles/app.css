@@ -82,11 +82,12 @@ nav{
     }
 
     /* ----------------------------USER BUTTONS---------------------------- */
-    #userOptions{
+    #sideMenu{
         grid-column: 3;
         grid-row: 1;
         display: flex;
-        gap: 30px;
+        gap: 40px;
+        align-items: center;
     }
 
     /* ----------------------------SEARCHBAR---------------------------- */
@@ -103,8 +104,8 @@ nav{
         height: 75px;
         width: 100%;
         font-size: 40px;
+        padding: 5px;
         border-style: none;
-        text-align: center;
         color: white;
         background-color: black;
     }
@@ -219,6 +220,13 @@ table tr td{
     padding: 5px;
 }
 
+/* --------------------------------FORMS-------------------------------- */
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 /* --------------------------------FOOTER-------------------------------- */
 footer{
     width: 100%;
@@ -320,7 +328,6 @@ footer h2{
             height: 30px;
             width: 800px;
             border-style: none;
-            text-align: center;
             font-size: 20px;
             color: white;
             background-color: black;
