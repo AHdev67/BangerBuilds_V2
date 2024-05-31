@@ -42,44 +42,44 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/product/new', name: 'new_produc')]
-    #[Route('/product/{id}/edit', name: 'edit_product')]
-    public function new(Product $product = null, Request $request, EntityManagerInterface $entityManager): Response
-    {
-        if(!$product){
-            $product = new Product();
-        }
+    // #[Route('/product/new', name: 'new_produc')]
+    // #[Route('/product/{id}/edit', name: 'edit_product')]
+    // public function new(Product $product = null, Request $request, EntityManagerInterface $entityManager): Response
+    // {
+    //     if(!$product){
+    //         $product = new Product();
+    //     }
 
-        $form = $this->createForm(ProductType::class, $product);
-        $form->handleRequest($request);
+    //     $form = $this->createForm(ProductType::class, $product);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+    //     if ($form->isSubmitted() && $form->isValid()) {
             
-            $product = $form->getData();
+    //         $product = $form->getData();
         
-            if ($product->getPrice() > 0)
-            {
-                $entityManager->persist($product);
-                $entityManager->flush();
+    //         if ($product->getPrice() > 0)
+    //         {
+    //             $entityManager->persist($product);
+    //             $entityManager->flush();
 
-                return $this->redirectToRoute('app_product');
-            }
-            else
-            {
-                $this->addFlash(
-                    'warning', 
-                    'Invalid input. Price must have a value superior to 0'
-                );
-                return $this->redirectToRoute("new_session");
-            }
-        }
+    //             return $this->redirectToRoute('app_product');
+    //         }
+    //         else
+    //         {
+    //             $this->addFlash(
+    //                 'warning', 
+    //                 'Invalid input. Price must have a value superior to 0'
+    //             );
+    //             return $this->redirectToRoute("new_session");
+    //         }
+    //     }
 
-        return $this->render('product/new.html.twig', [
-            'formAddProduct' => $form,
-            'edit' => $product->getId(),
-            'product'=>$product
-        ]);
-    }
+    //     return $this->render('product/new.html.twig', [
+    //         'formAddProduct' => $form,
+    //         'edit' => $product->getId(),
+    //         'product'=>$product
+    //     ]);
+    // }
 
     #[Route('/control/{id}/processJson', name: 'process_json')]
     public function processJson(#[MapEntity(id: 'id')] Category $category, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository): Response 
