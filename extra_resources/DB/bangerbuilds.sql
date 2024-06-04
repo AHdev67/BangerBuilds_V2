@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   CONSTRAINT `FK_D34A04AD12469DE2` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16854 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table bangerbuilds.product : ~15 668 rows (environ)
+-- Listage des données de la table bangerbuilds.product : ~15 625 rows (environ)
 INSERT INTO `product` (`id`, `category_id`, `label`, `price`, `in_stock`, `restock_delay`, `specs`, `image`) VALUES
 	(1, 26, 'Expert build + OS install', 70, 1, NULL, '{}', NULL),
 	(2, 26, 'Expert build', 50, 1, NULL, '{}', NULL),
@@ -17030,9 +17030,11 @@ CREATE TABLE IF NOT EXISTS `user` (
   `is_verified` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_IDENTIFIER_EMAIL` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table bangerbuilds.user : ~0 rows (environ)
+-- Listage des données de la table bangerbuilds.user : ~1 rows (environ)
+INSERT INTO `user` (`id`, `email`, `roles`, `password`, `is_verified`) VALUES
+	(2, 'john.php@wanadoo.fr', '[]', '$2y$13$Nk0TTSabz7eWVoVG6wTujexogCnsLCiCQH5eOSxErLDFfYsywWCsy', 0);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
