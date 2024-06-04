@@ -21,14 +21,4 @@ class CategoryController extends AbstractController
             'categories' => $categories,
         ]);
     }
-
-    #[Route('/category/{id}/productList', name: 'product_list')]
-    public function productList(#[MapEntity(id: 'id')] Category $category): Response
-    {
-        $products = $category->getProducts();
-        return $this->render('category/productList.html.twig', [
-            'category' => $category,
-            'products' => $products
-        ]);
-    }
 }

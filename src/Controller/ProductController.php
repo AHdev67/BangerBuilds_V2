@@ -18,16 +18,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProductController extends AbstractController
 {
-    // #[Route('/product', name: 'app_product')]
-    // public function index(ProductRepository $productRepository): Response
-    // {
-    //     $products = $productRepository->findBy(["category"], ["label" => "ASC"]);
-    //     return $this->render('product/index.html.twig', [
-    //         'products' => $products,
-    //     ]);
-    // }
+    #[Route('/category/{categoryId}/products', name: 'app_product')]
+    public function products(#[MapEntity(id: 'categoryId')] Category $category): Response
+    {
+        $products = $category->getProducts();
+        return $this->render('product/index.html.twig', [
+            'category' => $category,
+            'products' => $products
+        ]);
+    }
 
-    
+    #[Route('/category/{categoryId}/products/{productId}/product', name: 'show_product')]
+    public function index(#[MapEntity(id: 'productId')] Product $product): Response
+    {
+        return $this->render('product/show.html.twig', [
+            'product' => $product,
+        ]);
+    }
 
     //PRODUCT CONTROL PANEL FOR ADMIN USE
     #[Route('/control', name: 'control_product')]
