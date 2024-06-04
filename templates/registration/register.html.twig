@@ -1,24 +1,39 @@
 
-{% block title %}Register{% endblock %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Register !{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+        {% endblock %}
+    </head>
 
-{% block body %}
-    <main>
-        {% for flash_error in app.flashes('verify_email_error') %}
-            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-        {% endfor %}
+    <body>
+        
+        <main>
+            {% for flash_error in app.flashes('verify_email_error') %}
+                <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+            {% endfor %}
 
-        <h1>Register</h1>
+            <h1>Register</h1>
 
-        {{ form_errors(registrationForm) }}
+            {{ form_errors(registrationForm) }}
 
-        {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.plainPassword, {
-                label: 'Password'
-            }) }}
-            {{ form_row(registrationForm.agreeTerms) }}
+            {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.plainPassword, {
+                    label: 'Password'
+                }) }}
+                {{ form_row(registrationForm.agreeTerms) }}
 
-            <button type="submit" class="btn">Register</button>
-        {{ form_end(registrationForm) }}
-    </main>
-{% endblock %}
+                <button type="submit" class="btn">Register</button>
+            {{ form_end(registrationForm) }}
+        </main>
+
+        {% block javascripts %}
+        <script src="https://kit.fontawesome.com/b28c0a82b5.js" crossorigin="anonymous"></script>
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </body>
+</html>
