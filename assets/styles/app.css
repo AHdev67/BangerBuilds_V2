@@ -37,6 +37,10 @@ input {
     outline:none;
    }
 
+.hidden {
+    display: none;
+}
+
 /* --------------------------------NAVBAR-------------------------------- */
 header{
     position: fixed; top: 0px;
@@ -90,14 +94,33 @@ nav{
         align-items: center;
     }
 
+    #cart{
+        position: relative;
+    }
+
+    #cartCounter{
+        position: absolute;
+        top: 20px;
+        left: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #6e6e6e;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        padding: 2px;
+        font-size: 30px;
+    }
+
     /* ----------------------------SEARCHBAR---------------------------- */
     #search{
         grid-column: 1/4;
         grid-row: 2;
         display: flex;
-        width: 100%;
         padding-top: 25px;
         padding-bottom: 25px;
+        position: relative;
     }
 
     #searchbar{
@@ -120,6 +143,25 @@ nav{
         border-style: none;
         background-color: #d4d4d4;
         color: var(--bgColor);
+    }
+
+    #suggestions{
+        position: absolute;
+        top: 100px;
+        list-style: none;
+        background-color: #6e6e6e;
+        overflow-x: hidden;
+        z-index: 1;
+        max-height: 350px;
+        max-width: 930px;
+    }
+
+    #suggestions li{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding: 5px;
+        color: white;
     }
 
     /* ----------------------------BURGER MENU---------------------------- */
@@ -313,9 +355,24 @@ footer h2{
         }
 
         /* ----------------------------USER BUTTONS---------------------------- */
-        #userOptions{
+        #sideMenu{
             grid-column: 3;
             grid-row: 1;
+        }
+
+        #cartCounter{
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #6e6e6e;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            padding: 2px;
+            font-size: 15px;
         }
 
         /* ----------------------------SEARCHBAR---------------------------- */
