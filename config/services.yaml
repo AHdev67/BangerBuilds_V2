@@ -22,3 +22,18 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # App\Service\SearchService:
+    #     arguments:
+    #         $formFactory: '@form.factory'
+    #         $requestStack: '@request_stack'
+    #         $router: '@router'
+
+    # App\Twig\AppExtension:
+    #     arguments:
+    #         $searchService: '@App\Service\SearchService'
+    #         $twig: '@twig'
+    #     tags:
+    #         - { name: 'twig.extension' }
+    #     calls:
+    #         - [addGlobalSearchForm, []]
