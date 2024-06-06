@@ -11,58 +11,9 @@
 
     <body>
         <header>
-            <nav>
-                <div id="navTitle">
-                    <a href="{{ path('app_home') }}">
-                        {# <img id="navLogo" src="{{ asset('images/BANGER.png') }}" alt="website logo"> #}
-                        <span id="titleText">
-                            <div>BANGER</div>
-                            <div>BUILDS</div>
-                        </span>
-                    </a>
-                </div>
-
-                <div id="sideMenu">
-                    {% if app.user %}
-                        <a href="{{ path('app_logout') }}" class="menuItem" title="logout"><i class="fa-solid fa-right-from-bracket"></i></a>
-                        <a href="" class="menuItem"><i class="fa-solid fa-user" title="profile"></i></a>
-                    {% else %}
-                        <a href="{{ path('app_login') }}" class="menuItem" title="login"><i class="fa-solid fa-right-to-bracket"></i></a>
-                        <a href="{{ path('app_register') }}" class="menuItem" title="register"><i class="fa-solid fa-user-plus"></i></a>
-                    {% endif %}
-                    {# <a href="" class="menuItem"><i class="fa-solid fa-right-from-bracket"></i></a> #}
-                    <a href="" class="menuItem"><i class="fa-solid fa-cart-shopping"></i></a>
-                </div>
-
-                <button id="burger" aria-label="burger menu button">
-                    <i id="menuIcon" class="fa-solid fa-bars"></i>
-                    <i id="closeIcon" class="fa-solid fa-xmark"></i>
-                </button>
-
-                <ul id="menu" class="hideMenu">
-
-                    <li>
-                        <a href="{{ path('app_category') }}" class="menuItem"><i class="fa-solid fa-microchip"></i> COMPONENTS & ACCESSORIES</a>
-                    </li>                
-                    <li>
-                        <a href="" class="menuItem"><i class="fa-solid fa-screwdriver-wrench"></i> PC BUILDER</a>
-                    </li>
-                    <li>
-                        <a href="" class="menuItem"><i class="fa-solid fa-computer"></i> PREBUILTS</a>
-                    </li>
-                    <li>
-                        <a href="" class="menuItem"><i class="fa-solid fa-toolbox"></i> SERVICES</a>
-                    </li>
-                    <li>
-                        <a href="" class="menuItem">NEED HELP ?</a>
-                    </li>
-                </ul>
-                
-                <div id="search">
-                    <input type="text" placeholder="search" id="searchbar"></input>
-                    <a id="searchButton" href="" aria-label="search"><i class="fa-solid fa-magnifying-glass"></i></a>
-                </div>
-            </nav>
+            {% block nav %}
+                {{ render(controller('App\\Controller\\NavbarController::index')) }}
+            {% endblock %}
         </header>
 
         <div class="flashes">
