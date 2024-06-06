@@ -114,18 +114,20 @@ nav{
     }
 
     /* ----------------------------SEARCHBAR---------------------------- */
-    #search{
+    #searchContainer{
         grid-column: 1/4;
         grid-row: 2;
         display: flex;
+        justify-content: center;
         padding-top: 25px;
         padding-bottom: 25px;
         position: relative;
+        min-width: 100%;
     }
 
-    #searchbar{
+    #search{
         height: 75px;
-        width: 100%;
+        width: 800px;
         font-size: 40px;
         padding: 5px;
         border-style: none;
@@ -133,7 +135,7 @@ nav{
         background-color: black;
     }
 
-    #searchButton{
+    .searchButton{
         display: flex;
         justify-content: center;
         align-items: center;
@@ -376,12 +378,12 @@ footer h2{
         }
 
         /* ----------------------------SEARCHBAR---------------------------- */
-        #search{
+        #searchContainer{
             grid-column: 2;
             grid-row: 1;
         }
 
-        #searchbar{
+        #search{
             height: 30px;
             width: 800px;
             border-style: none;
