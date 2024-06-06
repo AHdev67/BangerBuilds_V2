@@ -19,7 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProductController extends AbstractController
 {
     #[Route('/category/{categoryId}/products', name: 'app_product')]
-    public function products(#[MapEntity(id: 'categoryId')] Category $category): Response
+    public function index(#[MapEntity(id: 'categoryId')] Category $category): Response
     {
         $products = $category->getProducts();
         return $this->render('product/index.html.twig', [
@@ -29,12 +29,25 @@ class ProductController extends AbstractController
     }
 
     #[Route('/category/{categoryId}/products/{productId}/product', name: 'show_product')]
-    public function index(#[MapEntity(id: 'productId')] Product $product): Response
+    public function showProduct(#[MapEntity(id: 'productId')] Product $product): Response
     {
         return $this->render('product/show.html.twig', [
             'product' => $product,
         ]);
     }
+
+    // #[Route('/search_results', name: 'search_results')]
+    // public function searchResults(Request $request)
+    // {
+    //     $session = $request->getSession();
+    //     $msg = "bonjour";
+    //     if (!$session->isStarted()) {
+    //         $session->start();
+    //     }
+    //     return $this->render('product/search_results.html.twig', [
+    //         'msg' => $msg,
+    //     ]);
+    // }
 
     //PRODUCT CONTROL PANEL FOR ADMIN USE
     #[Route('/control', name: 'control_product')]
@@ -48,45 +61,6 @@ class ProductController extends AbstractController
             'products' => $products
         ]);
     }
-
-    // #[Route('/product/new', name: 'new_produc')]
-    // #[Route('/product/{id}/edit', name: 'edit_product')]
-    // public function new(Product $product = null, Request $request, EntityManagerInterface $entityManager): Response
-    // {
-    //     if(!$product){
-    //         $product = new Product();
-    //     }
-
-    //     $form = $this->createForm(ProductType::class, $product);
-    //     $form->handleRequest($request);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-            
-    //         $product = $form->getData();
-        
-    //         if ($product->getPrice() > 0)
-    //         {
-    //             $entityManager->persist($product);
-    //             $entityManager->flush();
-
-    //             return $this->redirectToRoute('app_product');
-    //         }
-    //         else
-    //         {
-    //             $this->addFlash(
-    //                 'warning', 
-    //                 'Invalid input. Price must have a value superior to 0'
-    //             );
-    //             return $this->redirectToRoute("new_session");
-    //         }
-    //     }
-
-    //     return $this->render('product/new.html.twig', [
-    //         'formAddProduct' => $form,
-    //         'edit' => $product->getId(),
-    //         'product'=>$product
-    //     ]);
-    // }
 
     #[Route('/control/{id}/processJson', name: 'process_json')]
     public function processJson(#[MapEntity(id: 'id')] Category $category, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository): Response 
@@ -148,6 +122,4 @@ class ProductController extends AbstractController
         );
         return $this->redirectToRoute('control_product');
     }
-
-    
 }
