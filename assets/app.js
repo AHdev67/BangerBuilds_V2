@@ -28,4 +28,36 @@ function toggleMenu() {
     }
 }
 
-hamburger.addEventListener("click", toggleMenu);
+hamburger.addEventListener('click', toggleMenu);
+
+//----------------------SEARCHBAR SCRIPT----------------------
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     const searchField = document.getElementById("searchbar");
+//     const resultsList = document.getElementById("suggestionList");
+//     const searchUrl = `search_products`;
+
+//     function handleSearch() {
+//         const query = searchField.value;
+//         console.log("Searching for : ", query);
+//         console.log(`${searchUrl}?searchQuery=${encodeURIComponent(query)}`)
+
+//         if (query.length > 2) {
+//             fetch(`${searchUrl}?searchQuery=${encodeURIComponent(query)}`)
+//                 .then(response => response.json())
+//                 .then(data => {
+//                     resultsList.innerHTML = '';
+//                     data.forEach(product => {
+//                         const result = document.createElement('li');
+//                         result.textContent = product.label; // Ensure this matches your Product entity field
+//                         resultsList.appendChild(result);
+//                     });
+//                 })
+//                 .catch(error => console.error('Error:', error));
+//         } else {
+//             resultsList.innerHTML = '';
+//         }
+//     }
+
+//     searchField.addEventListener('input', handleSearch);
+// });
