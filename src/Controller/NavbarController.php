@@ -2,52 +2,32 @@
 
 namespace App\Controller;
 
-use App\Form\ProductAutocompleteField;
-use App\Form\SearchType;
+use App\Form\SearchbarType;
+use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class NavbarController extends AbstractController
 {
-    #[Route('/navbar', name: 'app_search')]
-    public function index(Request $request): Response
+    #[Route('/navbar', name: 'app_navbar')]
+    public function renderNavbar(Request $request): Response
     {
-        $form = $this->createForm(SearchType::class);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            echo($request);
-        }
-
         return $this->render('navbar/navbar.html.twig', [
-            'searchForm' => $form,
+            'bing' => "bong",
         ]);
     }
+
+    
+
+    // #[Route('/navbar/search', name: 'search_products')]
+    // public function search(ProductRepository $productRepository, Request $request): JsonResponse
+    // {
+    //     $query = $request->query->get('searchQuery');
+    //     $products = $productRepository->searchByName($query);
+
+    //     return new JsonResponse($products);
+    // }
 }
-
-// namespace App\Controller;
-
-// use DateTime;
-// use App\Entity\Product;
-// use App\Entity\Category;
-// use App\Form\ProductType;
-// use PhpParser\Node\Stmt\Label;
-// use App\Repository\ProductRepository;
-// use App\Repository\CategoryRepository;
-// use Doctrine\ORM\EntityManagerInterface;
-// use Symfony\Component\HttpFoundation\Request;
-// use Symfony\Component\HttpFoundation\Response;
-// use Symfony\Component\Routing\Attribute\Route;
-// use Symfony\Bridge\Doctrine\Attribute\MapEntity;
-// use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
-// class NavbarController extends AbstractController
-// {
-//     #[Route('/navbar', name: 'app_nav')]
-//     public function index(ProductRepository $productRepository, CategoryRepository $categoryRepository)
-//     {
-        
-//     }
-// }
