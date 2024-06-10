@@ -28,7 +28,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/category/{categoryId}/products/{productId}/product', name: 'show_product')]
+    #[Route('/{productId}/product', name: 'show_product')]
     public function showProduct(#[MapEntity(id: 'productId')] Product $product): Response
     {
         return $this->render('product/show.html.twig', [
@@ -36,18 +36,22 @@ class ProductController extends AbstractController
         ]);
     }
 
-    // #[Route('/search_results', name: 'search_results')]
-    // public function searchResults(Request $request)
-    // {
-    //     $session = $request->getSession();
-    //     $msg = "bonjour";
-    //     if (!$session->isStarted()) {
-    //         $session->start();
-    //     }
-    //     return $this->render('product/search_results.html.twig', [
-    //         'msg' => $msg,
-    //     ]);
-    // }
+    #[Route('/{productId}/product/addToCart', name: 'add_tocart')]
+    public function addProductToCart(#[MapEntity(id: 'productId')] Product $product, Request $request): Response
+    {
+        $session = $request->getSession();
+
+        // Retrieve the cart from the session or initialize it as an empty array
+        $cart = $session->get('cart', []);
+
+        // Add the product to the cart
+        $cart[] = $product;
+
+        // Save the updated cart back to the session
+        $session->set('cart', $cart);
+
+        return $this->redirectToRoute('app_cart');
+    }
 
     //PRODUCT CONTROL PANEL FOR ADMIN USE
     #[Route('/control', name: 'control_product')]
