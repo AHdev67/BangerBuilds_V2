@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shopping cart{% endblock %}
+
+{% block body %}
+<main>
+    <h1>Your shopping cart :</h1> 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item label</th>
+                <th>Price/unit</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in app.session.get('cart') %}
+            <tr>
+                <td>{{ item.label }}</td>
+                <td>{{ item.price }}$</td>
+                <td>+ qtt -</td>
+                <td><a href=""><i class="fa-solid fa-trash"></i></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}
