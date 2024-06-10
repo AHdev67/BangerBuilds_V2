@@ -28,10 +28,10 @@
             </a>
         {% endif %}
         
-        <a href="" class="menuItem" id="cart">
+        <a href="{{ path('app_cart') }}" class="menuItem" id="cart">
             <i class="fa-solid fa-cart-shopping"></i>
             <div id="cartCounter">
-                0
+                {{ app.session.get('cart')|length }}
             </div>
         </a>
     </div>
@@ -61,10 +61,8 @@
     </ul>
     
     <div id="searchContainer">
-        <form method="get" action="{{ path('app_search') }}">
-            {{ form_widget(searchForm) }}
-        </form>
-        {# <input type="text" placeholder="search" id="searchbar"></input>
-        <a id="searchButton" href="" aria-label="search"><i class="fa-solid fa-magnifying-glass"></i></a> #}
+        <input type="text" placeholder="Search for a product" id="searchbar"></input>
+        <a id="searchButton" href="" aria-label="search"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <ul id="suggestionList"></ul>
     </div>
 </nav>
