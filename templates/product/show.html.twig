@@ -4,29 +4,39 @@
 
 {% block body %}
 <main>
-    <div class="productDisplay">
-        <h1>{{ product.label }}</h1>
-        <figure>
-            <img src="" alt="Picture of the product">
-        </figure>
-    </div>
-    
-    <div class="productInfo">
-        <p>
-            Price : {{ product.price }} $
-        </p>
-        <p>
-            Availability : 
-            {% if product.inStock == true %}
-                In stock
-            {% else %}
-                Out of stock
-                {% if product.restockDelay %}
-                    <p>Restocking in approximatively : {{ product.restockDelay }} days</p>
-                {% endif %}
-            {% endif %}
-        </p>
+    <div class="productContainer">
+        <div class="productHeader">
+            <h1 class="productTitle">{{ product.label }}</h1>
+        </div>
         
+        <div class="productMain">
+            <div class="productDisplay">
+                <figure>
+                    <img src="" alt="Picture of the product">
+                </figure>
+            </div>
+            
+            <div class="productInfo">
+                <p>
+                    <b>Price : </b>{{ product.price }} $
+                </p>
+                <p>
+                    <b>Availability : </b>
+                    {% if product.inStock == true %}
+                        In stock
+                    {% else %}
+                        Out of stock
+                        {% if product.restockDelay %}
+                            <p>Restocking in approximatively : {{ product.restockDelay }} days</p>
+                        {% endif %}
+                    {% endif %}
+                </p>
+                <a href="{{ path('add_tocart', {'productId': product.id}) }}" class="addToCart">
+                    <button>Add to cart</button>
+                </a>
+                
+            </div>
+        </div>
     </div>
 </main>
 {% endblock %}
