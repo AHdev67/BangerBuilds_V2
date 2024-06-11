@@ -36,23 +36,6 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/{productId}/product/addToCart', name: 'add_tocart')]
-    public function addProductToCart(#[MapEntity(id: 'productId')] Product $product, Request $request): Response
-    {
-        $session = $request->getSession();
-
-        // Retrieve the cart from the session or initialize it as an empty array
-        $cart = $session->get('cart', []);
-
-        // Add the product to the cart
-        $cart[] = $product;
-
-        // Save the updated cart back to the session
-        $session->set('cart', $cart);
-
-        return $this->redirectToRoute('app_cart');
-    }
-
     //PRODUCT CONTROL PANEL FOR ADMIN USE
     #[Route('/control', name: 'control_product')]
     public function control(CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
