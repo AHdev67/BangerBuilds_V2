@@ -4,25 +4,54 @@
 
 {% block body %}
 <main>
-    <h1>Your shopping cart :</h1> 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Item label</th>
-                <th>Price/unit</th>
-                <th>Quantity</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for item in app.session.get('cart') %}
-            <tr>
-                <td>{{ item.label }}</td>
-                <td>{{ item.price }}$</td>
-                <td>+ qtt -</td>
-                <td><a href=""><i class="fa-solid fa-trash"></i></a></td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <a href="{{ path('app_home') }}" class="returnBtn">
+        <i class="fa-solid fa-arrow-left"></i> Continue shopping.
+    </a>
+
+    <h1 style="margin-top: 50px;">Your shopping cart :</h1> 
+    {% if app.session.get('cart') %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Item label</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, item in app.session.get('cart') %}
+                <tr>
+                    <td>{{ item.product.label }}</td>
+                    <td class="qtt"><a href="{{ path('up_quantity', {'itemId': key}) }}"><button><i class="fa-solid fa-plus"></i></button></a>
+                        {{ item.qtt }}
+                    <a href="{{ path('down_quantity', {'itemId': key}) }}"><button><i class="fa-solid fa-minus"></i></button></a></td>
+                    <td>{{ item.product.price }}$</td>
+                    <td><a href="{{ path('remove_item', {'itemId': key}) }}"><i class="fa-solid fa-trash"></i></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><b>Total : </b></td>
+                    <td colspan="2" class="total">{{ total }}$</td>
+                </tr>
+            </tfoot>
+        </table>
+    {% else %}
+        <div class="altSection">
+            No items in shopping cart.
+        </div>
+    {% endif %}
+    
+
+    <div class="optGroupX">
+        <a href="{{ path('flush_cart') }}" class="deleteBtn">
+            Empty out your cart <i class="fa-solid fa-trash"></i>
+        </a>
+        <a href="" class="validateBtn">
+            Proceed to order <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </div>
+
 </main>
 {% endblock %}
