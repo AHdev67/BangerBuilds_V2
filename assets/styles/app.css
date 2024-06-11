@@ -32,6 +32,7 @@ main{
 
 a{
     text-decoration: none;
+    color: black;
 }
 
 input {
@@ -40,6 +41,37 @@ input {
 
 .hidden {
     display: none;
+}
+
+.returnBtn{
+    background-color: #393939;
+    color: white;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+.deleteBtn{
+    background-color: rgb(236, 75, 75);
+    padding: 10px;
+    border-radius: 7px;
+}
+
+.validateBtn{
+    background-color: rgb(110, 202, 94);
+    padding: 10px;
+    border-radius: 7px;
+}
+
+.optGroupX{
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
+}
+
+.optGroupY{
+    display: flex;
+    flex-direction: column;
+    gap: 50px
 }
 
 /* --------------------------------NAVBAR-------------------------------- */
@@ -227,11 +259,27 @@ nav{
     }
 
 /* --------------------------------FLASH ALERTS-------------------------------- */
+.flashes{
+    position: fixed;
+    top: 200px;
+}
+
 .flashes .success{
     background-color: rgb(110, 202, 94);
     margin: 15px;
     padding: 15px;
-    font-size: larger;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 7px;
+}
+
+.flashes .warning{
+    background-color: rgb(236, 75, 75);
+    margin: 15px;
+    padding: 15px;
+    font-size: 30px;
+    font-weight: bold;
     text-align: center;
     border-radius: 7px;
 }
@@ -254,15 +302,33 @@ button{
 }
 
 table{
-    background-color: inherit;
+    background-color: #dbdbdb;
     border: 1px solid;
     border-collapse: collapse;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    min-width: 100%;
 }
 
 table tr td{
     background-color: inherit;
     border: 1px solid;
     padding: 5px;
+}
+
+.qtt{
+    text-align: center;
+}
+
+.total{
+    text-align: end;
+}
+
+.altSection{
+    background-color: #dbdbdb;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 25px;
 }
 
 /* --------------------------------FORMS-------------------------------- */
@@ -287,6 +353,14 @@ table tr td{
     padding: 25px;
     margin-left: 15px;
     border-style: none;
+}
+
+tbody{
+    border-top: 1px solid black;
+}
+
+tfoot{
+    border-top: 1px solid black;
 }
 
 /* --------------------------------PRODUCT INFO-------------------------------- */
