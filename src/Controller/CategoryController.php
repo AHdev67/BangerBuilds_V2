@@ -17,7 +17,7 @@ class CategoryController extends AbstractController
     {
         $categories = $categoryRepository->findAll();
         unset($categories[25]);
-        return $this->render('category/index.html.twig', [
+        return $this->render('category/list_categories.html.twig', [
             'categories' => $categories,
         ]);
     }

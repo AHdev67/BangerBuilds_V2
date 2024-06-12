@@ -23,7 +23,7 @@ class UserController extends AbstractController
                 $total = $total + $item['product']->getPrice() * $item['qtt'];
             }
         }
-        return $this->render('user/showCart.html.twig', [
+        return $this->render('user/show_cart.html.twig', [
             'total' => $total
         ]);
     }

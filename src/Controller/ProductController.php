@@ -22,7 +22,7 @@ class ProductController extends AbstractController
     public function index(#[MapEntity(id: 'categoryId')] Category $category): Response
     {
         $products = $category->getProducts();
-        return $this->render('product/index.html.twig', [
+        return $this->render('product/list_products.html.twig', [
             'category' => $category,
             'products' => $products
         ]);
@@ -31,7 +31,7 @@ class ProductController extends AbstractController
     #[Route('/{productId}/product', name: 'show_product')]
     public function showProduct(#[MapEntity(id: 'productId')] Product $product): Response
     {
-        return $this->render('product/show.html.twig', [
+        return $this->render('product/show_product.html.twig', [
             'product' => $product,
         ]);
     }
