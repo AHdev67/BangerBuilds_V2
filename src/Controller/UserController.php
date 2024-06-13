@@ -12,18 +12,38 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserController extends AbstractController
 {
-    #[Route('/user/cart', name: 'app_cart')]
-    public function index(Request $request): Response
+    #[route('/user', name: 'app_user')]
+    public function showUser(Request $request): Response
+    {
+        return $this->render('user/show_profile.html.twig', [
+
+        ]);
+    }
+
+    #[Route('/user/cart', name: 'show_cart')]
+    public function showCart(Request $request, ProductRepository $productRepository): Response
     {
         $total = 0;
         $session = $request->getSession();
         $cart = $session->get('cart');
-        if(isset($cart)) {
-            foreach($cart as $item){
-                $total = $total + $item['product']->getPrice() * $item['qtt'];
+        // if(isset($cart)) {
+        //     foreach($cart as $item){
+        //         $total = $total + $item['product']->getPrice() * $item['qtt'];
+        //     }
+        // }
+
+        $products = [];
+
+        if (isset($cart)) {
+            foreach ($cart as $item) {
+                $product = $productRepository->find($item);
+                $products[] = $product;
+                $total = $total + $product->getPrice() * $item['qtt'];
             }
         }
+
         return $this->render('user/show_cart.html.twig', [
+            'products' => $products,
             'total' => $total
         ]);
     }
@@ -43,10 +63,10 @@ class UserController extends AbstractController
         } else {
             // Add the product to the cart with an initial quantity of 1
             $cart[$productId] = [
-                'product' => $product,
                 'qtt' => 1,
             ];
         }
+        dd($cart);
         // Save the updated cart back to the session
         $session->set('cart', $cart);
 
@@ -54,7 +74,7 @@ class UserController extends AbstractController
             'success', 
             'Item successfully added to your cart.'
         );
-        return $this->redirectToRoute('app_cart');
+        return $this->redirectToRoute('show_cart');
     }
 
     #[Route('/user/cart/{itemId}/removeFromCart', name: 'remove_item')]
@@ -66,7 +86,7 @@ class UserController extends AbstractController
         unset($cart[$itemId]);
         $session->set('cart', $cart);
 
-        return $this->redirectToRoute('app_cart');
+        return $this->redirectToRoute('show_cart');
     }
 
     #[Route('/user/cart/{itemId}/upqtt', name: 'up_quantity')]
@@ -78,7 +98,7 @@ class UserController extends AbstractController
         $cart[$itemId]['qtt'] += 1;
         $session->set('cart', $cart);
 
-        return $this->redirectToRoute('app_cart');
+        return $this->redirectToRoute('show_cart');
     }
 
     #[Route('/user/cart/{itemId}/downqtt', name: 'down_quantity')]
@@ -91,7 +111,7 @@ class UserController extends AbstractController
 
         if ($cart[$itemId]['qtt'] > 0) {
             $session->set('cart', $cart);
-            return $this->redirectToRoute('app_cart');
+            return $this->redirectToRoute('show_cart');
         }
         else {
             $this->addFlash(
@@ -99,7 +119,7 @@ class UserController extends AbstractController
                 'Item quantity must be equal or superior to 1.
                 If you wish to remove the item from your cart, click the trashcan icon.'
             );
-            return $this->redirectToRoute('app_cart');
+            return $this->redirectToRoute('show_cart');
         }
         
     }
@@ -109,6 +129,6 @@ class UserController extends AbstractController
     {
         $session = $request->getSession();
         $session->set('cart', []);
-        return $this->redirectToRoute('app_cart');
+        return $this->redirectToRoute('show_cart');
     }
 }
