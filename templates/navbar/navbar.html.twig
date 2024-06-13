@@ -15,7 +15,7 @@
                 <i class="fa-solid fa-right-from-bracket"></i>
             </a>
 
-            <a href="" class="menuItem">
+            <a href="{{ path('app_user') }}" class="menuItem">
                 <i class="fa-solid fa-user" title="profile"></i>
             </a>
         {% else %}
@@ -28,7 +28,7 @@
             </a>
         {% endif %}
         
-        <a href="{{ path('app_cart') }}" class="menuItem" id="cart">
+        <a href="{{ path('show_cart') }}" class="menuItem" id="cart">
             <i class="fa-solid fa-cart-shopping"></i>
             <div id="cartCounter">
                 {{ app.session.get('cart')|length }}
