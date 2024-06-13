@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Proceed with order{% endblock %}
+
+{% block body %}
+    <main>
+        <a href="{{ path('show_cart') }}" class="returnBtn">
+            <i class="fa-solid fa-arrow-left"></i> Cancel order
+        </a>
+
+        <h1 style="margin-top: 50px;">Delivery information</h1>
+
+        <div class="formContainer">
+
+            {{ form_start(formOrder) }}
+                {{ form_row(formOrder.lastName) }}
+                {{ form_row(formOrder.firstName) }}
+                {{ form_row(formOrder.adress) }}
+                <div class="formRowDouble">
+                    {{ form_row(formOrder.city) }}
+                    {{ form_row(formOrder.postalCode) }}
+                </div>
+                
+            {{ form_end(formOrder) }}
+        </div>
+
+    </main>
+   
+
+{% endblock %}
