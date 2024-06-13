@@ -9,10 +9,13 @@
 
 :root{
     --police : "Montserrat", sans-serif, Arial, sans-serif;
-    --bgColor : #393939;
+    --bgDark : #393939;
+    --bgLight: #dbdbdb;
     --secColor : #eee3cf;
     --mainColor : #e7c253;
     --cardColor : #b4a581;
+    --warningColor : #ec4b4b;
+    --validateColor : #6eca5e;
 }
 
 #wrapper{
@@ -28,6 +31,7 @@ main{
     margin: 0;
     padding: 0;
     font-size: 30px;
+    min-height: 100vh;
 }
 
 a{
@@ -43,23 +47,32 @@ input {
     display: none;
 }
 
+.qttBtn{
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+}
+
 .returnBtn{
-    background-color: #393939;
+    background-color: var(--bgDark);
     color: white;
     padding: 10px;
     border-radius: 7px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .deleteBtn{
-    background-color: rgb(236, 75, 75);
+    background-color: var(--warningColor);
     padding: 10px;
     border-radius: 7px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .validateBtn{
-    background-color: rgb(110, 202, 94);
+    background-color: var(--validateColor);
     padding: 10px;
     border-radius: 7px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .optGroupX{
@@ -78,7 +91,7 @@ input {
 header{
     position: fixed; top: 0px;
     width: 100%;
-    background-color: var(--bgColor);
+    background-color: var(--bgDark);
     z-index: 99;
     /* box-shadow: 0px -10px 20px 20px #000000; */
 }
@@ -90,6 +103,7 @@ nav{
     padding-left: 25px;
     padding-right: 25px;
     width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
     /* ----------------------------NAVBAR TITLE---------------------------- */
@@ -177,7 +191,7 @@ nav{
         font-size: 50px;
         border-style: none;
         background-color: #d4d4d4;
-        color: var(--bgColor);
+        color: var(--bgDark);
     }
 
     #suggestionList{
@@ -209,7 +223,7 @@ nav{
         font-size: 30px;
         margin-right: 10px;
         border-style: none;
-        background-color: var(--bgColor);
+        background-color: var(--bgDark);
     }
 
     #menuIcon{
@@ -226,18 +240,18 @@ nav{
     #menu{
         position: fixed;
         transition: transform 0.2s;
-        top: 200px;
+        top: 199px;
         left: 0px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: var(--bgColor);
+        background-color: var(--bgDark);
         list-style: none;
         padding: 20px;
         width: 50%;
         border-bottom-right-radius: 50px;
-        /* box-shadow: 10px 10px 20px -3px #000000; */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
     .hideMenu {
@@ -265,7 +279,7 @@ nav{
 }
 
 .flashes .success{
-    background-color: rgb(110, 202, 94);
+    background-color: var(--validateColor);
     margin: 15px;
     padding: 15px;
     font-size: 30px;
@@ -275,7 +289,7 @@ nav{
 }
 
 .flashes .warning{
-    background-color: rgb(236, 75, 75);
+    background-color: var(--warningColor);
     margin: 15px;
     padding: 15px;
     font-size: 30px;
@@ -290,8 +304,8 @@ main{
     margin-left: 100px;
     margin-right: 100px;
     padding: 10px;
-    min-height: 100vh;
 }
+
 h1{
     background-color: inherit;
     margin-bottom: 10px;
@@ -302,7 +316,7 @@ button{
 }
 
 table{
-    background-color: #dbdbdb;
+    background-color: var(--bgLight);
     border: 1px solid;
     border-collapse: collapse;
     margin-top: 50px;
@@ -325,17 +339,61 @@ table tr td{
 }
 
 .altSection{
-    background-color: #dbdbdb;
+    background-color:var(--bgLight);
     margin-top: 50px;
     margin-bottom: 50px;
     padding: 25px;
 }
 
 /* --------------------------------FORMS-------------------------------- */
-main form{
+.formContainer{
+    display: flex;
+    justify-content: center;
+    background-color:var(--bgLight);
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.formContainer form{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 20px;
+    width: 50vw;
+}
+
+form div{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+form div label{
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+form div input{
+    padding: 15px;
+    font-size: 30px;
+    border-radius: 7px;
+}
+
+.formRowDouble{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.submitBtn{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    width: fit-content;
+    border-style: none;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 /* --------------------------------TABLES-------------------------------- */
@@ -396,7 +454,7 @@ footer{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: var(--bgColor);
+    background-color: var(--bgDark);
     color: white;
     padding: 10px;
     font-size: 20px;
@@ -442,7 +500,9 @@ footer h2{
 /* --------------------------------DESKTOP-------------------------------- */
 @media only screen and (min-device-width : 1290px){
 
-    
+    main{
+        font-size: 20px;
+    }
 
     /* --------------------------------HEADER-------------------------------- */
     nav{
@@ -518,7 +578,7 @@ footer h2{
             width: 30px;
             font-size: 20px;
             border-style: none;
-            color: var(--bgColor);
+            color: var(--bgDark);
         }
         
         /* ----------------------------BURGER MENU---------------------------- */
@@ -528,7 +588,7 @@ footer h2{
             width: 30px;
             margin-right: 10px;
             border-style: none;
-            background-color: var(--bgColor);
+            background-color: var(--bgDark);
             display: none;
         }
         
@@ -542,7 +602,7 @@ footer h2{
             align-items: center;
             top: 0px;
             right: 0px;
-            background-color: var(--bgColor);
+            background-color: var(--bgDark);
             list-style: none;
             padding-top: 25px;
             padding-bottom: 25px;
@@ -571,20 +631,44 @@ footer h2{
     /* --------------------------------MAIN-------------------------------- */
     main{
         margin-top: 200px;
-        margin-left: 200px;
-        margin-right: 200px;
+        margin-left: 300px;
+        margin-right: 300px;
     }
 
     /* --------------------------------INFO PAGE-------------------------------- */
 
     /* --------------------------------FORMS-------------------------------- */
+    
+    form div label{
+        font-size: 20px;
+    }
+    
+    form div input{
+        font-size: 20px;
+        padding: 5px;
+    }
+    
+    .formRowDouble{
+        flex-direction: row;
+    }
+    
+    .submitBtn{
+        font-size: 20px;
+    }
+    /* --------------------------------TABLES-------------------------------- */
    
+    .qttBtn{
+        width: 25px;
+        height: 25px;
+        font-size: 10px;
+    }
+    
     /* --------------------------------FOOTER-------------------------------- */
     footer{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        background-color: var(--bgColor);
+        background-color: var(--bgDark);
         color: white;
         padding: 10px;
     }
