@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Your profile{% endblock %}
+
+{% block body %}
+    <main>
+        <h1>Profile information</h1>
+
+        <section>
+            <h2>General information</h2>
+            <a href="{{ path('flush_cart') }}" class="deleteBtn">
+                Empty out your cart <i class="fa-solid fa-trash"></i>
+            </a>
+        </section>
+    </main>
+{% endblock %}
