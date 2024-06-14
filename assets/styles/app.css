@@ -330,8 +330,14 @@ table tr td{
     padding: 5px;
 }
 
-.qtt{
-    text-align: center;
+.itemLabel{
+    display: flex;
+    flex-direction: column;
+}
+
+.itemCategory{
+    font-size: 20px;
+    font-style: italic;
 }
 
 .total{
@@ -396,6 +402,54 @@ form div input{
     font-weight: bold;
 }
 
+.centerContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.generalInfo{
+    margin-left: 50px;
+    margin-top: 25px;
+    margin-bottom: 50px;
+    padding: 15px;
+    width: 100%;
+    background-color: var(--bgLight);
+}
+
+.generalInfo h2{
+    margin-bottom: 25px;
+}
+
+.generalInfo div{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.orderHistory{
+    margin-left: 50px;
+    padding: 15px;
+    width: 100%;
+    background-color: var(--bgLight);
+}
+
+.orderHistory h2{
+    margin-bottom: 25px;
+}
+
+.orderHistory ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.orderContent{
+    padding: 15px;
+    background-color: #eeeeee;
+}
+
 /* --------------------------------TABLES-------------------------------- */
 table{
     border-style: none;
@@ -409,7 +463,6 @@ table tr th{
 
 table tr td{
     padding: 25px;
-    margin-left: 15px;
     border-style: none;
 }
 
