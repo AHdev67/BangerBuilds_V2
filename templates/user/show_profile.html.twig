@@ -26,8 +26,8 @@
                 <h2>Order history</h2>
                     {% for order in app.user.orders %}
                         <ul>
-                            <li><b>Order date : </b>{{ order.orderDate|date('Y-m-d') }}</li>
                             <li><b>Ref ID : </b>{{ order.refId }}</li>
+                            <li><b>Order date : </b>{{ order.orderDate|date('Y-m-d') }}</li>
                             <li><b>Last name : </b>{{ order.lastName }}</li>
                             <li><b>First name : </b>{{ order.firstName }}</li>
                             <li><b>Delivery adress : </b>{{ order.adress }}</li>
