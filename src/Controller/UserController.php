@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,8 +16,10 @@ class UserController extends AbstractController
     #[route('/user', name: 'app_user')]
     public function showUser(Request $request): Response
     {
+        $user = $this->getUser();
+        $orders = $user->getOrders();
         return $this->render('user/show_profile.html.twig', [
-
+            'orders' => $orders
         ]);
     }
 
@@ -26,24 +29,21 @@ class UserController extends AbstractController
         $total = 0;
         $session = $request->getSession();
         $cart = $session->get('cart');
-        // if(isset($cart)) {
-        //     foreach($cart as $item){
-        //         $total = $total + $item['product']->getPrice() * $item['qtt'];
-        //     }
-        // }
 
-        $products = [];
+        $items = [];
 
-        if (isset($cart)) {
-            foreach ($cart as $item) {
-                $product = $productRepository->find($item);
-                $products[] = $product;
-                $total = $total + $product->getPrice() * $item['qtt'];
+        if (!empty($cart)) {
+            foreach ($cart as $productId => $item) {
+                $product = $productRepository->find($productId);
+                if ($product) {
+                    $items[] = ['product' => $product, 'qtt' => $item['qtt']];
+                    $total += $product->getPrice() * $item['qtt'];
+                }
             }
         }
 
         return $this->render('user/show_cart.html.twig', [
-            'products' => $products,
+            'items' => $items,
             'total' => $total
         ]);
     }
@@ -66,7 +66,6 @@ class UserController extends AbstractController
                 'qtt' => 1,
             ];
         }
-        dd($cart);
         // Save the updated cart back to the session
         $session->set('cart', $cart);
 
