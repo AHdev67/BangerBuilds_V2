@@ -5,12 +5,42 @@
 {% block body %}
     <main>
         <h1>Profile information</h1>
+        <div class="centerContainer">
+            <section class="generalInfo">
+                <h2>Account information</h2>
+                <div>
+                    <span>
+                        <b>Email : </b>{{ app.user.email }}
+                        <a href=""><button>Change email</button></a>
+                    </span>
+                    
+                    <span>
+                        <b>Password : </b>
+                        <a href=""><button>Change password</button></a>
+                        <a href=""><button>Retrieve password</button></a>
+                    </span>
+                </div>
+            </section>
 
-        <section>
-            <h2>General information</h2>
-            <a href="{{ path('flush_cart') }}" class="deleteBtn">
-                Empty out your cart <i class="fa-solid fa-trash"></i>
-            </a>
-        </section>
+            <section class="orderHistory">
+                <h2>Order history</h2>
+                    {% for order in app.user.orders %}
+                        <ul>
+                            <li><b>Order date : </b>{{ order.orderDate|date('Y-m-d') }}</li>
+                            <li><b>Ref ID : </b>{{ order.refId }}</li>
+                            <li><b>Last name : </b>{{ order.lastName }}</li>
+                            <li><b>First name : </b>{{ order.firstName }}</li>
+                            <li><b>Delivery adress : </b>{{ order.adress }}</li>
+                            <li><b>Content : </b></li>
+                                <ul class="orderContent">
+                                {% for product in order.products %}
+                                    <li>{{ product.label }}</li>
+                                {% endfor %}
+                                </ul>
+                            <li><b>Total : </b>{{ order.total }}$</li>
+                        </ul>
+                    {% endfor %}
+            </section>
+        </div>
     </main>
 {% endblock %}
