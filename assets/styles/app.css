@@ -47,6 +47,12 @@ input {
     display: none;
 }
 
+button{
+    padding: 10px;
+    border-radius: 7px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .qttBtn{
     width: 35px;
     height: 35px;
@@ -56,23 +62,14 @@ input {
 .returnBtn{
     background-color: var(--bgDark);
     color: white;
-    padding: 10px;
-    border-radius: 7px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .deleteBtn{
     background-color: var(--warningColor);
-    padding: 10px;
-    border-radius: 7px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .validateBtn{
     background-color: var(--validateColor);
-    padding: 10px;
-    border-radius: 7px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .optGroupX{
@@ -224,6 +221,7 @@ nav{
         margin-right: 10px;
         border-style: none;
         background-color: var(--bgDark);
+        box-shadow: none;
     }
 
     #menuIcon{
@@ -311,10 +309,6 @@ h1{
     margin-bottom: 10px;
 }
 
-button{
-    padding: 5px;
-}
-
 table{
     background-color: var(--bgLight);
     border: 1px solid;
@@ -349,6 +343,56 @@ table tr td{
     margin-top: 50px;
     margin-bottom: 50px;
     padding: 25px;
+}
+
+.centerContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.generalInfo{
+    margin-left: 50px;
+    margin-top: 25px;
+    margin-bottom: 50px;
+    width: 100%;
+    
+}
+
+.generalInfo h2{
+    margin-bottom: 25px;
+}
+
+.generalInfo div{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 15px;
+    background-color: var(--bgLight);
+}
+
+.orderHistory{
+    margin-left: 50px;
+    width: 100%;
+    
+}
+
+.orderHistory h2{
+    margin-bottom: 25px;
+}
+
+.orderHistory ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    background-color: var(--bgLight);
+}
+
+ul .orderContent{
+    padding: 15px;
+    background-color: #eeeeee;
 }
 
 /* --------------------------------FORMS-------------------------------- */
@@ -400,54 +444,6 @@ form div input{
     border-style: none;
     font-size: 30px;
     font-weight: bold;
-}
-
-.centerContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.generalInfo{
-    margin-left: 50px;
-    margin-top: 25px;
-    margin-bottom: 50px;
-    padding: 15px;
-    width: 100%;
-    background-color: var(--bgLight);
-}
-
-.generalInfo h2{
-    margin-bottom: 25px;
-}
-
-.generalInfo div{
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-.orderHistory{
-    margin-left: 50px;
-    padding: 15px;
-    width: 100%;
-    background-color: var(--bgLight);
-}
-
-.orderHistory h2{
-    margin-bottom: 25px;
-}
-
-.orderHistory ul{
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.orderContent{
-    padding: 15px;
-    background-color: #eeeeee;
 }
 
 /* --------------------------------TABLES-------------------------------- */
