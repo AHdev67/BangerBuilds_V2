@@ -41,25 +41,32 @@ class Order
     #[ORM\Column]
     private ?float $total = null;
 
-    /**
-     * @var Collection<int, Product>
-     */
-    #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'relatedOrders')]
-    private Collection $products;
+    // /**
+    //  * @var Collection<int, Product>
+    //  */
+    // #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'relatedOrders')]
+    // private Collection $products;
 
-    /**
-     * @var Collection<int, Build>
-     */
-    #[ORM\OneToMany(targetEntity: Build::class, mappedBy: 'relatedOrder')]
-    private Collection $builds;
+    // /**
+    //  * @var Collection<int, Build>
+    //  */
+    // #[ORM\OneToMany(targetEntity: Build::class, mappedBy: 'relatedOrder')]
+    // private Collection $builds;
 
     #[ORM\ManyToOne(inversedBy: 'Orders')]
     private ?User $user = null;
+
+    /**
+     * @var Collection<int, OrderItem>
+     */
+    #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'relatedOrder', orphanRemoval: true)]
+    private Collection $orderItems;
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->builds = new ArrayCollection();
+        $this->orderItems = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -163,58 +170,58 @@ class Order
         return $this;
     }
 
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
+    // /**
+    //  * @return Collection<int, Product>
+    //  */
+    // public function getProducts(): Collection
+    // {
+    //     return $this->products;
+    // }
 
-    public function addProduct(Product $product): static
-    {
+    // public function addProduct(Product $product): static
+    // {
         
-        $this->products->add($product);
+    //     $this->products->add($product);
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeProduct(Product $product): static
-    {
-        $this->products->removeElement($product);
+    // public function removeProduct(Product $product): static
+    // {
+    //     $this->products->removeElement($product);
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    /**
-     * @return Collection<int, Build>
-     */
-    public function getBuilds(): Collection
-    {
-        return $this->builds;
-    }
+    // /**
+    //  * @return Collection<int, Build>
+    //  */
+    // public function getBuilds(): Collection
+    // {
+    //     return $this->builds;
+    // }
 
-    public function addBuild(Build $build): static
-    {
-        if (!$this->builds->contains($build)) {
-            $this->builds->add($build);
-            $build->setRelatedOrder($this);
-        }
+    // public function addBuild(Build $build): static
+    // {
+    //     if (!$this->builds->contains($build)) {
+    //         $this->builds->add($build);
+    //         $build->setRelatedOrder($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeBuild(Build $build): static
-    {
-        if ($this->builds->removeElement($build)) {
-            // set the owning side to null (unless already changed)
-            if ($build->getRelatedOrder() === $this) {
-                $build->setRelatedOrder(null);
-            }
-        }
+    // public function removeBuild(Build $build): static
+    // {
+    //     if ($this->builds->removeElement($build)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($build->getRelatedOrder() === $this) {
+    //             $build->setRelatedOrder(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getUser(): ?User
     {
@@ -224,6 +231,36 @@ class Order
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrderItem>
+     */
+    public function getOrderItems(): Collection
+    {
+        return $this->orderItems;
+    }
+
+    public function addOrderItem(OrderItem $orderItem): static
+    {
+        if (!$this->orderItems->contains($orderItem)) {
+            $this->orderItems->add($orderItem);
+            $orderItem->setRelatedOrder($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderItem(OrderItem $orderItem): static
+    {
+        if ($this->orderItems->removeElement($orderItem)) {
+            // set the owning side to null (unless already changed)
+            if ($orderItem->getRelatedOrder() === $this) {
+                $orderItem->setRelatedOrder(null);
+            }
+        }
 
         return $this;
     }
