@@ -53,6 +53,9 @@ class Order
     #[ORM\OneToMany(targetEntity: Build::class, mappedBy: 'relatedOrder')]
     private Collection $builds;
 
+    #[ORM\ManyToOne(inversedBy: 'Orders')]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -170,9 +173,8 @@ class Order
 
     public function addProduct(Product $product): static
     {
-        if (!$this->products->contains($product)) {
-            $this->products->add($product);
-        }
+        
+        $this->products->add($product);
 
         return $this;
     }
@@ -210,6 +212,18 @@ class Order
                 $build->setRelatedOrder(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
