@@ -35,15 +35,17 @@ class OrderController extends AbstractController
 
             $session = $request->getSession();
             $cart = $session->get('cart');
-            if (!empty($cart)) {
-                foreach ($cart as $productId => $item) {
-                    $product = $productRepository->find($productId);
-                    for ($i = 0; $i < $item['qtt']; $i++) {
-                        $order->addProduct($product);
-                        $order->setTotal($order->getTotal() + $product->getPrice());
-                    }
-                }   
-            }
+            // if (!empty($cart)) {
+            //     foreach ($cart as $productId => $item) {
+            //         $product = $productRepository->find($productId);
+            //         for ($i = 0; $i < $item['qtt']; $i++) {
+            //             $order->addProduct($product);
+            //             $order->setTotal($order->getTotal() + $product->getPrice());
+            //         }
+            //     }   
+            // }
+
+            // REWORK METHOD TO USE NEW ORDER ITEM ENTITY !
 
             $entityManager->persist($order);
             $entityManager->flush();

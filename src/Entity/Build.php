@@ -25,15 +25,22 @@ class Build
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
-    #[ORM\ManyToOne(inversedBy: 'builds')]
-    private ?Order $relatedOrder = null;
+    // #[ORM\ManyToOne(inversedBy: 'builds')]
+    // private ?Order $relatedOrder = null;
 
     #[ORM\Column]
     private ?float $total = null;
 
+    /**
+     * @var Collection<int, OrderItem>
+     */
+    #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'build')]
+    private Collection $orderItems;
+
     public function __construct()
     {
         $this->components = new ArrayCollection();
+        $this->orderItems = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,17 +84,17 @@ class Build
         return $this;
     }
 
-    public function getRelatedOrder(): ?Order
-    {
-        return $this->relatedOrder;
-    }
+    // public function getRelatedOrder(): ?Order
+    // {
+    //     return $this->relatedOrder;
+    // }
 
-    public function setRelatedOrder(?Order $relatedOrder): static
-    {
-        $this->relatedOrder = $relatedOrder;
+    // public function setRelatedOrder(?Order $relatedOrder): static
+    // {
+    //     $this->relatedOrder = $relatedOrder;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getTotal(): ?float
     {
@@ -97,6 +104,36 @@ class Build
     public function setTotal(float $total): static
     {
         $this->total = $total;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrderItem>
+     */
+    public function getOrderItems(): Collection
+    {
+        return $this->orderItems;
+    }
+
+    public function addOrderItem(OrderItem $orderItem): static
+    {
+        if (!$this->orderItems->contains($orderItem)) {
+            $this->orderItems->add($orderItem);
+            $orderItem->setBuild($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderItem(OrderItem $orderItem): static
+    {
+        if ($this->orderItems->removeElement($orderItem)) {
+            // set the owning side to null (unless already changed)
+            if ($orderItem->getBuild() === $this) {
+                $orderItem->setBuild(null);
+            }
+        }
 
         return $this;
     }

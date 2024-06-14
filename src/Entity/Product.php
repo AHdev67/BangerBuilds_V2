@@ -40,11 +40,11 @@ class Product
     #[ORM\ManyToMany(targetEntity: Build::class, mappedBy: 'components')]
     private Collection $builds;
 
-    /**
-     * @var Collection<int, Order>
-     */
-    #[ORM\ManyToMany(targetEntity: Order::class, mappedBy: 'products')]
-    private Collection $relatedOrders;
+    // /**
+    //  * @var Collection<int, Order>
+    //  */
+    // #[ORM\ManyToMany(targetEntity: Order::class, mappedBy: 'products')]
+    // private Collection $relatedOrders;
 
     /**
      * @var Collection<int, Review>
@@ -55,11 +55,18 @@ class Product
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
+    /**
+     * @var Collection<int, OrderItem>
+     */
+    #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'product')]
+    private Collection $orderItems;
+
     public function __construct()
     {
         $this->builds = new ArrayCollection();
         $this->relatedOrders = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->orderItems = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -166,32 +173,32 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection<int, Order>
-     */
-    public function getRelatedOrders(): Collection
-    {
-        return $this->relatedOrders;
-    }
+    // /**
+    //  * @return Collection<int, Order>
+    //  */
+    // public function getRelatedOrders(): Collection
+    // {
+    //     return $this->relatedOrders;
+    // }
 
-    public function addOrder(Order $order): static
-    {
-        if (!$this->relatedOrders->contains($order)) {
-            $this->relatedOrders->add($order);
-            $order->addProduct($this);
-        }
+    // public function addOrder(Order $order): static
+    // {
+    //     if (!$this->relatedOrders->contains($order)) {
+    //         $this->relatedOrders->add($order);
+    //         $order->addProduct($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeOrder(Order $order): static
-    {
-        if ($this->relatedOrders->removeElement($order)) {
-            $order->removeProduct($this);
-        }
+    // public function removeOrder(Order $order): static
+    // {
+    //     if ($this->relatedOrders->removeElement($order)) {
+    //         $order->removeProduct($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection<int, Review>
@@ -231,6 +238,36 @@ class Product
     public function setImage(?string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrderItem>
+     */
+    public function getOrderItems(): Collection
+    {
+        return $this->orderItems;
+    }
+
+    public function addOrderItem(OrderItem $orderItem): static
+    {
+        if (!$this->orderItems->contains($orderItem)) {
+            $this->orderItems->add($orderItem);
+            $orderItem->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderItem(OrderItem $orderItem): static
+    {
+        if ($this->orderItems->removeElement($orderItem)) {
+            // set the owning side to null (unless already changed)
+            if ($orderItem->getProduct() === $this) {
+                $orderItem->setProduct(null);
+            }
+        }
 
         return $this;
     }
