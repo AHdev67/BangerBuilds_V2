@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Order;
 use App\Form\OrderType;
 use App\Repository\OrderRepository;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +17,7 @@ class OrderController extends AbstractController
     #[Route('/order/new', name: 'new_order')]
     #[Route('/order/{orderId}/edit', name: 'edit_order')]
 
-    public function newOrder(Order $order = null, Request $request, EntityManagerInterface $entityManager): Response
+    public function newOrder(Order $order = null, Request $request, EntityManagerInterface $entityManager, ProductRepository $productRepository): Response
     {
         if (!$order){
             $order = new Order();
@@ -34,13 +35,13 @@ class OrderController extends AbstractController
 
             $session = $request->getSession();
             $cart = $session->get('cart');
-            if ($cart) {
-                foreach ($cart as $item) {
-                    $product = $item['product'];
-                    $entityManager->persist($product);
-                    dd($product);
-                    $order->addProduct($product);
-                    $order->setTotal($order->getTotal() + $product->getPrice());
+            if (!empty($cart)) {
+                foreach ($cart as $productId => $item) {
+                    $product = $productRepository->find($productId);
+                    for ($i = 0; $i < $item['qtt']; $i++) {
+                        $order->addProduct($product);
+                        $order->setTotal($order->getTotal() + $product->getPrice());
+                    }
                 }   
             }
 
