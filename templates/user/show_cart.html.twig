@@ -19,21 +19,43 @@
                 </tr>
             </thead>
             <tbody>
-                {% for key, item in app.session.get('cart') %}
-                <tr>
-                    <td>{{ item.product.label }}</td>
-                    <td class="qtt"><a href="{{ path('up_quantity', {'itemId': key}) }}"><button><i class="fa-solid fa-plus"></i></button></a>
-                        {{ item.qtt }}
-                    <a href="{{ path('down_quantity', {'itemId': key}) }}"><button><i class="fa-solid fa-minus"></i></button></a></td>
-                    <td>{{ item.product.price }}$</td>
-                    <td><a href="{{ path('remove_item', {'itemId': key}) }}"><i class="fa-solid fa-trash"></i></a></td>
-                </tr>
+                {% for item in items %}
+                    <tr>
+                        <td class="itemLabel">
+                            <span class="itemCategory">{{ item.product.category.name }}</span>
+                            <span><b>{{ item.product.label }}</b></span>
+                        </td>
+
+                        <td class="qtt">
+                            <a href="{{ path('up_quantity', {'itemId': item.product.id}) }}"><button class="qttBtn"><i class="fa-solid fa-plus"></i></button></a>
+                                {{ item.qtt }}
+                            <a href="{{ path('down_quantity', {'itemId': item.product.id}) }}"><button class="qttBtn"><i class="fa-solid fa-minus"></i></button></a>
+                        </td>
+
+                        <td>{{ item.product.price }}$</td>
+
+                        <td>
+                            <a href="{{ path('remove_item', {'itemId': item.product.id}) }}">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td class="itemLabel">Err: Invalid object in cart</td>
+                        <td class="qtt"><a href="{{ path('up_quantity', {'itemId': item.product.id}) }}"><button class="qttBtn"><i class="fa-solid fa-plus"></i></button></a>
+                            {{ item.qtt }}
+                        <a href="{{ path('down_quantity', {'itemId': item.product.id}) }}"><button class="qttBtn"><i class="fa-solid fa-minus"></i></button></a></td>
+                        <td>Err: Invalid object in cart</td>
+                        <td><a href="{{ path('remove_item', {'itemId': item.product.id}) }}"><i class="fa-solid fa-trash"></i></a></td>
+                    </tr>
                 {% endfor %}
+
             </tbody>
             <tfoot>
                 <tr>
-                    <td><b>Total : </b></td>
-                    <td colspan="2" class="total">{{ total }}$</td>
+                    <td colspan="2"><b>Total : </b></td>
+                    <td>{{ total }}$</td>
                 </tr>
             </tfoot>
         </table>
@@ -48,10 +70,20 @@
         <a href="{{ path('flush_cart') }}" class="deleteBtn">
             Empty out your cart <i class="fa-solid fa-trash"></i>
         </a>
-        <a href="" class="validateBtn">
+        <a href="{{ path('new_order') }}" class="validateBtn">
             Proceed to order <i class="fa-solid fa-arrow-right"></i>
         </a>
     </div>
 
 </main>
 {% endblock %}
+
+
+{# <tr>
+    <td id="itemLabel">{{ item.product.label }}</td>
+    <td class="qtt"><a href="{{ path('up_quantity', {'itemId': key}) }}"><button class="qttBtn"><i class="fa-solid fa-plus"></i></button></a>
+        {{ item.qtt }}
+    <a href="{{ path('down_quantity', {'itemId': key}) }}"><button class="qttBtn"><i class="fa-solid fa-minus"></i></button></a></td>
+    <td>{{ item.product.price }}$</td>
+    <td><a href="{{ path('remove_item', {'itemId': key}) }}"><i class="fa-solid fa-trash"></i></a></td>
+</tr> #}
