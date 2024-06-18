@@ -41,18 +41,6 @@ class Order
     #[ORM\Column]
     private ?float $total = null;
 
-    // /**
-    //  * @var Collection<int, Product>
-    //  */
-    // #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'relatedOrders')]
-    // private Collection $products;
-
-    // /**
-    //  * @var Collection<int, Build>
-    //  */
-    // #[ORM\OneToMany(targetEntity: Build::class, mappedBy: 'relatedOrder')]
-    // private Collection $builds;
-
     #[ORM\ManyToOne(inversedBy: 'Orders')]
     private ?User $user = null;
 
@@ -169,59 +157,6 @@ class Order
 
         return $this;
     }
-
-    // /**
-    //  * @return Collection<int, Product>
-    //  */
-    // public function getProducts(): Collection
-    // {
-    //     return $this->products;
-    // }
-
-    // public function addProduct(Product $product): static
-    // {
-        
-    //     $this->products->add($product);
-
-    //     return $this;
-    // }
-
-    // public function removeProduct(Product $product): static
-    // {
-    //     $this->products->removeElement($product);
-
-    //     return $this;
-    // }
-
-    // /**
-    //  * @return Collection<int, Build>
-    //  */
-    // public function getBuilds(): Collection
-    // {
-    //     return $this->builds;
-    // }
-
-    // public function addBuild(Build $build): static
-    // {
-    //     if (!$this->builds->contains($build)) {
-    //         $this->builds->add($build);
-    //         $build->setRelatedOrder($this);
-    //     }
-
-    //     return $this;
-    // }
-
-    // public function removeBuild(Build $build): static
-    // {
-    //     if ($this->builds->removeElement($build)) {
-    //         // set the owning side to null (unless already changed)
-    //         if ($build->getRelatedOrder() === $this) {
-    //             $build->setRelatedOrder(null);
-    //         }
-    //     }
-
-    //     return $this;
-    // }
 
     public function getUser(): ?User
     {
