@@ -23,7 +23,7 @@ class OrderType extends AbstractType
             
             ->add('Validate', SubmitType::class, [
                 'attr' => [
-                    'class' => 'validateBtn submitBtn',
+                    'class' => 'validateBtn submitBtn btn',
                 ]
             ])
         ;
