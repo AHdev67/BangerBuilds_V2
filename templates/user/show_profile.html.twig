@@ -11,14 +11,15 @@
                 <div>
                     <span>
                         <b>Email : </b>{{ app.user.email }}
-                        <a href=""><button>Change email</button></a>
+                        <a href=""><button class="btn">Change email</button></a>
                     </span>
                     
                     <span>
                         <b>Password : </b>
-                        <a href=""><button>Change password</button></a>
-                        <a href=""><button>Retrieve password</button></a>
+                        <a href=""><button class="btn">Change password</button></a>
+                        <a href=""><button class="btn">Retrieve password</button></a>
                     </span>
+                    
                 </div>
             </section>
 
@@ -33,8 +34,8 @@
                             <li><b>Delivery adress : </b>{{ order.adress }}</li>
                             <li><b>Content : </b></li>
                                 <ul class="orderContent">
-                                {% for product in order.products %}
-                                    <li>{{ product.label }}</li>
+                                {% for item in order.orderItems %}
+                                    <li>{{ item.quantity }}x <b>{{ item.product.label }}</b></li>
                                 {% endfor %}
                                 </ul>
                             <li><b>Total : </b>{{ order.total }}$</li>

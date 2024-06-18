@@ -4,7 +4,7 @@
 
 {% block body %}
 <main>
-    <a href="{{ path('app_home') }}" class="returnBtn">
+    <a href="{{ path('app_home') }}" class="returnBtn btn">
         <i class="fa-solid fa-arrow-left"></i> Continue shopping
     </a>
 
@@ -67,10 +67,10 @@
     
 
     <div class="optGroupX">
-        <a href="{{ path('flush_cart') }}" class="deleteBtn">
+        <a href="{{ path('flush_cart') }}" class="deleteBtn btn">
             Empty out your cart <i class="fa-solid fa-trash"></i>
         </a>
-        <a href="{{ path('new_order') }}" class="validateBtn">
+        <a href="{{ path('new_order') }}" class="validateBtn btn">
             Proceed to order <i class="fa-solid fa-arrow-right"></i>
         </a>
     </div>
