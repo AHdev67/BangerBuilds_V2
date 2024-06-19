@@ -47,16 +47,24 @@ input {
     display: none;
 }
 
+span{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .btn{
     padding: 10px;
     border-radius: 7px;
+    font-size: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+    border-style: none;
 }
 
 .qttBtn{
     width: 35px;
     height: 35px;
-    font-size: 20px;
 }
 
 .returnBtn{
@@ -155,6 +163,7 @@ nav{
         height: 35px;
         padding: 2px;
         font-size: 30px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
     /* ----------------------------SEARCHBAR---------------------------- */
@@ -309,6 +318,17 @@ h1{
     margin-bottom: 10px;
 }
 
+.mainTitle{
+    margin-bottom: 80px;
+}
+
+.optContainer{
+    display: flex;
+    gap: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
 table{
     background-color: var(--bgLight);
     border: 1px solid;
@@ -429,6 +449,16 @@ form div input{
     padding: 15px;
     font-size: 30px;
     border-radius: 7px;
+}
+
+form div select{
+    padding: 15px;
+    font-size: 30px;
+    border-radius: 7px;
+}
+
+form div select option{
+    font-size: 15px;
 }
 
 .formRowDouble{
@@ -552,6 +582,10 @@ footer h2{
 
     main{
         font-size: 20px;
+    }
+
+    .btn{
+        font-size: 15px;
     }
 
     /* --------------------------------HEADER-------------------------------- */
@@ -697,6 +731,16 @@ footer h2{
         font-size: 20px;
         padding: 5px;
     }
+
+    form div select{
+        font-size: 20px;
+        padding: 5px;
+    }
+
+    form div select option{
+        font-size: 20px;
+    }
+    
     
     .formRowDouble{
         flex-direction: row;
