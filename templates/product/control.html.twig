@@ -4,40 +4,49 @@
 
 {% block body %}
 <main>
-    <h1>Product control</h1>
+    <h1 class="mainTitle">Administrator control panel</h1>
 
-    {# <a href="{{ path('process_json') }}">
-        <button>Process Json data</button>
-    </a> #}
-    
-    <table>
-        <thead>
-            <tr>
-                <th>Category</th>
-                <th>Data operation</th>
-                <th>Product count</th>
-            </tr>
-        </thead>
-        {% for category in categories %}
-        <tbody>
-             <tr>
-                <td>{{category.name}}</td>
-                <td>
-                    <a href="{{ path('process_json', {'categoryId': category.id}) }}">
-                        <button>Process Json data</button>
-                    </a>
-                </td>
-                <td>{{ category.nbProducts }}</td>
-            </tr>
-        </tbody>
-        {% endfor %}
-        <tfoot>
-            <tr>
-                <td colspan="2">Total number of products :</td>
-                <td>{{ products|length }}</td>
-            </tr>
-        </tfoot>
-    </table>
+    <h2>Add a new product to the database</h2>
+    <div class="optContainer">
+        <a href="{{ path('new_product') }}">
+            <button class="btn"><i class="fa-solid fa-microchip"></i> Add new individual product</button>
+        </a>
+        <a href="">
+            <button class="btn"><i class="fa-solid fa-computer"></i> Add new prebuilt PC</button>
+        </a>
+    </div>
+
+    <h2>Mass-process product Json data</h2>
+    <div class="tableContainer">
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Operation</th>
+                    <th>Product count</th>
+                </tr>
+            </thead>
+            {% for category in categories %}
+            <tbody>
+                <tr>
+                    <td>{{category.name}}</td>
+                    <td>
+                        <a href="{{ path('process_json', {'id': category.id}) }}">
+                            <button class="btn">Process data</button>
+                        </a>
+                    </td>
+                    <td>{{ category.nbProducts }}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+            <tfoot>
+                <tr>
+                    <td colspan="2">Total number of products :</td>
+                    <td>{{ products|length }}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
     
 </main>
 {% endblock %}
