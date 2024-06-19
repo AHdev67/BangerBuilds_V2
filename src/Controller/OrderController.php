@@ -18,7 +18,7 @@ class OrderController extends AbstractController
     #[Route('/order/new', name: 'new_order')]
     #[Route('/order/{orderId}/edit', name: 'edit_order')]
 
-    public function newOrder(Order $order = null, Request $request, EntityManagerInterface $entityManager, ProductRepository $productRepository): Response
+    public function updateOrder(Order $order = null, Request $request, EntityManagerInterface $entityManager, ProductRepository $productRepository): Response
     {
         if (!$order){
             $order = new Order();
