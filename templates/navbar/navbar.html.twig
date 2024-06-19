@@ -58,6 +58,11 @@
         <li>
             <a href="" class="menuItem">NEED HELP ?</a>
         </li>
+        {% if is_granted('ROLE_ADMIN') %}
+        <li>
+            <a href="{{ path('control_product') }}" class="menuItem">ADMIN PANEL</a>
+        </li>
+        {% endif %}
     </ul>
     
     <div id="searchContainer">
