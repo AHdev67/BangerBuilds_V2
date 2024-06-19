@@ -36,6 +36,34 @@ class ProductController extends AbstractController
         ]);
     }
 
+    #[Route('/control/newProduct', name: 'new_product')]
+    #[Route('/control/{productId}/edit', name: 'edit_product')]
+
+    public function updateProduct(Product $product = null, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        if (!$product) {
+            $product = new Product();
+        }
+        
+        $form = $this->createForm(ProductType::class, $product);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $product = $form->getData();
+
+            $entityManager->persist($product);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_product', ['id'=>$product->getId()]);
+        }
+
+        return $this->render('product/new_product.html.twig', [
+            'formAddProduct' => $form,
+            'edit' => $product->getId()
+        ]);
+    }
+
     //PRODUCT CONTROL PANEL FOR ADMIN USE
     #[Route('/control', name: 'control_product')]
     public function control(CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
