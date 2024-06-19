@@ -4,11 +4,22 @@
 
 {% block body %}
 <main>
-    {% if edit %}
-    <h1 class="display-5 fw-bold text-body-emphasis mb-5">Modify product information</h1>
-    {% else %}
-        <h1 class="display-5 fw-bold text-body-emphasis mb-5">Add new product :</h1>
-    {% endif %}
+    <a href="{{ path('control_product') }}" class="returnBtn btn">
+        <i class="fa-solid fa-arrow-left"></i> Cancel product creation
+    </a>
+
+    <div class="formContainer" style="margin-top: 50px;">
+
+        {{ form_start(formAddProduct) }}
+            {{ form_row(formAddProduct.label) }}
+            {{ form_row(formAddProduct.price) }}
+            {{ form_row(formAddProduct.specs) }}
+            {{ form_row(formAddProduct.category) }}
+            {{ form_row(formAddProduct.image) }}
+
+            
+        {{ form_end(formAddProduct) }}
+    </div> 
     
 </main>
 {% endblock %}
