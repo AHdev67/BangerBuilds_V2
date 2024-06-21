@@ -70,9 +70,16 @@
         <a href="{{ path('flush_cart') }}" class="deleteBtn btn">
             Empty out your cart <i class="fa-solid fa-trash"></i>
         </a>
-        <a href="{{ path('new_order') }}" class="validateBtn btn">
-            Proceed to order <i class="fa-solid fa-arrow-right"></i>
-        </a>
+        {% if app.user %}
+            <a href="{{ path('new_order') }}" class="validateBtn btn">
+                Proceed to order <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        {% else %}
+            <a href="{{ path('app_login') }}" class="validateBtn btn">
+                Proceed to order <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        {% endif %}
+        
     </div>
 
 </main>
