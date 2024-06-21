@@ -34,11 +34,11 @@ class Product
     #[ORM\JoinColumn(nullable: true)]
     private ?Category $category = null;
 
-    /**
-     * @var Collection<int, Build>
-     */
-    #[ORM\ManyToMany(targetEntity: Build::class, mappedBy: 'components')]
-    private Collection $builds;
+    // /**
+    //  * @var Collection<int, Build>
+    //  */
+    // #[ORM\ManyToMany(targetEntity: Build::class, mappedBy: 'components')]
+    // private Collection $builds;
 
     // /**
     //  * @var Collection<int, Order>
@@ -61,12 +61,18 @@ class Product
     #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'product')]
     private Collection $orderItems;
 
+    /**
+     * @var Collection<int, BuildComponent>
+     */
+    #[ORM\OneToMany(targetEntity: BuildComponent::class, mappedBy: 'component', orphanRemoval: true)]
+    private Collection $buildComponents;
+
     public function __construct()
     {
-        $this->builds = new ArrayCollection();
         $this->relatedOrders = new ArrayCollection();
         $this->reviews = new ArrayCollection();
         $this->orderItems = new ArrayCollection();
+        $this->buildComponents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -146,32 +152,32 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection<int, Build>
-     */
-    public function getBuilds(): Collection
-    {
-        return $this->builds;
-    }
+    // /**
+    //  * @return Collection<int, Build>
+    //  */
+    // public function getBuilds(): Collection
+    // {
+    //     return $this->builds;
+    // }
 
-    public function addBuild(Build $build): static
-    {
-        if (!$this->builds->contains($build)) {
-            $this->builds->add($build);
-            $build->addComponent($this);
-        }
+    // public function addBuild(Build $build): static
+    // {
+    //     if (!$this->builds->contains($build)) {
+    //         $this->builds->add($build);
+    //         $build->addComponent($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeBuild(Build $build): static
-    {
-        if ($this->builds->removeElement($build)) {
-            $build->removeComponent($this);
-        }
+    // public function removeBuild(Build $build): static
+    // {
+    //     if ($this->builds->removeElement($build)) {
+    //         $build->removeComponent($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     // /**
     //  * @return Collection<int, Order>
@@ -266,6 +272,36 @@ class Product
             // set the owning side to null (unless already changed)
             if ($orderItem->getProduct() === $this) {
                 $orderItem->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, BuildComponent>
+     */
+    public function getBuildComponents(): Collection
+    {
+        return $this->buildComponents;
+    }
+
+    public function addBuildComponent(BuildComponent $buildComponent): static
+    {
+        if (!$this->buildComponents->contains($buildComponent)) {
+            $this->buildComponents->add($buildComponent);
+            $buildComponent->setComponent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBuildComponent(BuildComponent $buildComponent): static
+    {
+        if ($this->buildComponents->removeElement($buildComponent)) {
+            // set the owning side to null (unless already changed)
+            if ($buildComponent->getComponent() === $this) {
+                $buildComponent->setComponent(null);
             }
         }
 
