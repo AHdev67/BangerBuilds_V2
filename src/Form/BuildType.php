@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Build;
-use App\Entity\Product;
+use App\Entity\BuildComponent;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -16,14 +16,13 @@ class BuildType extends AbstractType
     {
         $builder
             ->add('total')
-            ->add('components', EntityType::class, [
-                'class' => Product::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
-            ->add('author', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
+            // ->add('author', EntityType::class, [
+            //     'class' => User::class,
+            //     'choice_label' => 'id',
+            // ])
+            ->add('buildComponents', EntityType::class, [
+                'class' => BuildComponent::class,
+                'choice_label' => 'label'
             ])
         ;
     }
