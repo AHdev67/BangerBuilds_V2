@@ -15,11 +15,11 @@ class Build
     #[ORM\Column]
     private ?int $id = null;
 
-    /**
-     * @var Collection<int, Product>
-     */
-    #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'builds')]
-    private Collection $components;
+    // /**
+    //  * @var Collection<int, Product>
+    //  */
+    // #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'builds')]
+    // private Collection $components;
 
     #[ORM\ManyToOne(inversedBy: 'builds')]
     #[ORM\JoinColumn(nullable: false)]
@@ -31,16 +31,21 @@ class Build
     #[ORM\Column]
     private ?float $total = null;
 
+    // /**
+    //  * @var Collection<int, OrderItem>
+    //  */
+    // #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'build')]
+    // private Collection $orderItems;
+
     /**
-     * @var Collection<int, OrderItem>
+     * @var Collection<int, BuildComponent>
      */
-    #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'build')]
-    private Collection $orderItems;
+    #[ORM\OneToMany(targetEntity: BuildComponent::class, mappedBy: 'relatedBuild')]
+    private Collection $buildComponents;
 
     public function __construct()
     {
-        $this->components = new ArrayCollection();
-        $this->orderItems = new ArrayCollection();
+        $this->buildComponents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -48,29 +53,29 @@ class Build
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getComponents(): Collection
-    {
-        return $this->components;
-    }
+    // /**
+    //  * @return Collection<int, Product>
+    //  */
+    // public function getComponents(): Collection
+    // {
+    //     return $this->components;
+    // }
 
-    public function addComponent(Product $component): static
-    {
-        if (!$this->components->contains($component)) {
-            $this->components->add($component);
-        }
+    // public function addComponent(Product $component): static
+    // {
+    //     if (!$this->components->contains($component)) {
+    //         $this->components->add($component);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeComponent(Product $component): static
-    {
-        $this->components->removeElement($component);
+    // public function removeComponent(Product $component): static
+    // {
+    //     $this->components->removeElement($component);
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getAuthor(): ?User
     {
@@ -108,30 +113,60 @@ class Build
         return $this;
     }
 
+    // /**
+    //  * @return Collection<int, OrderItem>
+    //  */
+    // public function getOrderItems(): Collection
+    // {
+    //     return $this->orderItems;
+    // }
+
+    // public function addOrderItem(OrderItem $orderItem): static
+    // {
+    //     if (!$this->orderItems->contains($orderItem)) {
+    //         $this->orderItems->add($orderItem);
+    //         $orderItem->setBuild($this);
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removeOrderItem(OrderItem $orderItem): static
+    // {
+    //     if ($this->orderItems->removeElement($orderItem)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($orderItem->getBuild() === $this) {
+    //             $orderItem->setBuild(null);
+    //         }
+    //     }
+
+    //     return $this;
+    // }
+
     /**
-     * @return Collection<int, OrderItem>
+     * @return Collection<int, BuildComponent>
      */
-    public function getOrderItems(): Collection
+    public function getBuildComponents(): Collection
     {
-        return $this->orderItems;
+        return $this->buildComponents;
     }
 
-    public function addOrderItem(OrderItem $orderItem): static
+    public function addBuildComponent(BuildComponent $buildComponent): static
     {
-        if (!$this->orderItems->contains($orderItem)) {
-            $this->orderItems->add($orderItem);
-            $orderItem->setBuild($this);
+        if (!$this->buildComponents->contains($buildComponent)) {
+            $this->buildComponents->add($buildComponent);
+            $buildComponent->setRelatedBuild($this);
         }
 
         return $this;
     }
 
-    public function removeOrderItem(OrderItem $orderItem): static
+    public function removeBuildComponent(BuildComponent $buildComponent): static
     {
-        if ($this->orderItems->removeElement($orderItem)) {
+        if ($this->buildComponents->removeElement($buildComponent)) {
             // set the owning side to null (unless already changed)
-            if ($orderItem->getBuild() === $this) {
-                $orderItem->setBuild(null);
+            if ($buildComponent->getRelatedBuild() === $this) {
+                $buildComponent->setRelatedBuild(null);
             }
         }
 
