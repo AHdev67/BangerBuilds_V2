@@ -49,8 +49,7 @@ INSERT INTO `category` (`id`, `name`) VALUES
 
 -- Listage des données de la table bangerbuilds.doctrine_migration_versions : ~1 rows (environ)
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-	('DoctrineMigrations\\Version20240614145928', '2024-06-14 14:59:50', 926),
-	('DoctrineMigrations\\Version20240620135513', '2024-06-20 13:55:26', 456);
+	('DoctrineMigrations\\Version20240624070329', '2024-06-24 07:03:37', 1031);
 
 -- Listage des données de la table bangerbuilds.messenger_messages : ~0 rows (environ)
 
@@ -59,14 +58,14 @@ INSERT INTO `order` (`id`, `user_id`, `ref_id`, `last_name`, `first_name`, `adre
 	(4, 2, '69420', 'PHP', 'John', '22 rue de la Livraison', 'Strasbourg', '67000', '2024-06-17 09:56:50', 480.93),
 	(5, 2, '69420', 'PHP', 'John', '22 rue de la Livraison', 'Strasbourg', '67000', '2024-06-17 11:38:27', 117.99);
 
--- Listage des données de la table bangerbuilds.order_item : ~0 rows (environ)
-INSERT INTO `order_item` (`id`, `related_order_id`, `product_id`, `build_id`, `quantity`) VALUES
-	(7, 4, 5, NULL, 1),
-	(8, 4, 614, NULL, 1),
-	(9, 4, 16781, NULL, 2),
-	(10, 5, 2323, NULL, 1);
+-- Listage des données de la table bangerbuilds.order_item : ~4 rows (environ)
+INSERT INTO `order_item` (`id`, `related_order_id`, `product_id`, `quantity`) VALUES
+	(7, 4, 5, 1),
+	(8, 4, 614, 1),
+	(9, 4, 16781, 2),
+	(10, 5, 2323, 1);
 
--- Listage des données de la table bangerbuilds.product : ~0 rows (environ)
+-- Listage des données de la table bangerbuilds.product : ~16 853 rows (environ)
 INSERT INTO `product` (`id`, `category_id`, `label`, `price`, `in_stock`, `restock_delay`, `specs`, `image`) VALUES
 	(1, 26, 'Expert build + OS install', 70, 1, NULL, '{}', NULL),
 	(2, 26, 'Expert build', 50, 1, NULL, '{}', NULL),
