@@ -14,12 +14,7 @@ class BuildType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-            ->add('total')
-            // ->add('author', EntityType::class, [
-            //     'class' => User::class,
-            //     'choice_label' => 'id',
-            // ])
+        $builder          
             ->add('buildComponents', EntityType::class, [
                 'class' => BuildComponent::class,
                 'choice_label' => 'label'
