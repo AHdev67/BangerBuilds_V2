@@ -52,8 +52,6 @@ class Order
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
-        $this->builds = new ArrayCollection();
         $this->orderItems = new ArrayCollection();
     }
 
