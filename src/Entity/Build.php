@@ -15,27 +15,12 @@ class Build
     #[ORM\Column]
     private ?int $id = null;
 
-    // /**
-    //  * @var Collection<int, Product>
-    //  */
-    // #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'builds')]
-    // private Collection $components;
-
     #[ORM\ManyToOne(inversedBy: 'builds')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
-    // #[ORM\ManyToOne(inversedBy: 'builds')]
-    // private ?Order $relatedOrder = null;
-
     #[ORM\Column]
     private ?float $total = null;
-
-    // /**
-    //  * @var Collection<int, OrderItem>
-    //  */
-    // #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'build')]
-    // private Collection $orderItems;
 
     /**
      * @var Collection<int, BuildComponent>
@@ -48,34 +33,11 @@ class Build
         $this->buildComponents = new ArrayCollection();
     }
 
+
     public function getId(): ?int
     {
         return $this->id;
     }
-
-    // /**
-    //  * @return Collection<int, Product>
-    //  */
-    // public function getComponents(): Collection
-    // {
-    //     return $this->components;
-    // }
-
-    // public function addComponent(Product $component): static
-    // {
-    //     if (!$this->components->contains($component)) {
-    //         $this->components->add($component);
-    //     }
-
-    //     return $this;
-    // }
-
-    // public function removeComponent(Product $component): static
-    // {
-    //     $this->components->removeElement($component);
-
-    //     return $this;
-    // }
 
     public function getAuthor(): ?User
     {
@@ -89,18 +51,6 @@ class Build
         return $this;
     }
 
-    // public function getRelatedOrder(): ?Order
-    // {
-    //     return $this->relatedOrder;
-    // }
-
-    // public function setRelatedOrder(?Order $relatedOrder): static
-    // {
-    //     $this->relatedOrder = $relatedOrder;
-
-    //     return $this;
-    // }
-
     public function getTotal(): ?float
     {
         return $this->total;
@@ -112,36 +62,6 @@ class Build
 
         return $this;
     }
-
-    // /**
-    //  * @return Collection<int, OrderItem>
-    //  */
-    // public function getOrderItems(): Collection
-    // {
-    //     return $this->orderItems;
-    // }
-
-    // public function addOrderItem(OrderItem $orderItem): static
-    // {
-    //     if (!$this->orderItems->contains($orderItem)) {
-    //         $this->orderItems->add($orderItem);
-    //         $orderItem->setBuild($this);
-    //     }
-
-    //     return $this;
-    // }
-
-    // public function removeOrderItem(OrderItem $orderItem): static
-    // {
-    //     if ($this->orderItems->removeElement($orderItem)) {
-    //         // set the owning side to null (unless already changed)
-    //         if ($orderItem->getBuild() === $this) {
-    //             $orderItem->setBuild(null);
-    //         }
-    //     }
-
-    //     return $this;
-    // }
 
     /**
      * @return Collection<int, BuildComponent>
