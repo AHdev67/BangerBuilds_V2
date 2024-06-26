@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Build;
 use App\Form\BuildType;
+use App\Entity\Category;
 use App\Entity\BuildComponent;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,23 +19,36 @@ class BuildController extends AbstractController
     //  RETURNS THE CREATION FORM FOR A NEW BUILD / EDIT FORM FOR AN EXISITNG BUILD
 
     #[Route('/build/new', name: 'new_build')]
-    public function newBuild(Build $build = null, Request $request, EntityManagerInterface $entityManager): Response
+    public function newBuild(Request $request, EntityManagerInterface $entityManager): Response
     {
-        if (!$build) {
-            $build = new Build();
-        }
+        $categoryRepository = $entityManager->getRepository(Category::class);
+        $cpuCategory = $categoryRepository->findOneBy(['name' => 'Processor']);
 
-        $form = $this->createForm(BuildType::class, $build);
+        $categories = [
+            'cpu' => $cpuCategory,
+            // Add other categories similarly...
+        ];
+
+        // dd($categories['cpu']);
+
+        $build = new Build();
+
+        $cpuComponent = new BuildComponent();
+        $build->addBuildComponent($cpuComponent);
+
+        // dd($build);
+
+        $form = $this->createForm(BuildType::class, $build, ['categories' => $categories]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $cpu = $form->get('cpu')->getData();
+            $cpuComponents = $form->get('cpu')->getData();
 
-            $buildComponentCpu = new BuildComponent();
-            $buildComponentCpu->setComponent($cpu);
-            $buildComponentCpu->setQuantity(1);
-            $build->addBuildComponent($buildComponentCpu);
+            foreach ($cpuComponents as $cpuComponent) {
+                $cpuComponent->setQuantity(1);
+                $build->addBuildComponent($cpuComponent);
+            }
 
             $entityManager->persist($build);
             $entityManager->flush();
@@ -42,8 +56,8 @@ class BuildController extends AbstractController
             return $this->redirectToRoute('app_user');
         }
 
-        return $this->render('build/new.html.twig', [
-            'form' => $form->createView(),
+        return $this->render('build/new_build.html.twig', [
+            'formBuild' => $form->createView(),
         ]);
     }
 }
