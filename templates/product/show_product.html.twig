@@ -10,7 +10,7 @@
             <h1 class="productTitle">{{ product.label }}</h1>
         </div>
         
-        <div class="productMain">
+        <section class="productMain">
             <div class="productDisplay">
                 <figure>
                     <img src="" alt="Picture of the product">
@@ -18,26 +18,41 @@
             </div>
             
             <div class="productInfo">
-                <p>
-                    <b>Price : </b>{{ product.price }} $
-                </p>
-                <p>
-                    <b>Availability : </b>
-                    {% if product.inStock == true %}
-                        In stock
-                    {% else %}
-                        Out of stock
-                        {% if product.restockDelay %}
-                            <p>Restocking in approximatively : {{ product.restockDelay }} days</p>
+                <ul>
+                    <li>
+                        <b>Price : </b>{{ product.price }} $
+                    </li>
+                
+                    <li>
+                        <b>Availability : </b>
+                        {% if product.inStock == true %}
+                            In stock
+                        {% else %}
+                            Out of stock
+                            {% if product.restockDelay %}
+                                <p>Restocking in approximatively : {{ product.restockDelay }} days</p>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
-                </p>
-                <a href="{{ path('add_item', {'productId': product.id}) }}" class="addToCart">
-                    <button>Add to cart</button>
+                    </li>
+
+
+                </ul>
+
+                <a href="{{ path('add_item', {'productId': product.id}) }}" class= "addToCartBtn btn">
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <br>
+                    Add to cart
                 </a>
                 
             </div>
-        </div>
+        </section>
+
+        <section class="productDesc">
+            <p>
+                {{ product.description }}
+            </p>
+        </section>
     </div>
 </main>
 {% endblock %}
