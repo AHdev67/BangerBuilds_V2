@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
@@ -34,18 +35,6 @@ class Product
     #[ORM\JoinColumn(nullable: true)]
     private ?Category $category = null;
 
-    // /**
-    //  * @var Collection<int, Build>
-    //  */
-    // #[ORM\ManyToMany(targetEntity: Build::class, mappedBy: 'components')]
-    // private Collection $builds;
-
-    // /**
-    //  * @var Collection<int, Order>
-    //  */
-    // #[ORM\ManyToMany(targetEntity: Order::class, mappedBy: 'products')]
-    // private Collection $relatedOrders;
-
     /**
      * @var Collection<int, Review>
      */
@@ -66,6 +55,9 @@ class Product
      */
     #[ORM\OneToMany(targetEntity: BuildComponent::class, mappedBy: 'component', orphanRemoval: true)]
     private Collection $buildComponents;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
 
     public function __construct()
     {
@@ -151,60 +143,6 @@ class Product
 
         return $this;
     }
-
-    // /**
-    //  * @return Collection<int, Build>
-    //  */
-    // public function getBuilds(): Collection
-    // {
-    //     return $this->builds;
-    // }
-
-    // public function addBuild(Build $build): static
-    // {
-    //     if (!$this->builds->contains($build)) {
-    //         $this->builds->add($build);
-    //         $build->addComponent($this);
-    //     }
-
-    //     return $this;
-    // }
-
-    // public function removeBuild(Build $build): static
-    // {
-    //     if ($this->builds->removeElement($build)) {
-    //         $build->removeComponent($this);
-    //     }
-
-    //     return $this;
-    // }
-
-    // /**
-    //  * @return Collection<int, Order>
-    //  */
-    // public function getRelatedOrders(): Collection
-    // {
-    //     return $this->relatedOrders;
-    // }
-
-    // public function addOrder(Order $order): static
-    // {
-    //     if (!$this->relatedOrders->contains($order)) {
-    //         $this->relatedOrders->add($order);
-    //         $order->addProduct($this);
-    //     }
-
-    //     return $this;
-    // }
-
-    // public function removeOrder(Order $order): static
-    // {
-    //     if ($this->relatedOrders->removeElement($order)) {
-    //         $order->removeProduct($this);
-    //     }
-
-    //     return $this;
-    // }
 
     /**
      * @return Collection<int, Review>
@@ -304,6 +242,18 @@ class Product
                 $buildComponent->setComponent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }
