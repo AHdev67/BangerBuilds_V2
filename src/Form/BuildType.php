@@ -12,22 +12,29 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class BuildType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $categories = $options['categories'];
+
         $builder          
-        ->add('cpu', EntityType::class, [
-            'class' => Product::class,
-            'query_builder' => function (EntityRepository $entityRepository) {
-                return $entityRepository->createQueryBuilder('p')
-                    ->where('p.category = :category')
-                    ->setParameter('category', 'cpu');
-            },
-            'choice_label' => 'label',
-            'placeholder' => 'Processors',
+        ->add('cpu', CollectionType::class, [
+            'entry_type' => ComponentSlotType::class,
+            'entry_options' => ['category' => $categories['cpu']],
+            'mapped' => false,
+            'allow_add' => true,
+            'allow_delete' => true,
+            'by_reference' => false,
+            'prototype' => true,
+        ])
+
+        ->add('save', SubmitType::class, [
+            'label' => 'Save Build',
+            'attr' => ['class' => 'validateBtn submitBtn btn'],
         ])
         ;
     }
@@ -37,5 +44,6 @@ class BuildType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Build::class,
         ]);
+        $resolver->setRequired(['categories']);
     }
 }
