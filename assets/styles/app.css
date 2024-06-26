@@ -60,6 +60,7 @@ span{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     cursor: pointer;
     border-style: none;
+    text-align: center;
 }
 
 .qttBtn{
@@ -78,6 +79,11 @@ span{
 
 .validateBtn{
     background-color: var(--validateColor);
+}
+
+.addToCartBtn{
+    background-color: var(--bgDark);
+    color: white;
 }
 
 .optGroupX{
@@ -416,6 +422,8 @@ ul .orderContent{
     background-color: #eeeeee;
 }
 
+
+
 /* --------------------------------FORMS-------------------------------- */
 .formContainer{
     display: flex;
@@ -507,10 +515,6 @@ tfoot{
     margin-bottom: 75px;
 }
 
-.addToCart button{
-    font-size: 30px;
-}
-
 .productMain{
     display: flex;
     justify-content: space-between;
@@ -526,6 +530,11 @@ tfoot{
     display: flex;
     flex-direction: column;
     gap: 50px;
+}
+
+.productDesc{
+    margin-top: 30px;
+    margin-bottom: 80px;
 }
 
 /* --------------------------------FOOTER-------------------------------- */
@@ -582,10 +591,6 @@ footer h2{
 
     main{
         font-size: 20px;
-    }
-
-    .btn{
-        font-size: 15px;
     }
 
     /* --------------------------------HEADER-------------------------------- */
