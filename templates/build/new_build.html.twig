@@ -4,6 +4,26 @@
 
 {% block body %}
 <main>
+    <a href="{{ path('app_home') }}" class="returnBtn btn">
+        <i class="fa-solid fa-arrow-left"></i> Return to homepage
+    </a>
 
+    <h1 style="margin-top: 50px;">Create a new PC build</h1>
+
+    <div class="formContainer">
+
+        {{ form_start(formBuild) }}
+
+            {# {{ dump(formBuild.cpu) }} #}
+
+            <div>
+                {% for cpuSlot in formBuild.cpu %}
+                    {{ form_row(cpuSlot.product) }}
+                {% endfor %}
+            </div>
+                    
+        {{ form_end(formBuild) }}
+    </div>
 </main>
+
 {% endblock %}
