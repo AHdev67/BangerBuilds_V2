@@ -12,6 +12,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategoryController extends AbstractController
 {
+
+
+    //  RETURNS THE LIST OF PRODUCT CATEGORIES
+
     #[Route('/category', name: 'app_category')]
     public function index(CategoryRepository $categoryRepository): Response
     {

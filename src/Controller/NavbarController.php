@@ -12,6 +12,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class NavbarController extends AbstractController
 {
+
+
+    //  RETURNS THE NAVBAR TEMPLATE FOR RENTERING IN THE BASE TEMPLATE
+
     #[Route('/navbar', name: 'app_navbar')]
     public function renderNavbar(Request $request): Response
     {

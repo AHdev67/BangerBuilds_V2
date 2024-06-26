@@ -18,6 +18,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProductController extends AbstractController
 {
+
+
+    //  RETURNS LIST OF PRODUCTS BY CATEGORY
+
     #[Route('/category/{categoryId}/products', name: 'app_product')]
     public function index(#[MapEntity(id: 'categoryId')] Category $category): Response
     {
@@ -28,18 +32,24 @@ class ProductController extends AbstractController
         ]);
     }
 
+
+    //  RETURNS INFOPAGE OF A SPECIFIC PRODUCT (BY ID)
+
     #[Route('/{productId}/product', name: 'show_product')]
-    public function showProduct(#[MapEntity(id: 'productId')] Product $product): Response
+    public function show(#[MapEntity(id: 'productId')] Product $product): Response
     {
         return $this->render('product/show_product.html.twig', [
             'product' => $product,
         ]);
     }
 
+
+    //  RETURNS AND PROCESSES EITHER THE PRODUCT CREATION FORM / THE EDIT FORM FOR A SPECIFIC PRODUCT (BY ID)
+
     #[Route('/control/newProduct', name: 'new_product')]
     #[Route('/control/{productId}/edit', name: 'edit_product')]
 
-    public function updateProduct(Product $product = null, Request $request, EntityManagerInterface $entityManager): Response
+    public function newEdit(Product $product = null, Request $request, EntityManagerInterface $entityManager): Response
     {
         if (!$product) {
             $product = new Product();
@@ -64,7 +74,9 @@ class ProductController extends AbstractController
         ]);
     }
 
-    //PRODUCT CONTROL PANEL FOR ADMIN USE
+
+    //  RETURNS THE PRODUCT CONTROL PANEL FOR ADMIN USERS ONLY
+
     #[Route('/control', name: 'control_product')]
     public function control(CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
     {
@@ -76,6 +88,9 @@ class ProductController extends AbstractController
             'products' => $products
         ]);
     }
+
+
+    //  PROCESSES THE INTIAL JSON PRODUCT DATA AND CONVERTS IT TO PRODUCT OBJECTS THAT ARE PERSISTED TO THE DATABASE
 
     #[Route('/control/{id}/processJson', name: 'process_json')]
     public function processJson(#[MapEntity(id: 'id')] Category $category, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository): Response 

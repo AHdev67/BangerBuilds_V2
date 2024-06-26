@@ -14,6 +14,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserController extends AbstractController
 {
+
+
+    //  RETURNS THE USER PROFILE PAGE FOR CURRENT USER
+
     #[route('/user', name: 'app_user')]
     public function showUser(Request $request): Response
     {
@@ -23,6 +27,9 @@ class UserController extends AbstractController
             'orders' => $orders
         ]);
     }
+
+
+    //  RETURNS THE SHOPPING CART OF CURRENT USER
 
     #[Route('/user/cart', name: 'show_cart')]
     public function showCart(Request $request, ProductRepository $productRepository): Response
@@ -48,6 +55,9 @@ class UserController extends AbstractController
             'total' => $total
         ]);
     }
+
+
+    //  ADDS A NEW PRODUCT TO THE CART / ADDS 1 TO ITEM QUANTITY IF PRODUCT IS ALREADY IN THE CART
 
     #[Route('/{productId}/product/addToCart', name: 'add_item')]
     public function addProductToCart(#[MapEntity(id: 'productId')] Product $product, Request $request): Response
@@ -77,6 +87,9 @@ class UserController extends AbstractController
         return $this->redirectToRoute('show_cart');
     }
 
+
+    //  REMOVES A PRODUCT FROM THE CART REGARDLESS OF QUANTITY
+
     #[Route('/user/cart/{itemId}/removeFromCart', name: 'remove_item')]
     public function removeItemFromCart(Request $request ): Response
     {
@@ -89,6 +102,9 @@ class UserController extends AbstractController
         return $this->redirectToRoute('show_cart');
     }
 
+
+    //  ADDS 1 TO QUANTITY OF A PRODUCT IN CART
+
     #[Route('/user/cart/{itemId}/upqtt', name: 'up_quantity')]
     public function upQuantity(Request $request ): Response
     {
@@ -100,6 +116,9 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('show_cart');
     }
+
+
+    //  REMOVES 1 TO QUANTITY OF A PRODUCT IN CART
 
     #[Route('/user/cart/{itemId}/downqtt', name: 'down_quantity')]
     public function downQuantity(Request $request ): Response
@@ -123,6 +142,9 @@ class UserController extends AbstractController
         }
         
     }
+
+
+    //  COMPLETELY EMPTIES OUT THE CART
 
     #[Route('/user/cart/flush', name: 'flush_cart')]
     public function flushCart(Request $request): Response
