@@ -24,9 +24,16 @@ class Category
     #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'category')]
     private Collection $products;
 
+    /**
+     * @var Collection<int, BuildComponent>
+     */
+    #[ORM\OneToMany(targetEntity: BuildComponent::class, mappedBy: 'category')]
+    private Collection $buildComponents;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->buildComponents = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -79,5 +86,40 @@ class Category
     public function getNbProducts(): ?int
     {
         return count($this->products);
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return Collection<int, BuildComponent>
+     */
+    public function getBuildComponents(): Collection
+    {
+        return $this->buildComponents;
+    }
+
+    public function addBuildComponent(BuildComponent $buildComponent): static
+    {
+        if (!$this->buildComponents->contains($buildComponent)) {
+            $this->buildComponents->add($buildComponent);
+            $buildComponent->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBuildComponent(BuildComponent $buildComponent): static
+    {
+        if ($this->buildComponents->removeElement($buildComponent)) {
+            // set the owning side to null (unless already changed)
+            if ($buildComponent->getCategory() === $this) {
+                $buildComponent->setCategory(null);
+            }
+        }
+
+        return $this;
     }
 }

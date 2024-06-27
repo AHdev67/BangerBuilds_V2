@@ -25,7 +25,7 @@ class Build
     /**
      * @var Collection<int, BuildComponent>
      */
-    #[ORM\OneToMany(targetEntity: BuildComponent::class, mappedBy: 'relatedBuild')]
+    #[ORM\OneToMany(targetEntity: BuildComponent::class, mappedBy: 'relatedBuild', cascade:["persist"])]
     private Collection $buildComponents;
 
     public function __construct()

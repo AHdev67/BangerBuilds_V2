@@ -17,9 +17,9 @@
             {# {{ dump(formBuild.cpu) }} #}
 
             <div>
-                {% for cpuSlot in formBuild.cpu %}
-                    {{ form_row(cpuSlot.product) }}
-                {% endfor %}
+                {# {% for cpuSlot in formBuild.cpu %} #}
+                    {{ form_row(formBuild.buildComponents) }}
+                {# {% endfor %} #}
             </div>
                     
         {{ form_end(formBuild) }}

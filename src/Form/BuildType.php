@@ -19,16 +19,17 @@ class BuildType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $categories = $options['categories'];
 
         $builder          
-        ->add('cpu', CollectionType::class, [
-            'entry_type' => ComponentSlotType::class,
-            'entry_options' => ['category' => $categories['cpu']],
-            'mapped' => false,
+        ->add('buildComponents', CollectionType::class, [
+            'entry_type' => BuildComponentType::class,
+            'entry_options' => [
+                'label' => false,
+                // 'category' => 'category'
+            ],
+            'by_reference' => false,
             'allow_add' => true,
             'allow_delete' => true,
-            'by_reference' => false,
             'prototype' => true,
         ])
 
@@ -44,6 +45,5 @@ class BuildType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Build::class,
         ]);
-        $resolver->setRequired(['categories']);
     }
 }

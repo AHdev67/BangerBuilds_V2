@@ -13,29 +13,29 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ComponentSlotType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    // public function buildForm(FormBuilderInterface $builder, array $options)
+    // {
 
-        $category = $options['category'];
+    //     // $category = $options['category'];
 
-        $builder
-            ->add('product', EntityType::class, [
-                'class' => Product::class,
-                'query_builder' => function (EntityRepository $entityRepository) use ($category) {
-                    return $entityRepository->createQueryBuilder('p')
-                        ->where('p.category = :category')
-                        ->setParameter('category', $category);
-                },
-                'choice_label' => 'label',
-                'placeholder' => 'Choose a product',
-            ]);
-    }
+    //     $builder
+    //         ->add('product', EntityType::class, [
+    //             'class' => Product::class,
+    //             'query_builder' => function (EntityRepository $entityRepository) use ($category) {
+    //                 return $entityRepository->createQueryBuilder('p')
+    //                     ->where('p.category = :category')
+    //                     ->setParameter('category', $category);
+    //             },
+    //             'choice_label' => 'label',
+    //             'placeholder' => 'Choose a product',
+    //         ]);
+    // }
     
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'category' => null,
-        ]);
-        $resolver->setAllowedTypes('category', [Category::class]);
-    }
+    // public function configureOptions(OptionsResolver $resolver)
+    // {
+    //     // $resolver->setDefaults([
+    //     //     'category' => null,
+    //     // ]);
+    //     // $resolver->setAllowedTypes('category', [Category::class]);
+    // }
 }

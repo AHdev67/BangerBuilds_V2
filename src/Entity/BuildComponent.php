@@ -16,7 +16,10 @@ class BuildComponent
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'buildComponents')]
-    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
+    
+    #[ORM\ManyToOne(inversedBy: 'buildComponents')]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Product $component = null;
 
     #[ORM\Column]
@@ -28,6 +31,18 @@ class BuildComponent
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
+
+        return $this;
     }
 
     public function getComponent(): ?Product

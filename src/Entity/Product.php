@@ -57,14 +57,25 @@ class Product
     private Collection $buildComponents;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description = null;
+    private ?string $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin lectus ut ex dictum mollis. 
+                                    Etiam ornare mauris nec lorem interdum, ut pellentesque dolor iaculis. 
+                                    Aliquam erat volutpat. In et ligula tincidunt, sollicitudin turpis nec, tempus turpis. 
+                                    In hac habitasse platea dictumst. Nunc ultrices ex nibh, in posuere diam aliquet eget. 
+                                    Pellentesque accumsan arcu vel neque ultricies gravida. Etiam fringilla egestas ante, 
+                                    in laoreet felis consectetur vel. Nam elementum eros et ligula faucibus tempus. 
+                                    Curabitur porta dolor sit amet nisl pellentesque tempus.";
 
     public function __construct()
     {
-        $this->relatedOrders = new ArrayCollection();
+        // $this->relatedOrders = new ArrayCollection();
         $this->reviews = new ArrayCollection();
         $this->orderItems = new ArrayCollection();
         $this->buildComponents = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->label;
     }
 
     public function getId(): ?int

@@ -6,6 +6,8 @@ use App\Entity\Build;
 use App\Form\BuildType;
 use App\Entity\Category;
 use App\Entity\BuildComponent;
+use App\Repository\CategoryRepository;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,26 +21,25 @@ class BuildController extends AbstractController
     //  RETURNS THE CREATION FORM FOR A NEW BUILD / EDIT FORM FOR AN EXISITNG BUILD
 
     #[Route('/build/new', name: 'new_build')]
-    public function newBuild(Request $request, EntityManagerInterface $entityManager): Response
+    public function newBuild(Request $request, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
     {
-        $categoryRepository = $entityManager->getRepository(Category::class);
-        $cpuCategory = $categoryRepository->findOneBy(['name' => 'Processor']);
 
-        $categories = [
-            'cpu' => $cpuCategory,
-            // Add other categories similarly...
-        ];
-
-        // dd($categories['cpu']);
+        //  BUILD OBJECT INITIALIZATION
 
         $build = new Build();
 
-        $cpuComponent = new BuildComponent();
-        $build->addBuildComponent($cpuComponent);
+        $cpuSlot = new BuildComponent();
+        $cpuCategory = $categoryRepository->findOneBy(['name' => 'Processor']);
+        $cpuSlot->setCategory($cpuCategory);
+        $build->addBuildComponent($cpuSlot);
+
+        $cpuCoolerSlot = new BuildComponent();
+        $build->addBuildComponent($cpuCoolerSlot);
 
         // dd($build);
-
-        $form = $this->createForm(BuildType::class, $build, ['categories' => $categories]);
+        
+        // $form = $this->createForm(BuildType::class, $build, ['categories' => $categories]);
+        $form = $this->createForm(BuildType::class, $build);
 
         $form->handleRequest($request);
 
