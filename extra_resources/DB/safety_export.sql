@@ -14,9 +14,22 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Listage des données de la table bangerbuilds.build : ~0 rows (environ)
+-- Listage des données de la table bangerbuilds.build : ~1 rows (environ)
+INSERT INTO `build` (`id`, `author_id`, `total`) VALUES
+	(2, 2, 1855.88);
 
--- Listage des données de la table bangerbuilds.build_component : ~0 rows (environ)
+-- Listage des données de la table bangerbuilds.build_component : ~10 rows (environ)
+INSERT INTO `build_component` (`id`, `component_id`, `related_build_id`, `category_id`, `quantity`) VALUES
+	(1, 12, 2, NULL, 1),
+	(2, 614, 2, NULL, 1),
+	(3, 1564, 2, NULL, 1),
+	(4, 2327, 2, NULL, 1),
+	(5, 5414, 2, NULL, 1),
+	(6, 6510, 2, NULL, 1),
+	(7, 10181, 2, NULL, 1),
+	(8, 9044, 2, NULL, 1),
+	(9, 11216, 2, NULL, 1),
+	(10, 1, 2, NULL, 1);
 
 -- Listage des données de la table bangerbuilds.category : ~26 rows (environ)
 INSERT INTO `category` (`id`, `name`) VALUES
@@ -47,21 +60,25 @@ INSERT INTO `category` (`id`, `name`) VALUES
 	(25, 'Themal paste'),
 	(26, 'Service');
 
+-- Listage des données de la table bangerbuilds.doctrine_migration_versions : ~1 rows (environ)
+INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
+	('DoctrineMigrations\\Version20240627124344', '2024-06-27 12:43:55', 785);
+
 -- Listage des données de la table bangerbuilds.messenger_messages : ~0 rows (environ)
 
--- Listage des données de la table bangerbuilds.order : ~2 rows (environ)
+-- Listage des données de la table bangerbuilds.order : ~0 rows (environ)
 INSERT INTO `order` (`id`, `user_id`, `ref_id`, `last_name`, `first_name`, `adress`, `city`, `postal_code`, `order_date`, `total`) VALUES
 	(4, 2, '69420', 'PHP', 'John', '22 rue de la Livraison', 'Strasbourg', '67000', '2024-06-17 09:56:50', 480.93),
 	(5, 2, '69420', 'PHP', 'John', '22 rue de la Livraison', 'Strasbourg', '67000', '2024-06-17 11:38:27', 117.99);
 
--- Listage des données de la table bangerbuilds.order_item : ~0 rows (environ)
+-- Listage des données de la table bangerbuilds.order_item : ~4 rows (environ)
 INSERT INTO `order_item` (`id`, `related_order_id`, `product_id`, `quantity`) VALUES
 	(7, 4, 5, 1),
 	(8, 4, 614, 1),
 	(9, 4, 16781, 2),
 	(10, 5, 2323, 1);
 
--- Listage des données de la table bangerbuilds.product : ~16 853 rows (environ)
+-- Listage des données de la table bangerbuilds.product : ~15 831 rows (environ)
 INSERT INTO `product` (`id`, `category_id`, `label`, `price`, `in_stock`, `restock_delay`, `specs`, `image`, `description`) VALUES
 	(1, 26, 'Expert build + OS install', 70, 1, NULL, '{}', NULL, NULL),
 	(2, 26, 'Expert build', 50, 1, NULL, '{}', NULL, NULL),
@@ -5083,12 +5100,12 @@ INSERT INTO `product` (`id`, `category_id`, `label`, `price`, `in_stock`, `resto
 	(5018, 4, 'G.Skill ECO 4 GB', 29.99, 1, NULL, '{"color": "Silver", "speed": [3, 1600], "modules": [2, 2], "cas_latency": 9, "price_per_gb": 7.497, "first_word_latency": 11.25}', NULL, NULL),
 	(5019, 4, 'Kingston KVR800D2S6/2G 2 GB', 11.75, 1, NULL, '{"color": "Green", "speed": [2, 800], "modules": [1, 2], "cas_latency": 6, "price_per_gb": 5.875, "first_word_latency": 15}', NULL, NULL),
 	(5020, 4, 'G.Skill NS 4 GB', 42, 1, NULL, '{"color": "Black", "speed": [3, 1333], "modules": [1, 4], "cas_latency": 9, "price_per_gb": 10.5, "first_word_latency": 13.503}', NULL, NULL),
-	(5021, 4, 'IBM 00D4968 16 GB', 31.43, 1, NULL, '{"color": "Black / Green", "speed": [3, 1600], "modules": [1, 16], "cas_latency": 11, "price_per_gb": 1.964, "first_word_latency": 13.75}', NULL, NULL),
+	(5021, 4, 'IBM 00D4968 16 GB', 31.43, 1, NULL, '{"color": "Black / Green", "speed": [3, 1600], "modules": [1, 16], "cas_latency": 11, "price_per_gb": 1.964, "first_word_latency": 13.75}', NULL, NULL);
+INSERT INTO `product` (`id`, `category_id`, `label`, `price`, `in_stock`, `restock_delay`, `specs`, `image`, `description`) VALUES
 	(5022, 4, 'Crucial CT51264BF160BJ 4 GB', 18.97, 1, NULL, '{"color": "Black / Green", "speed": [3, 1600], "modules": [1, 4], "cas_latency": 11, "price_per_gb": 4.742, "first_word_latency": 13.75}', NULL, NULL),
 	(5023, 4, 'Kingston KVR1333D3E9S/4G 4 GB', 15.99, 1, NULL, '{"color": "Black / Green", "speed": [3, 1333], "modules": [1, 4], "cas_latency": 9, "price_per_gb": 3.998, "first_word_latency": 13.503}', NULL, NULL),
 	(5024, 4, 'Kingston KVR1333D3D4R9S/4GED 4 GB', 29.21, 1, NULL, '{"color": "Green", "speed": [3, 1333], "modules": [1, 4], "cas_latency": 9, "price_per_gb": 7.303, "first_word_latency": 13.503}', NULL, NULL),
-	(5025, 4, 'Crucial CT2K51264BD160BJ 8 GB', 32.9, 1, NULL, '{"color": "Black / Green", "speed": [3, 1600], "modules": [2, 4], "cas_latency": 11, "price_per_gb": 4.112, "first_word_latency": 13.75}', NULL, NULL);
-INSERT INTO `product` (`id`, `category_id`, `label`, `price`, `in_stock`, `restock_delay`, `specs`, `image`, `description`) VALUES
+	(5025, 4, 'Crucial CT2K51264BD160BJ 8 GB', 32.9, 1, NULL, '{"color": "Black / Green", "speed": [3, 1600], "modules": [2, 4], "cas_latency": 11, "price_per_gb": 4.112, "first_word_latency": 13.75}', NULL, NULL),
 	(5026, 4, 'G.Skill Ripjaws 16 GB', 38.88, 1, NULL, '{"color": "Black", "speed": [4, 2133], "modules": [1, 16], "cas_latency": 15, "price_per_gb": 2.43, "first_word_latency": 14.065}', NULL, NULL),
 	(5027, 4, 'G.Skill Ripjaws 16 GB', 43.43, 1, NULL, '{"color": "Black", "speed": [4, 2666], "modules": [2, 8], "cas_latency": 18, "price_per_gb": 2.714, "first_word_latency": 13.503}', NULL, NULL),
 	(5028, 4, 'Crucial CT8G4RFS824A 8 GB', 28.99, 1, NULL, '{"color": "Green / Black", "speed": [4, 2400], "modules": [1, 8], "cas_latency": 17, "price_per_gb": 3.624, "first_word_latency": 14.167}', NULL, NULL),
@@ -9938,12 +9955,12 @@ INSERT INTO `product` (`id`, `category_id`, `label`, `price`, `in_stock`, `resto
 	(9872, 8, 'Lian Li ODYSSEY X', 187.98, 1, NULL, '{"psu": null, "type": "ATX Full Tower", "color": "Silver / Black", "side_panel": "Tempered Glass", "external_volume": null, "internal_35_bays": 3}', NULL, NULL),
 	(9873, 8, 'Antec DP505', 88, 1, NULL, '{"psu": null, "type": "ATX Mid Tower", "color": "White", "side_panel": "Tempered Glass", "external_volume": 51.9, "internal_35_bays": 2}', NULL, NULL),
 	(9874, 8, 'Cougar MX600 RGB', 181.75, 1, NULL, '{"psu": null, "type": "ATX Full Tower", "color": "White", "side_panel": "Tempered Glass", "external_volume": 57.8, "internal_35_bays": 1}', NULL, NULL),
-	(9875, 8, 'Jonsbo BO 100', 229.99, 1, NULL, '{"psu": null, "type": "Mini ITX Desktop", "color": "Black", "side_panel": "Tempered Glass", "external_volume": 15.7, "internal_35_bays": 1}', NULL, NULL),
+	(9875, 8, 'Jonsbo BO 100', 229.99, 1, NULL, '{"psu": null, "type": "Mini ITX Desktop", "color": "Black", "side_panel": "Tempered Glass", "external_volume": 15.7, "internal_35_bays": 1}', NULL, NULL);
+INSERT INTO `product` (`id`, `category_id`, `label`, `price`, `in_stock`, `restock_delay`, `specs`, `image`, `description`) VALUES
 	(9876, 8, 'Phanteks Evolv Shift 2', 140.84, 1, NULL, '{"psu": null, "type": "Mini ITX Tower", "color": "Gray", "side_panel": "Tempered Glass", "external_volume": 22.8, "internal_35_bays": 1}', NULL, NULL),
 	(9877, 8, 'Thermaltake AH T200 Snow', 134.88, 1, NULL, '{"psu": null, "type": "MicroATX Mid Tower", "color": "White", "side_panel": "Tempered Glass", "external_volume": null, "internal_35_bays": 2}', NULL, NULL),
 	(9878, 8, 'Silverstone RVZ03B-ARGB', 160.85, 1, NULL, '{"psu": null, "type": "Mini ITX Desktop", "color": "Black", "side_panel": null, "external_volume": null, "internal_35_bays": 0}', NULL, NULL),
-	(9879, 8, 'Thermaltake Versa H24', 131, 1, NULL, '{"psu": null, "type": "ATX Mid Tower", "color": "Black", "side_panel": null, "external_volume": 42.6, "internal_35_bays": 3}', NULL, NULL);
-INSERT INTO `product` (`id`, `category_id`, `label`, `price`, `in_stock`, `restock_delay`, `specs`, `image`, `description`) VALUES
+	(9879, 8, 'Thermaltake Versa H24', 131, 1, NULL, '{"psu": null, "type": "ATX Mid Tower", "color": "Black", "side_panel": null, "external_volume": 42.6, "internal_35_bays": 3}', NULL, NULL),
 	(9880, 8, 'BGears ‎b-BlackWidow-RGB', 85.83, 1, NULL, '{"psu": null, "type": "ATX Mid Tower", "color": "Black", "side_panel": "Tinted Tempered Glass", "external_volume": 41.2, "internal_35_bays": 2}', NULL, NULL),
 	(9881, 8, 'Thermaltake Divider 200 TG Air Snow', 149.96, 1, NULL, '{"psu": null, "type": "MicroATX Mini Tower", "color": "White", "side_panel": "Tempered Glass", "external_volume": 51.6, "internal_35_bays": 3}', NULL, NULL),
 	(9882, 8, 'Silverstone RVZ02B', 114.04, 1, NULL, '{"psu": null, "type": "HTPC", "color": "Black", "side_panel": null, "external_volume": null, "internal_35_bays": 1}', NULL, NULL),
@@ -14900,12 +14917,12 @@ INSERT INTO `product` (`id`, `category_id`, `label`, `price`, `in_stock`, `resto
 	(14833, 21, 'Dell E2020H', 80.98, 1, NULL, '{"panel_type": "TN", "resolution": [1600, 900], "screen_size": 19.5, "aspect_ratio": "16:9", "refresh_rate": 60, "response_time": 5}', NULL, NULL),
 	(14834, 21, 'Acer KG241Y Sbiip', 109.99, 1, NULL, '{"panel_type": "VA", "resolution": [1920, 1080], "screen_size": 23.8, "aspect_ratio": "16:9", "refresh_rate": 165, "response_time": null}', NULL, NULL),
 	(14835, 21, 'ViewSonic VX2718-2KPC-MHD', 174.99, 1, NULL, '{"panel_type": "VA", "resolution": [2560, 1440], "screen_size": 27, "aspect_ratio": "16:9", "refresh_rate": 165, "response_time": 5}', NULL, NULL),
-	(14836, 21, 'LG 27GN800-B', 246.99, 1, NULL, '{"panel_type": "IPS", "resolution": [2560, 1440], "screen_size": 27, "aspect_ratio": "16:9", "refresh_rate": 144, "response_time": 1}', NULL, NULL),
+	(14836, 21, 'LG 27GN800-B', 246.99, 1, NULL, '{"panel_type": "IPS", "resolution": [2560, 1440], "screen_size": 27, "aspect_ratio": "16:9", "refresh_rate": 144, "response_time": 1}', NULL, NULL);
+INSERT INTO `product` (`id`, `category_id`, `label`, `price`, `in_stock`, `restock_delay`, `specs`, `image`, `description`) VALUES
 	(14837, 21, 'Asus ROG Swift OLED PG34WCDM', 1199.99, 1, NULL, '{"panel_type": "OLED", "resolution": [3440, 1440], "screen_size": 33.9, "aspect_ratio": "21:9", "refresh_rate": 240, "response_time": 0.03}', NULL, NULL),
 	(14838, 21, 'Acer Acer Nitro XV272U W2bmiiprx', 279.99, 1, NULL, '{"panel_type": "IPS", "resolution": [2560, 1440], "screen_size": 27, "aspect_ratio": "16:9", "refresh_rate": 240, "response_time": 1}', NULL, NULL),
 	(14839, 21, 'Asus VA24EHE', 106.99, 1, NULL, '{"panel_type": "IPS", "resolution": [1920, 1080], "screen_size": 23.8, "aspect_ratio": "16:9", "refresh_rate": 75, "response_time": null}', NULL, NULL),
-	(14840, 21, 'Dell UP3218K', 4029.99, 1, NULL, '{"panel_type": "IPS", "resolution": [7680, 4320], "screen_size": 31.5, "aspect_ratio": "16:9", "refresh_rate": 60, "response_time": 6}', NULL, NULL);
-INSERT INTO `product` (`id`, `category_id`, `label`, `price`, `in_stock`, `restock_delay`, `specs`, `image`, `description`) VALUES
+	(14840, 21, 'Dell UP3218K', 4029.99, 1, NULL, '{"panel_type": "IPS", "resolution": [7680, 4320], "screen_size": 31.5, "aspect_ratio": "16:9", "refresh_rate": 60, "response_time": 6}', NULL, NULL),
 	(14841, 21, 'Alienware AW2524H', 499.99, 1, NULL, '{"panel_type": "IPS", "resolution": [1920, 1080], "screen_size": 24.5, "aspect_ratio": "16:9", "refresh_rate": 500, "response_time": 0.5}', NULL, NULL),
 	(14842, 21, 'Acer VG272U W2', 329.99, 1, NULL, '{"panel_type": "IPS", "resolution": [2560, 1440], "screen_size": 27, "aspect_ratio": "16:9", "refresh_rate": 240, "response_time": 1}', NULL, NULL),
 	(14843, 21, 'Dell G2724D', 299.99, 1, NULL, '{"panel_type": "IPS", "resolution": [2560, 1440], "screen_size": 27, "aspect_ratio": "16:9", "refresh_rate": 165, "response_time": 1}', NULL, NULL),
