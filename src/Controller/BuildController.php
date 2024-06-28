@@ -27,30 +27,44 @@ class BuildController extends AbstractController
         //  BUILD OBJECT INITIALIZATION
 
         $build = new Build();
+        $build->setTotal(0);
 
-        $cpuSlot = new BuildComponent();
-        $cpuCategory = $categoryRepository->findOneBy(['name' => 'Processor']);
-        $cpuSlot->setCategory($cpuCategory);
-        $build->addBuildComponent($cpuSlot);
-
-        $cpuCoolerSlot = new BuildComponent();
-        $build->addBuildComponent($cpuCoolerSlot);
-
-        // dd($build);
-        
-        // $form = $this->createForm(BuildType::class, $build, ['categories' => $categories]);
-        $form = $this->createForm(BuildType::class, $build);
+        $form = $this->createForm(BuildType::class);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $cpuComponents = $form->get('cpu')->getData();
+            $components = [
+                $form->get('cpu')->getData(),
+                $form->get('cpuCooler')->getData(),
+                $form->get('motherboard')->getData(),
+                $form->get('memory')->getData(),
+                $form->get('graphicsCard')->getData(),
+                $form->get('storage')->getData(),
+                $form->get('powerSupply')->getData(),
+                $form->get('case')->getData(),
+                $form->get('opticalDrive')->getData(),
+                $form->get('wiredNetworkCard')->getData(),
+                $form->get('wirelessNetworkCard')->getData(),
+                $form->get('soundCard')->getData(),
+                $form->get('operatingSystem')->getData(),
+                $form->get('caseFan')->getData(),
+                $form->get('service')->getData(),
+            ];
 
-            foreach ($cpuComponents as $cpuComponent) {
-                $cpuComponent->setQuantity(1);
-                $build->addBuildComponent($cpuComponent);
+            foreach ($components as $component) {
+                if (isset($component)) {
+                    $buildComponent = new BuildComponent();
+                    $buildComponent->setComponent($component);
+                    $buildComponent->setQuantity(1);
+                    $build->addBuildComponent($buildComponent);
+                    $build->addToTotal($buildComponent->getComponent()->getPrice() * $buildComponent->getQuantity());
+                }
+                
             }
 
+            $build->setAuthor($this->getUser());
+            
             $entityManager->persist($build);
             $entityManager->flush();
 
