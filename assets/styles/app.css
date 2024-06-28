@@ -397,17 +397,17 @@ table tr td{
     background-color: var(--bgLight);
 }
 
-.orderHistory{
+.history{
     margin-left: 50px;
     width: 100%;
     
 }
 
-.orderHistory h2{
+.history h2{
     margin-bottom: 25px;
 }
 
-.orderHistory ul{
+.historyItem{
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -417,7 +417,8 @@ table tr td{
     background-color: var(--bgLight);
 }
 
-ul .orderContent{
+.itemContent{
+    list-style: none;
     padding: 15px;
     background-color: #eeeeee;
 }
