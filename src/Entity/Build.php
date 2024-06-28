@@ -92,4 +92,11 @@ class Build
 
         return $this;
     }
+
+    public function addToTotal(float $itemPrice): static
+    {
+        $this->total += $itemPrice;
+
+        return $this;
+    }
 }
