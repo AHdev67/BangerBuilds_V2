@@ -23,8 +23,10 @@ class UserController extends AbstractController
     {
         $user = $this->getUser();
         $orders = $user->getOrders();
+        $builds = $user->getBuilds();
         return $this->render('user/show_profile.html.twig', [
-            'orders' => $orders
+            'orders' => $orders,
+            'builds' => $builds
         ]);
     }
 
