@@ -16,13 +16,16 @@ class BuildComponentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
+        $category = $options['category'];
+
         $builder
             ->add('component', EntityType::class, [
                 'class' => Product::class,
-                'query_builder' => function (EntityRepository $entityRepository) {
+                'query_builder' => function (EntityRepository $entityRepository) use ($category) {
                     return $entityRepository->createQueryBuilder('p')
                         ->where('p.category = :category')
-                        ->setParameter('category', '1');
+                        ->setParameter('category', $category);
                 },
                 'choice_label' => 'label',
                 'placeholder' => 'Choose a product',
@@ -34,6 +37,8 @@ class BuildComponentType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => BuildComponent::class,
+            'category' => null,
         ]);
+        $resolver->setAllowedTypes('category', ['null', 'int']);
     }
 }
