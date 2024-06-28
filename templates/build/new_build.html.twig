@@ -14,13 +14,37 @@
 
         {{ form_start(formBuild) }}
 
-            {# {{ dump(formBuild.cpu) }} #}
-
+            <h2>Main components :</h2>
             <div>
-                {# {% for cpuSlot in formBuild.cpu %} #}
-                    {{ form_row(formBuild.buildComponents) }}
-                {# {% endfor %} #}
+                {{ form_row(formBuild.cpu) }}
+                {{ form_row(formBuild.cpuCooler) }}
+                {{ form_row(formBuild.motherboard) }}
+                {{ form_row(formBuild.memory) }}
+                {{ form_row(formBuild.graphicsCard) }}
+                {{ form_row(formBuild.storage) }}
+                {{ form_row(formBuild.powerSupply) }}
+                {{ form_row(formBuild.case) }}
             </div>
+
+            <h2>Optional components :</h2>
+            <div>
+                {{ form_row(formBuild.opticalDrive) }}
+                {{ form_row(formBuild.wiredNetworkCard) }}
+                {{ form_row(formBuild.wirelessNetworkCard) }}
+                {{ form_row(formBuild.soundCard) }}
+                {{ form_row(formBuild.caseFan) }}
+            </div>
+
+            <h2>Software</h2>
+            <div>
+                {{ form_row(formBuild.operatingSystem) }}
+            </div>
+
+            <h2>Services</h2>
+            <div>
+                {{ form_row(formBuild.service) }}
+            </div>
+
                     
         {{ form_end(formBuild) }}
     </div>
