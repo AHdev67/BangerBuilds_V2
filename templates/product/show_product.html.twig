@@ -6,7 +6,6 @@
 <main>
     <div class="productContainer">
         <div class="productHeader">
-            <h3>{{ product.category.name }} > {{ product.label }}</h3>
             <h1 class="productTitle">{{ product.label }}</h1>
         </div>
         
@@ -51,6 +50,16 @@
         <section class="productDesc">
             <p>
                 {{ product.description }}
+            </p>
+        </section>
+
+        <section>
+            <p>
+                <ul>
+                {% for key, spec in specs %}
+                    <li>{{ key }} : {{ spec}}</li>
+                {% endfor %}
+                </ul>
             </p>
         </section>
     </div>
