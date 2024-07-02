@@ -34,6 +34,11 @@
                         <a href="{{ path('process_json', {'id': category.id}) }}">
                             <button class="btn">Process data</button>
                         </a>
+                        {% if category.name == "Video card" %}
+                            <a href="{{ path('fix_gpus', {'id': category.id}) }}">
+                                <button class="btn">Fix gpu names</button>
+                            </a>
+                        {% endif %}
                     </td>
                     <td>{{ category.nbProducts }}</td>
                 </tr>
