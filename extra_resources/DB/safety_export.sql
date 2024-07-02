@@ -14,24 +14,24 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Listage des données de la table bangerbuilds.build : ~1 rows (environ)
+-- Listage des données de la table bangerbuilds.build : ~0 rows (environ)
 INSERT INTO `build` (`id`, `author_id`, `total`) VALUES
 	(2, 2, 1855.88);
 
--- Listage des données de la table bangerbuilds.build_component : ~10 rows (environ)
-INSERT INTO `build_component` (`id`, `component_id`, `related_build_id`, `category_id`, `quantity`) VALUES
-	(1, 12, 2, NULL, 1),
-	(2, 614, 2, NULL, 1),
-	(3, 1564, 2, NULL, 1),
-	(4, 2327, 2, NULL, 1),
-	(5, 5414, 2, NULL, 1),
-	(6, 6510, 2, NULL, 1),
-	(7, 10181, 2, NULL, 1),
-	(8, 9044, 2, NULL, 1),
-	(9, 11216, 2, NULL, 1),
-	(10, 1, 2, NULL, 1);
+-- Listage des données de la table bangerbuilds.build_component : ~0 rows (environ)
+INSERT INTO `build_component` (`id`, `category_id`, `component_id`, `related_build_id`, `quantity`) VALUES
+	(1, NULL, 12, 2, 1),
+	(2, NULL, 614, 2, 1),
+	(3, NULL, 1564, 2, 1),
+	(4, NULL, 2327, 2, 1),
+	(5, NULL, 5414, 2, 1),
+	(6, NULL, 6510, 2, 1),
+	(7, NULL, 10181, 2, 1),
+	(8, NULL, 9044, 2, 1),
+	(9, NULL, 11216, 2, 1),
+	(10, NULL, 1, 2, 1);
 
--- Listage des données de la table bangerbuilds.category : ~26 rows (environ)
+-- Listage des données de la table bangerbuilds.category : ~0 rows (environ)
 INSERT INTO `category` (`id`, `name`) VALUES
 	(1, 'Processor'),
 	(2, 'CPU cooler'),
@@ -62,7 +62,8 @@ INSERT INTO `category` (`id`, `name`) VALUES
 
 -- Listage des données de la table bangerbuilds.doctrine_migration_versions : ~1 rows (environ)
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-	('DoctrineMigrations\\Version20240627124344', '2024-06-27 12:43:55', 785);
+	('DoctrineMigrations\\Version20240627124344', '2024-06-27 12:43:55', 785),
+	('DoctrineMigrations\\Version20240702123653', '2024-07-02 12:37:21', 1189);
 
 -- Listage des données de la table bangerbuilds.messenger_messages : ~0 rows (environ)
 
@@ -71,14 +72,14 @@ INSERT INTO `order` (`id`, `user_id`, `ref_id`, `last_name`, `first_name`, `adre
 	(4, 2, '69420', 'PHP', 'John', '22 rue de la Livraison', 'Strasbourg', '67000', '2024-06-17 09:56:50', 480.93),
 	(5, 2, '69420', 'PHP', 'John', '22 rue de la Livraison', 'Strasbourg', '67000', '2024-06-17 11:38:27', 117.99);
 
--- Listage des données de la table bangerbuilds.order_item : ~4 rows (environ)
+-- Listage des données de la table bangerbuilds.order_item : ~0 rows (environ)
 INSERT INTO `order_item` (`id`, `related_order_id`, `product_id`, `quantity`) VALUES
 	(7, 4, 5, 1),
 	(8, 4, 614, 1),
 	(9, 4, 16781, 2),
 	(10, 5, 2323, 1);
 
--- Listage des données de la table bangerbuilds.product : ~15 831 rows (environ)
+-- Listage des données de la table bangerbuilds.product : ~0 rows (environ)
 INSERT INTO `product` (`id`, `category_id`, `label`, `price`, `in_stock`, `restock_delay`, `specs`, `image`, `description`) VALUES
 	(1, 26, 'Expert build + OS install', 70, 1, NULL, '{}', NULL, NULL),
 	(2, 26, 'Expert build', 50, 1, NULL, '{}', NULL, NULL),
@@ -16939,7 +16940,7 @@ INSERT INTO `product` (`id`, `category_id`, `label`, `price`, `in_stock`, `resto
 
 -- Listage des données de la table bangerbuilds.review : ~0 rows (environ)
 
--- Listage des données de la table bangerbuilds.user : ~1 rows (environ)
+-- Listage des données de la table bangerbuilds.user : ~0 rows (environ)
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `is_verified`) VALUES
 	(2, 'john.php@wanadoo.fr', '["ROLE_ADMIN"]', '$2y$13$Nk0TTSabz7eWVoVG6wTujexogCnsLCiCQH5eOSxErLDFfYsywWCsy', 0);
 
