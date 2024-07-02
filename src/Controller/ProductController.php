@@ -38,8 +38,27 @@ class ProductController extends AbstractController
     #[Route('/{productId}/product', name: 'show_product')]
     public function show(#[MapEntity(id: 'productId')] Product $product): Response
     {
+        $formattedSpecs = [];
+        foreach ($product->getSpecs() as $key => $value) {
+            if ($key == "smt") {
+                $formattedKey = "SMT";
+                $formattedValue = "Yes";
+            }
+            elseif ($key == "tdp") {
+                $formattedKey = "TDP";
+                $formattedValue = $value."W";
+            }
+            else {
+                $formattedKey = $key;
+                $formattedValue = $value;
+            }
+
+            $formattedSpecs[$formattedKey] = $formattedValue;
+        }
+
         return $this->render('product/show_product.html.twig', [
             'product' => $product,
+            'specs' => $formattedSpecs
         ]);
     }
 
@@ -87,6 +106,53 @@ class ProductController extends AbstractController
             'categories' => $categories,
             'products' => $products
         ]);
+    }
+
+    #[Route('/control/{id}/fixGpus', name: 'fix_gpus')]
+    public function fixGpuNames(#[MapEntity(id: 'id')] Category $category, EntityManagerInterface $entityManager, ProductRepository $productRepository): Response
+    {
+        $gpus = $category->getProducts();
+
+        foreach ($gpus as $gpu) {
+            $label = $gpu->getLabel();
+            $chipset = $gpu->getSpecs()["chipset"];
+
+            // Normalize label and chipset for comparison
+            $normalizedLabel = strtolower($label);
+            $normalizedChipset = strtolower($chipset);
+
+            // Split the normalized strings into arrays of words
+            $labelWords = explode(' ', $normalizedLabel);
+            $chipsetWords = explode(' ', $normalizedChipset);
+            
+            // dd($labelWords,$chipsetWords);
+
+            // Check if the normalized chipset is already part of the normalized label
+            if (function($labelWords, $chipsetWords) {
+                $foundWords = 0;
+                foreach ($chipsetWords as $chipsetWord) {
+                    foreach ($labelWords as $labelWord) {
+                        // Use Levenshtein distance to allow for slight variations
+                        if (levenshtein($labelWord, $chipsetWord) <= 1) {
+                            $foundWords++;
+                            break;
+                        }
+                    }
+                }
+                // Check if all chipset words were found in the label
+                return $foundWords == count($chipsetWords);
+            }) {
+                $gpu->setLabel($label . " " . $chipset);
+            }
+
+            dd($gpu);
+
+            $entityManager->persist($gpu);
+        }
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('control_product');
     }
 
 
