@@ -5,19 +5,38 @@
 {% block body %}
 <main>
     <h1>COMPONENTS & ACCESSORIES</h1>
-    <ul>
+    <ul class="cardList">
         {% for category in categories %}
             <li>
-                {% if category.name == "Headphones" or category.name == "Memory" %}
-                    <a href="{{ path('app_product', {'categoryId': category.id}) }}">{{ category.name }}</a>
-                {% elseif category.name == "Power supply" %}
-                    <a href="{{ path('app_product', {'categoryId': category.id}) }}">Power supplies</a>
-                {% elseif category.name == "Uninterruptible Power Supply" %}
-                    <a href="{{ path('app_product', {'categoryId': category.id}) }}">Uninteruptible Power Supplies</a>
-                {% else %}
-                    <a href="{{ path('app_product', {'categoryId': category.id}) }}">{{ category.name }}s</a>
-                {% endif %}
-                
+                <a href="{{ path('app_product', {'categoryId': category.id}) }}">
+                    <div class="card">
+                    {% if category.name == "Headphones" or category.name == "Memory" %}
+                            
+                        <span class="cardTitle">
+                            {{ category.name }}
+                        </span>
+
+                    {% elseif category.name == "Power supply" %}
+
+                        <span class="cardTitle">
+                            Power supplies
+                        </span>
+
+                    {% elseif category.name == "Uninterruptible Power Supply" %}
+
+                        <span class="cardTitle">
+                            Uninteruptible Power Supplies
+                        </span>
+
+                    {% else %}
+
+                        <span class="cardTitle">
+                            {{ category.name }}s
+                        </span>
+
+                    {% endif %}
+                    </div>
+                </a>
             </li>
         {% endfor %}
     </ul>
