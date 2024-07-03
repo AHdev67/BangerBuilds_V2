@@ -4,37 +4,36 @@
 
 {% block body %}
 <main>
-    <h1>COMPONENTS & ACCESSORIES</h1>
+    <h1 class="mainTitle">COMPONENTS & ACCESSORIES</h1>
+
     <ul class="cardList">
         {% for category in categories %}
             <li>
                 <a href="{{ path('app_product', {'categoryId': category.id}) }}">
                     <div class="card">
-                    {% if category.name == "Headphones" or category.name == "Memory" %}
-                            
-                        <span class="cardTitle">
-                            {{ category.name }}
-                        </span>
+                        <figure class="cardImg">
+                            <img src="" alt="{{category.name}} image">
+                        </figure>
 
-                    {% elseif category.name == "Power supply" %}
+                        <div class="cardTitle">
+                            {% if category.name == "Headphones" or category.name == "Memory" %}  
 
-                        <span class="cardTitle">
-                            Power supplies
-                        </span>
+                                {{ category.name }}
 
-                    {% elseif category.name == "Uninterruptible Power Supply" %}
+                            {% elseif category.name == "Power supply" %}      
 
-                        <span class="cardTitle">
-                            Uninteruptible Power Supplies
-                        </span>
+                                Power supplies
 
-                    {% else %}
+                            {% elseif category.name == "Uninterruptible Power Supply" %} 
 
-                        <span class="cardTitle">
-                            {{ category.name }}s
-                        </span>
+                                Uninteruptible Power Supplies
 
-                    {% endif %}
+                            {% else %}
+
+                                {{ category.name }}s
+                                
+                            {% endif %}
+                        </div>
                     </div>
                 </a>
             </li>
