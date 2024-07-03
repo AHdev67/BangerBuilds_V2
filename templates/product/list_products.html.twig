@@ -4,24 +4,36 @@
 
 {% block body %}
 <main>
-    {% if category.name == "Headphones" or category.name == "Memory" %}
-        <h1>{{ category.name }}</h1>
-    {% elseif category.name == "Power supply" %}
-        <h1>Power supplies</h1>
-    {% elseif category.name == "Uninterruptible Power Supply" %}
-        <h1>Uninteruptible Power Supplies</h1>
-    {% else %}
-        <h1>{{ category.name }}s</h1>
-    {% endif %}
+    <h1 class="mainTitle">
+        {% if category.name == "Headphones" or category.name == "Memory" %}
+            {{ category.name }}
+        {% elseif category.name == "Power supply" %}
+            Power supplies
+        {% elseif category.name == "Uninterruptible Power Supply" %}
+            Uninteruptible Power Supplies
+        {% else %}
+            {{ category.name }}s
+        {% endif %}
+    </h1>
 
-    <ul class="itemList">
+    <ul class="cardList">
+
         {% for product in products %}
-            <li class="listItem">
-                <a href="{{ path('show_product', {'categoryId': category.id, 'productId': product.id}) }}" class="mainItem btn">{{ product.label }}</a>
+            <li>
+                <a href="{{ path('show_product', {'productId': product.id}) }}">
+                    <div class="cardLarge">
 
-                {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('edit_product', {'id': product.id}) }}" class="mainItem btn"><i class="fa-solid fa-pen-to-square"></i></a>
-                {% endif %}
+                        <figure class="cardImg">
+                            <img src="" alt="{{product.label}} image">
+                        </figure>
+
+                        <div class="cardTitle">
+                            {{ product.label }}
+                            <hr>
+                            {{ product.price }}$
+                        </div>
+                    </div>
+                </a>
             </li>
         {% endfor %}
     </ul>
