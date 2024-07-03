@@ -427,6 +427,45 @@ table tr td{
 }
 
 
+/* --------------------------------LISTS-------------------------------- */
+.cardList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 25px;
+}
+
+.card{
+    width: 200px;
+    height: 250px;
+    background-color: var(--bgDark);
+    border-radius: 7px;
+    
+}
+
+.cardTitle{
+    color: white;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.itemList{
+    margin: 15px;
+    margin-top: 30px;
+    list-style: none;
+}
+
+.listItem {
+    margin-bottom: 50px;
+}
+
+.mainItem {
+    color: white;
+    background-color: var(--bgDark);
+}
+
 
 /* --------------------------------FORMS-------------------------------- */
 .formContainer{
