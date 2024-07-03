@@ -4,11 +4,24 @@
 
 {% block body %}
 <main>
-    <h1>{{ category.name }}</h1>
-    <ul>
+    {% if category.name == "Headphones" or category.name == "Memory" %}
+        <h1>{{ category.name }}</h1>
+    {% elseif category.name == "Power supply" %}
+        <h1>Power supplies</h1>
+    {% elseif category.name == "Uninterruptible Power Supply" %}
+        <h1>Uninteruptible Power Supplies</h1>
+    {% else %}
+        <h1>{{ category.name }}s</h1>
+    {% endif %}
+
+    <ul class="itemList">
         {% for product in products %}
-            <li>
-                <a href="{{ path('show_product', {'categoryId': category.id, 'productId': product.id}) }}">{{ product.label }}</a>
+            <li class="listItem">
+                <a href="{{ path('show_product', {'categoryId': category.id, 'productId': product.id}) }}" class="mainItem btn">{{ product.label }}</a>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('edit_product', {'id': product.id}) }}" class="mainItem btn"><i class="fa-solid fa-pen-to-square"></i></a>
+                {% endif %}
             </li>
         {% endfor %}
     </ul>
