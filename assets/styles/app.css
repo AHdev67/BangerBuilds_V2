@@ -430,6 +430,10 @@ table tr td{
 
 
 /* --------------------------------LISTS-------------------------------- */
+ul{
+    list-style: none;
+}
+
 .cardList{
     display: flex;
     flex-direction: row;
@@ -448,19 +452,19 @@ table tr td{
 
 .cardLarge{
     width: 300px;
-    height: 300px;
+    height: 350px;
     background-color: var(--bgDark);
     border-radius: 7px;
 }
 
 .cardImg{
-    height: 80%;
+    height: 70%;
     width: inherit;
     background-color: var(--bgLight);
 }
 
 .cardTitle{
-    height: 50px;
+    height: 70px;
     color: white;
     font-size: 20px;
     text-align: center;
@@ -519,6 +523,12 @@ form div input{
 }
 
 form div select{
+    padding: 15px;
+    font-size: 30px;
+    border-radius: 7px;
+}
+
+form div textarea{
     padding: 15px;
     font-size: 30px;
     border-radius: 7px;
@@ -809,6 +819,11 @@ footer h2{
     }
 
     form div select{
+        font-size: 20px;
+        padding: 5px;
+    }
+
+    form div textarea{
         font-size: 20px;
         padding: 5px;
     }
