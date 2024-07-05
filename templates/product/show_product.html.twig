@@ -23,6 +23,9 @@
             <div class="productInfo">
                 <ul>
                     <li>
+                        <b>Rating : </b>{{  }}
+                    </li>
+                    <li>
                         <b>Price : </b>{{ product.price }} $
                     </li>
                 
@@ -45,6 +48,10 @@
                     <br>
                     Add to cart
                 </a>
+
+                <a href="{{ path('new_review', {'productId': product.id}) }}" class="btn">
+                    Review this product
+                </a>
                 
             </div>
         </section>
@@ -61,6 +68,20 @@
                 {% endfor %}
                 </ul>
             </p>
+        </section>
+
+        <section class="productReviews">
+            {% for review in product.reviews %}
+                <div class="review">
+                    <h3>{{ review.title }}</h3>
+                    <p>
+                        {{ review.content }}
+                    </p>
+                    <p>
+                        By : {{ review.author }}
+                    </p>
+                </div>
+            {% endfor %}
         </section>
 
             

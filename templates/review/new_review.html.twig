@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Review this product{% endblock %}
+
+{% block body %}
+<main>
+    <a href="{{ path('show_product', {'productId': product.id}) }}" class="returnBtn btn">
+        <i class="fa-solid fa-arrow-left"></i> Cancel review
+    </a>
+
+    <div class="formContainer" style="margin-top: 50px;">
+        {{ form_start(formAddReview) }}
+            {{ form_row(formAddReview.title) }}
+            {{ form_row(formAddReview.content) }}
+            {{ form_row(formAddReview.rating) }}
+        {{ form_end(formAddReview) }}
+    </div> 
+    
+</main>
+{% endblock %}
