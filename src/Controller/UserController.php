@@ -30,7 +30,6 @@ class UserController extends AbstractController
         ]);
     }
 
-
     //  RETURNS THE SHOPPING CART OF CURRENT USER
 
     #[Route('/user/cart', name: 'show_cart')]
