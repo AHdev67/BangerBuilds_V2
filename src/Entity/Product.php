@@ -57,13 +57,7 @@ class Product
     private Collection $buildComponents;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin lectus ut ex dictum mollis. 
-                                    Etiam ornare mauris nec lorem interdum, ut pellentesque dolor iaculis. 
-                                    Aliquam erat volutpat. In et ligula tincidunt, sollicitudin turpis nec, tempus turpis. 
-                                    In hac habitasse platea dictumst. Nunc ultrices ex nibh, in posuere diam aliquet eget. 
-                                    Pellentesque accumsan arcu vel neque ultricies gravida. Etiam fringilla egestas ante, 
-                                    in laoreet felis consectetur vel. Nam elementum eros et ligula faucibus tempus. 
-                                    Curabitur porta dolor sit amet nisl pellentesque tempus.";
+    private ?string $description;
 
     public function __construct()
     {
@@ -267,5 +261,22 @@ class Product
         $this->description = $description;
 
         return $this;
+    }
+
+    public function getGlobalRating(): ?float
+    {
+        $totalRating = 0;
+        $count = 0;
+
+        foreach ($this->reviews as $review) {
+            $totalRating += $review->getRating();
+            $count++;
+        }
+
+        if ($count === 0) {
+            return null;
+        }
+
+        return $totalRating / $count;
     }
 }
