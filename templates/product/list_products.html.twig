@@ -23,15 +23,23 @@
                 <a href="{{ path('show_product', {'productId': product.id}) }}">
                     <div class="cardLarge">
 
-                        <figure class="cardImg">
+                        <figure class="cardImgLarge">
                             <img src="" alt="{{product.label}} image">
                         </figure>
 
-                        <div class="cardTitle">
-                            {{ product.label }}
-                            <hr>
-                            {{ product.price }}$
+                        <div class="cardDescription">
+
+                            <div class="cardLabel">
+                                {{ product.label }}
+                                
+                            </div>
+
+                            <div class="cardPricetag">
+                                {{ product.price }}$
+                            </div>
+                            
                         </div>
+                        
                     </div>
                 </a>
             </li>

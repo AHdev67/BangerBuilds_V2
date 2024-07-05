@@ -14,8 +14,22 @@
         </div>
         
         <section class="productMain">
-            <div class="productDisplay">
-                <figure>
+            <div class="productGallery">
+                <div class="galleryMenu">
+                    <figure class="thumbnail">
+                        <img src="" alt="Picture of the product">
+                    </figure>
+
+                    <figure class="thumbnail">
+                        <img src="" alt="Picture of the product">
+                    </figure>
+
+                    <figure class="thumbnail">
+                        <img src="" alt="Picture of the product">
+                    </figure>
+                </div>
+
+                <figure class="mainImg">
                     <img src="" alt="Picture of the product">
                 </figure>
             </div>
@@ -23,8 +37,10 @@
             <div class="productInfo">
                 <ul>
                     <li>
-                        <b>Rating : </b>{{  }}
+                        <b>Rating : </b> <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <div id="globalRating">{{ product.globalRating }}</div>
                     </li>
+
                     <li>
                         <b>Price : </b>{{ product.price }} $
                     </li>
@@ -49,7 +65,7 @@
                     Add to cart
                 </a>
 
-                <a href="{{ path('new_review', {'productId': product.id}) }}" class="btn">
+                <a href="{{ path('new_review', {'productId': product.id}) }}" class="neutralBtn btn">
                     Review this product
                 </a>
                 
@@ -57,17 +73,20 @@
         </section>
 
         <section class="productDesc">
-            <p>
+            <p class="description">
                 {{ product.description }}
             </p>
             
-            <p>
-                <ul>
-                {% for key, spec in specs %}
-                    <li>{{ key }} : {{ spec}}</li>
-                {% endfor %}
-                </ul>
-            </p>
+            <table class="specs">
+                <tbody>
+                    {% for key, spec in specs %}
+                        <tr>
+                            <td>{{ key }} :</td>
+                            <td>{{ spec}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </section>
 
         <section class="productReviews">

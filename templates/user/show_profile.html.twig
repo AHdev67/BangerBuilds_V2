@@ -10,14 +10,24 @@
                 <h2>Account information</h2>
                 <div>
                     <span>
-                        <b>Email :</b>{{ app.user.email }}
-                        <a href=""><button class="btn">Change email</button></a>
+                        {% if app.user.username %}
+                            <b>Username : </b>{{ app.user.username }}
+                            <a href="" class="btn">Change username</a>
+                        {% else %}
+                            <b>You do not have a username yet. </b>
+                            <a href="" class="btn">Set a username</a>
+                        {% endif %}
+                    </span>
+
+                    <span>
+                        <b>Email : </b>{{ app.user.email }}
+                        <a href="" class="btn">Change email</a>
                     </span>
                     
                     <span>
                         <b>Password : </b>
-                        <a href=""><button class="btn">Change password</button></a>
-                        <a href=""><button class="btn">Retrieve password</button></a>
+                        <a href="" class="btn">Change password</a>
+                        <a href="" class="btn">Retrieve password</a>
                     </span>
                     
                 </div>
