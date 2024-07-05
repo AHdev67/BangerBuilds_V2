@@ -56,6 +56,11 @@ span{
     text-align: center;
 }
 
+.neutralBtn{
+    background-color: var(--bgDark);
+    color: white;
+}
+
 .qttBtn{
     width: 35px;
     height: 35px;
@@ -445,30 +450,67 @@ ul{
 
 .card{
     width: 200px;
-    height: 250px;
-    background-color: var(--bgDark);
     border-radius: 7px;
 }
 
 .cardLarge{
     width: 300px;
-    height: 350px;
-    background-color: var(--bgDark);
     border-radius: 7px;
 }
 
 .cardImg{
-    height: 70%;
+    height: 200px;
+    width: inherit;
+    background-color: var(--bgLight);
+}
+
+.cardImgLarge{
+    height: 300px;
     width: inherit;
     background-color: var(--bgLight);
 }
 
 .cardTitle{
-    height: 70px;
+    padding: 10px;
+    background-color: var(--bgDark);
     color: white;
     font-size: 20px;
-    text-align: center;
     line-height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+.cardDescription{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cardLabel{
+    padding: 10px;
+    background-color: var(--bgDark);
+    color: white;
+    font-size: 20px;
+    line-height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardPricetag{
+    padding: 10px;
+    background-color: var(--bgDark);
+    color: white;
+    font-size: 20px;
+    line-height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
 }
 
 .itemList{
@@ -582,40 +624,90 @@ tfoot{
 .productHeader{
     display: flex;
     gap: 25px;
-    margin-bottom: 75px;
+    margin-bottom: 45px;
 }
 
 .productTitle{
     font-size: 45px;
-    
 }
 
 .productMain{
     display: flex;
-    justify-content: space-between;
-    margin-left: 100px;
-    margin-right: 100px;
+    gap: 50px;
 }
 
-.productDisplay figure{
+.productGallery{
+    background-color: var(--bgLight);
+    padding: 25px;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 25px;
+}
+
+.galleryMenu{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.thumbnail{
     border: solid black 1px;
-    width: 400px;
-    height: 400px;
+    background-color: white;
+    width: 100px;
+    height: 100px;
+}
+
+.mainImg{
+    border: solid black 1px;
+    background-color: white;
+    width: 320px;
+    height: 320px;
 }
 
 .productInfo {
     display: flex;
     flex-direction: column;
     gap: 50px;
+    width: 100%;
+    background-color: var(--bgLight);
+    padding: 25px;
+}
+
+.productInfo ul{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .productDesc{
     margin-top: 50px;
-    margin-left: 100px;
-    margin-right: 100px;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+}
+
+.description{
+    background-color: var(--bgLight);
+    padding: 25px;
+}
+
+.specs td{
+    border: var(--bgDark) solid 1px;
+
+}
+
+.productReviews{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.review{
+    background-color: var(--bgLight);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 /* --------------------------------FOOTER-------------------------------- */
@@ -807,6 +899,54 @@ footer h2{
 
     /* --------------------------------INFO PAGE-------------------------------- */
 
+        /* --------------------------------PRODUCT INFO-------------------------------- */
+
+        .productGallery{
+            background-color: var(--bgLight);
+            padding: 25px;
+            display: flex;
+            flex-direction: row;
+            gap: 25px;
+        }
+
+        .galleryMenu{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: space-between;
+        }
+
+        .thumbnail{
+            border: solid black 1px;
+            background-color: white;
+            width: 200px;
+            height: 200px;
+        }
+
+        .mainImg{
+            border: solid black 1px;
+            background-color: white;
+            width: 620px;
+            height: 620px;
+        }
+
+        .productInfo {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        .productInfo ul{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .productDesc{
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+        }
     /* --------------------------------FORMS-------------------------------- */
     
     form div label{
