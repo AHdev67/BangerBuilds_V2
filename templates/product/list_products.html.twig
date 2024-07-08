@@ -18,7 +18,7 @@
 
     <ul class="cardList">
 
-        {% for product in products %}
+        {% for product in products|sort((b, a) => a.globalRating <=> b.globalRating) %}
             <li>
                 <a href="{{ path('show_product', {'productId': product.id}) }}">
                     <div class="cardLarge">
