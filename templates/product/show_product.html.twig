@@ -35,17 +35,27 @@
             </div>
             
             <div class="productInfo">
-                <ul>
-                    <li>
-                        <b>Rating : </b> <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        <div id="globalRating">{{ product.globalRating }}</div>
-                    </li>
+                <div class="infoList">
+                    <div>
+                        <b>Rating : </b>
+                        <a href="#reviewSection">
+                        <div class="productStars"> 
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        </a>
 
-                    <li>
+                        <div id="globalRating" class="hidden">{{ product.globalRating }}</div>
+                    </div>
+
+                    <div>
                         <b>Price : </b>{{ product.price }} $
-                    </li>
+                    </div>
                 
-                    <li>
+                    <div>
                         <b>Availability : </b>
                         {% if product.inStock == true %}
                             In stock
@@ -55,8 +65,8 @@
                                 <p>Restocking in approximatively : {{ product.restockDelay }} days</p>
                             {% endif %}
                         {% endif %}
-                    </li>
-                </ul>
+                    </div>
+                </div>
 
                 <a href="{{ path('add_item', {'productId': product.id}) }}" class= "addToCartBtn btn">
                     <i class="fa-solid fa-arrow-right"></i>
@@ -64,45 +74,63 @@
                     <br>
                     Add to cart
                 </a>
-
-                <a href="{{ path('new_review', {'productId': product.id}) }}" class="neutralBtn btn">
-                    Review this product
-                </a>
                 
             </div>
         </section>
 
         <section class="productDesc">
+            <h2>Description</h2>
             <p class="description">
                 {{ product.description }}
             </p>
             
-            <table class="specs">
-                <tbody>
-                    {% for key, spec in specs %}
-                        <tr>
-                            <td>{{ key }} :</td>
-                            <td>{{ spec}}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <div class="productSpecs">
+                <h2>Specifications</h2>
+                <table class="specs">
+                    <tbody>
+                        {% for key, spec in specs %}
+                            <tr>
+                                <td>{{ key }} :</td>
+                                <td>{{ spec}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </section>
 
-        <section class="productReviews">
+        <section class="productReviews" id="reviewSection">
+            <div class="reviewsHeader">
+                <h2>User reviews</h2>
+
+                <a href="{{ path('new_review', {'productId': product.id}) }}" class="neutralBtn btn">
+                    Review this product
+                </a>
+            </div>
+            
             {% for review in product.reviews %}
                 <div class="review">
                     <h3>{{ review.title }}</h3>
+                    <div class="reviewStars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+
+                    <div class="reviewRating hidden">
+                        {{ review.rating }}
+                    </div>
                     <p>
                         {{ review.content }}
                     </p>
                     <p>
-                        By : {{ review.author }}
+                        By : <b>{{ review.author }}</b>
                     </p>
                 </div>
             {% endfor %}
         </section>
-
             
     </div>
 </main>
