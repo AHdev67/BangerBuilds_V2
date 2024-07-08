@@ -674,10 +674,10 @@ tfoot{
     padding: 25px;
 }
 
-.productInfo ul{
+.infoList{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 50px;
 }
 
 .productDesc{
@@ -689,17 +689,28 @@ tfoot{
 .description{
     background-color: var(--bgLight);
     padding: 25px;
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
+.specs{
+    margin-top: 25px;
 }
 
 .specs td{
     border: var(--bgDark) solid 1px;
-
 }
 
 .productReviews{
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.reviewsHeader{
+    display: flex;
+    align-items: center;
+    gap: 25px;
 }
 
 .review{
@@ -709,6 +720,19 @@ tfoot{
     flex-direction: column;
     gap: 10px;
 }
+
+.star-active{
+    color: #ffd000;
+    text-shadow: 1px 1px 2px var(--bgDark);}
+
+.productStars, .reviewStars{
+    position: relative;
+}
+
+.star-overlay{
+    position: absolute;
+}
+
 
 /* --------------------------------FOOTER-------------------------------- */
 footer{
