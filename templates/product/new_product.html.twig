@@ -4,10 +4,16 @@
 
 {% block body %}
 <main>
-    <a href="{{ path('control_product') }}" class="returnBtn btn">
-        <i class="fa-solid fa-arrow-left"></i> Cancel product creation
-    </a>
-
+    {% if edit %}
+        <a href="{{ path('show_product', {'productId': product.id}) }}" class="returnBtn btn">
+            <i class="fa-solid fa-arrow-left"></i> Return to previous page
+        </a>
+    {% else %}
+        <a href="{{ path('control_product') }}" class="returnBtn btn">
+            <i class="fa-solid fa-arrow-left"></i> Cancel product creation
+        </a>
+    {% endif %}
+    
     <div class="formContainer" style="margin-top: 50px;">
 
         {{ form_start(formAddProduct) }}
