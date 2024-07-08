@@ -30,6 +30,27 @@ function toggleMenu() {
 
 hamburger.addEventListener('click', toggleMenu);
 
+//----------------------SCORE STARS SCRIPT----------------------
+const productScore = document.querySelector("#globalRating");
+const productStars = document.querySelector(".productStars");
+const pStars = productStars.querySelectorAll(".fa-star");
+
+for (let i = 0; i < productScore.innerHTML; i++) {
+    pStars[i].classList.add("star-active");
+}
+
+const reviews = document.querySelectorAll(".review")
+
+reviews.forEach(review => {
+    let reviewScore = review.querySelector(".reviewRating");
+    let reviewStars = review.querySelector(".reviewStars");
+    let rStars = reviewStars.querySelectorAll(".fa-star");
+    
+    for (let i = 0; i < reviewScore.innerHTML; i++) {
+        rStars[i].classList.add("star-active");
+    }
+      
+});
 //----------------------SEARCHBAR SCRIPT----------------------
 
 // document.addEventListener('DOMContentLoaded', function() {
