@@ -338,6 +338,13 @@ main{
     justify-content: center;
     align-items: center;
     margin-bottom: 50px;
+    position: relative;
+}
+
+.quote{
+    font-style: italic;
+    font-size: 20px;
+    margin: 25px;
 }
 
 .carouselContainer{
@@ -378,7 +385,33 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-}   
+}  
+
+.homepageSection{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin: 50px;
+}
+
+.homepageRow{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 25px;
+    
+}
+
+.popularCategory{
+    height: 20vw;
+    width: 20vw;
+    background-color: #6eca5e;
+}
+
+.rowItem{
+    height: 20vw;
+    width: 15vw;
+    background-color: #6eca5e;
+}
 
 h1{
     background-color: inherit;
