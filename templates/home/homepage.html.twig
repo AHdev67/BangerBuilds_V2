@@ -3,9 +3,55 @@
 {% block title %}Banger Builds : Home{% endblock %}
 
 {% block body %}
-<main>
-    <h1>
-        Welcome to Banger Builds
-    </h1>
+<main class="homeMain">
+    <div class="banner">
+        <h1>Welcome to BANGER BUILDS</h1>
+        <p>
+            "We sell PCs, and PC parts."
+            <hr>
+            <b>- John Banger, CEO</b>
+        </p>
+    </div>
+    
+    <div class="carouselContainer">
+        <!-- Slider main container -->
+        <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide">
+                    <div class="carouselItem">
+                        Slide 1
+                    </div>
+                </div>
+                
+                <div class="swiper-slide">
+                    <div class="carouselItem">
+                        Slide 2
+                    </div>    
+                </div>
+                    
+                <div class="swiper-slide">
+                    <div class="carouselItem">
+                        Slide 3
+                    </div>
+                </div>
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+        
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+
+    <section class="sec1">
+
+    </section>
+
+    <section class="sec2">
+
+    </section>
 </main>
 {% endblock %}
