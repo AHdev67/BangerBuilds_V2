@@ -9,7 +9,36 @@ import './styles/app.css';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 
-//----------------------BURGER MENU SCRIPT----------------------
+
+
+//--------------------------------------------SWIPER SCRIPT--------------------------------------------
+
+const swiper = new Swiper('.swiper', {
+    // Optional parameters
+    direction: 'horizontal',
+    loop: true,
+  
+    // If we need pagination
+    pagination: {
+      el: '.swiper-pagination',
+    },
+  
+    // Navigation arrows
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  
+    // And if we need scrollbar
+    scrollbar: {
+      el: '.swiper-scrollbar',
+    },
+  });
+
+
+
+//--------------------------------------------BURGER MENU SCRIPT--------------------------------------------
+
 const menu = document.querySelector("#menu");
 const menuItems = document.querySelectorAll(".menuItem");
 const hamburger= document.querySelector("#burger");
@@ -30,7 +59,10 @@ function toggleMenu() {
 
 hamburger.addEventListener('click', toggleMenu);
 
-//----------------------SCORE STARS SCRIPT----------------------
+
+
+//--------------------------------------------SCORE STARS SCRIPT--------------------------------------------
+
 const productScore = document.querySelector("#globalRating");
 const productStars = document.querySelector(".productStars");
 const pStars = productStars.querySelectorAll(".fa-star");
