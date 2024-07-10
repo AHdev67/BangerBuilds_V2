@@ -11,12 +11,14 @@
         <a href="{{ path('new_product') }}">
             <button class="btn"><i class="fa-solid fa-microchip"></i> Add new individual product</button>
         </a>
-        <a href="">
+
+        <a href="{{ path('new_build') }}">
             <button class="btn"><i class="fa-solid fa-computer"></i> Add new prebuilt PC</button>
         </a>
     </div>
 
     <h2>Mass-process product Json data</h2>
+
     <div class="tableContainer">
         <table>
             <thead>
@@ -52,6 +54,10 @@
             </tfoot>
         </table>
     </div>
+
+    <a href="{{ path('add_placeholders') }}">
+        <button class="btn">Add placeholder descriptions</button>
+    </a>
     
 </main>
 {% endblock %}
