@@ -91,7 +91,16 @@
                         {% for key, spec in specs %}
                             <tr>
                                 <td>{{ key }} :</td>
-                                <td>{{ spec}}</td>
+                                <td>
+                                    {% if spec is iterable %}
+                                        {% for item in spec %}
+                                            {{ item }}
+                                        {% endfor %}
+                                    {% else %}
+                                        {{ spec }}
+                                    {% endif %}
+                                    
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>
