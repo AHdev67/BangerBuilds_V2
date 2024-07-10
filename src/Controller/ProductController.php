@@ -108,6 +108,29 @@ class ProductController extends AbstractController
         ]);
     }
 
+    #[Route('/control/addPlaceholders', name: 'add_placeholders')]
+    public function addPlaceholders(EntityManagerInterface $entityManager, ProductRepository $productRepository): Response
+    {
+        $products = $productRepository->findAll();
+
+        foreach ($products as $product) {
+            $product->setDescription(
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin lectus ut ex dictum mollis. 
+                Etiam ornare mauris nec lorem interdum, ut pellentesque dolor iaculis. 
+                Aliquam erat volutpat. In et ligula tincidunt, sollicitudin turpis nec, tempus turpis. 
+                In hac habitasse platea dictumst. Nunc ultrices ex nibh, in posuere diam aliquet eget. 
+                Pellentesque accumsan arcu vel neque ultricies gravida. Etiam fringilla egestas ante, 
+                in laoreet felis consectetur vel. Nam elementum eros et ligula faucibus tempus. 
+                Curabitur porta dolor sit amet nisl pellentesque tempus."
+            );
+            $entityManager->persist($product);
+        }
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('control_product');
+    }
+
     #[Route('/control/{id}/fixGpus', name: 'fix_gpus')]
     public function fixGpuNames(#[MapEntity(id: 'id')] Category $category, EntityManagerInterface $entityManager, ProductRepository $productRepository): Response
     {
