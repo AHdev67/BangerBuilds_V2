@@ -349,6 +349,7 @@ main{
 
 .carouselContainer{
     background-color: var(--bgLight);
+    margin-bottom: 75px;
 }
 
 .swiper {
@@ -391,7 +392,9 @@ main{
     display: flex;
     flex-direction: column;
     gap: 25px;
-    margin: 50px;
+    background-color: var(--bgLight);
+    padding: 50px;
+    margin-bottom: 75px;
 }
 
 .homepageRow{
@@ -405,12 +408,33 @@ main{
     height: 20vw;
     width: 20vw;
     background-color: #6eca5e;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.popularCardImg{
+    height: 80%;
+    width: 100%;
+    background-color: #d4d4d4;
+}
+
+.popularCardDesc{
+    height: 20%;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--bgDark);
+    color: white;
+    font-size: 20px;
+    line-height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .rowItem{
     height: 20vw;
     width: 15vw;
     background-color: #6eca5e;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 h1{
@@ -538,11 +562,13 @@ ul{
 .card{
     width: 200px;
     border-radius: 7px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .cardLarge{
     width: 300px;
     border-radius: 7px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .cardImg{
