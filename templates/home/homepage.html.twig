@@ -20,19 +20,25 @@
                 <!-- Slides -->
                 <div class="swiper-slide">
                     <div class="carouselItem">
-                        Slide 1
+                        <figure>
+                            <img src="" alt="Promo banner 1">
+                        </figure>
                     </div>
                 </div>
                 
                 <div class="swiper-slide">
                     <div class="carouselItem">
-                        Slide 2
+                        <figure>
+                            <img src="" alt="Promo banner 2">
+                        </figure>
                     </div>    
                 </div>
                     
                 <div class="swiper-slide">
                     <div class="carouselItem">
-                        Slide 3
+                        <figure>
+                            <img src="" alt="Promo banner 3">
+                        </figure>
                     </div>
                 </div>
             </div>
@@ -52,19 +58,47 @@
 
         <div class="homepageRow">
             <div class="popularCategory">
-
+                <a href="{{ path('app_product', {'categoryId': popularCategories.categ1.id}) }}">
+                    <figure class="popularCardImg">
+                        <img src="" alt="card image">
+                    </figure>
+                    <div class="popularCardDesc">
+                        {{popularCategories.categ1.name}}s
+                    </div>
+                </a>
             </div>
 
             <div class="popularCategory">
-
+                <a href="{{ path('app_product', {'categoryId': popularCategories.categ2.id}) }}">
+                    <figure class="popularCardImg">
+                        <img src="" alt="card image">
+                    </figure>
+                    <div class="popularCardDesc">
+                        {{popularCategories.categ2.name}}s
+                    </div>
+                </a>
             </div>
 
             <div class="popularCategory">
-
+                <a href="{{ path('app_product', {'categoryId': popularCategories.categ3.id}) }}">
+                    <figure class="popularCardImg">
+                        <img src="" alt="card image">
+                    </figure>
+                    <div class="popularCardDesc">
+                        {{popularCategories.categ3.name}}s
+                    </div>
+                </a>
             </div>
 
             <div class="popularCategory">
-
+                <a href="{{ path('new_build') }}">
+                    <figure class="popularCardImg">
+                        <img src="" alt="card image">
+                    </figure>
+                    <div class="popularCardDesc">
+                        Builder
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -76,27 +110,58 @@
 
         <div class="homepageRow">
             <div class="rowItem">
-
+                <a href="{{ path('show_product', {'productId': newestProducts.prod1.id}) }}">
+                    <figure class="popularCardImg">
+                        <img src="" alt="card image">
+                    </figure>
+                    <div class="popularCardDesc">
+                        {{newestProducts.prod1.label}}
+                    </div>
+                </a>
             </div>
 
             <div class="rowItem">
-
+                <a href="{{ path('show_product', {'productId': newestProducts.prod2.id}) }}">
+                    <figure class="popularCardImg">
+                        <img src="" alt="card image">
+                    </figure>
+                    <div class="popularCardDesc">
+                        {{newestProducts.prod2.label}}
+                    </div>
+                </a>
             </div>
 
             <div class="rowItem">
+                <a href="{{ path('show_product', {'productId': newestProducts.prod3.id}) }}">
+                    <figure class="popularCardImg">
+                        <img src="" alt="card image">
+                    </figure>
+                    <div class="popularCardDesc">
+                        {{newestProducts.prod3.label}}
+                    </div>
+                </a>
+            </div> 
 
+            <div class="rowItem">
+                <a href="{{ path('show_product', {'productId': newestProducts.prod4.id}) }}">
+                    <figure class="popularCardImg">
+                        <img src="" alt="card image">
+                    </figure>
+                    <div class="popularCardDesc">
+                        {{newestProducts.prod4.label}}
+                    </div>
+                </a>
             </div>
 
             <div class="rowItem">
-
-            </div>
-
-            <div class="rowItem">
-
-            </div>
-
-            <div class="rowItem">
-
+                <a href="{{ path('show_product', {'productId': newestProducts.prod5.id}) }}">
+                    <figure class="popularCardImg">
+                        <img src="" alt="card image">
+                    </figure>
+                    <div class="popularCardDesc">
+                        {{newestProducts.prod5.label}}
+                    </div>
+                </a>
             </div>
         </div>
         
