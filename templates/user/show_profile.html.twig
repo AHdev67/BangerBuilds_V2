@@ -36,17 +36,18 @@
             <section class="history">
                 <h2>Your builds</h2>
                 {% for build in app.user.builds %}
-                    <ul class="historyItem">
-                        <li><h3>Build</h3></li>
-                        <li><b>Components : </b></li>
-                            <ul class="itemContent">
-                            {% for buildComponent in build.buildComponents %}
-                                <li><b>{{ buildComponent.component.category }} : </b>{{ buildComponent.component.label }} | <b>{{ buildComponent.component.price }}</b>$</li>
-                            {% endfor %}
-                            </ul>
-                        <li><b>Total : </b>{{ build.total }}$</li>
-                    </ul>
-
+                    <a href="{{ path('show_build', {'buildId': build.id}) }}">
+                        <ul class="historyItem">
+                            <li><h3>Build</h3></li>
+                            <li><b>Components : </b></li>
+                                <ul class="itemContent">
+                                {% for buildComponent in build.buildComponents %}
+                                    <li><b>{{ buildComponent.component.category }} : </b>{{ buildComponent.component.label }} | <b>{{ buildComponent.component.price }}</b>$</li>
+                                {% endfor %}
+                                </ul>
+                            <li><b>Total : </b>{{ build.total }}$</li>
+                        </ul>
+                    </a>
                 {% endfor %}
             </section>
 
