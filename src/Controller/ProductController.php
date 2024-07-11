@@ -10,10 +10,12 @@ use PhpParser\Node\Stmt\Label;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
+use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProductController extends AbstractController
@@ -23,9 +25,14 @@ class ProductController extends AbstractController
     //  RETURNS LIST OF PRODUCTS BY CATEGORY
 
     #[Route('/category/{categoryId}/products', name: 'app_product')]
-    public function index(#[MapEntity(id: 'categoryId')] Category $category): Response
+    public function index(#[MapEntity(id: 'categoryId')] Category $category, PaginatorInterface $paginator, Request $request): Response
     {
-        $products = $category->getProducts();
+        $products = $paginator->paginate(
+            $category->getProducts(),
+            $request->query->getInt('page', 1), /*page number*/
+            8 /*limit per page*/
+        );
+        
         return $this->render('product/list_products.html.twig', [
             'category' => $category,
             'products' => $products
