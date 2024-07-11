@@ -57,49 +57,62 @@
         </h2>
 
         <div class="homepageRow">
-            <div class="popularCategory">
-                <a href="{{ path('app_product', {'categoryId': popularCategories.categ1.id}) }}">
-                    <figure class="popularCardImg">
+            <a href="{{ path('app_product', {'categoryId': popularCategories.categ1.id}) }}">
+                <div class="homeCard">
+                    <figure class="homeCardImg">
                         <img src="" alt="card image">
                     </figure>
-                    <div class="popularCardDesc">
-                        {{popularCategories.categ1.name}}s
+                    <div class="homeCardDesc">
+                        <div class="homeCardLabel">
+                            {{popularCategories.categ1.name}}s
+                        </div>
+                        
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
 
-            <div class="popularCategory">
-                <a href="{{ path('app_product', {'categoryId': popularCategories.categ2.id}) }}">
-                    <figure class="popularCardImg">
+            <a href="{{ path('app_product', {'categoryId': popularCategories.categ2.id}) }}">
+                <div class="homeCard">
+                    <figure class="homeCardImg">
                         <img src="" alt="card image">
                     </figure>
-                    <div class="popularCardDesc">
-                        {{popularCategories.categ2.name}}s
+                    <div class="homeCardDesc">
+                        <div class="homeCardLabel">
+                            {{popularCategories.categ2.name}}s
+                        </div>
+                        
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
 
-            <div class="popularCategory">
-                <a href="{{ path('app_product', {'categoryId': popularCategories.categ3.id}) }}">
-                    <figure class="popularCardImg">
+            <a href="{{ path('app_product', {'categoryId': popularCategories.categ3.id}) }}">
+                <div class="homeCard">
+                    <figure class="homeCardImg">
                         <img src="" alt="card image">
                     </figure>
-                    <div class="popularCardDesc">
-                        {{popularCategories.categ3.name}}s
+                    <div class="homeCardDesc">
+                        <div class="homeCardLabel">
+                            {{popularCategories.categ3.name}}s
+                        </div>
+                        
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
 
-            <div class="popularCategory">
-                <a href="{{ path('new_build') }}">
-                    <figure class="popularCardImg">
+            <a href="{{ path('new_build') }}">
+                <div class="homeCard">
+                    <figure class="homeCardImg">
                         <img src="" alt="card image">
                     </figure>
-                    <div class="popularCardDesc">
-                        Builder
+                    <div class="homeCardDesc">
+                        <div class="homeCardLabel">
+                            Builder
+                        </div>
+                        
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
+            
         </div>
     </section>
 
@@ -109,60 +122,93 @@
         </h2>
 
         <div class="homepageRow">
-            <div class="rowItem">
-                <a href="{{ path('show_product', {'productId': newestProducts.prod1.id}) }}">
-                    <figure class="popularCardImg">
+            <a href="{{ path('show_product', {'productId': newestProducts.prod1.id}) }}">
+                <div class="rowCard">
+                    <figure class="homeCardImg">
                         <img src="" alt="card image">
                     </figure>
-                    <div class="popularCardDesc">
-                        {{newestProducts.prod1.label}}
-                    </div>
-                </a>
-            </div>
+                    <div class="homeCardDesc">
+                        <div class="homeCardLabel">
+                            {{ newestProducts.prod1.label }}
+                            
+                        </div>
 
-            <div class="rowItem">
-                <a href="{{ path('show_product', {'productId': newestProducts.prod2.id}) }}">
-                    <figure class="popularCardImg">
-                        <img src="" alt="card image">
-                    </figure>
-                    <div class="popularCardDesc">
-                        {{newestProducts.prod2.label}}
+                        <div class="homeCardPrice">
+                            {{ newestProducts.prod1.price }}$
+                        </div>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
 
-            <div class="rowItem">
-                <a href="{{ path('show_product', {'productId': newestProducts.prod3.id}) }}">
-                    <figure class="popularCardImg">
+            <a href="{{ path('show_product', {'productId': newestProducts.prod2.id}) }}">
+                <div class="rowCard">
+                    <figure class="homeCardImg">
                         <img src="" alt="card image">
                     </figure>
-                    <div class="popularCardDesc">
-                        {{newestProducts.prod3.label}}
-                    </div>
-                </a>
-            </div> 
+                    <div class="homeCardDesc">
+                        <div class="homeCardLabel">
+                            {{ newestProducts.prod2.label }}
+                            
+                        </div>
 
-            <div class="rowItem">
-                <a href="{{ path('show_product', {'productId': newestProducts.prod4.id}) }}">
-                    <figure class="popularCardImg">
-                        <img src="" alt="card image">
-                    </figure>
-                    <div class="popularCardDesc">
-                        {{newestProducts.prod4.label}}
+                        <div class="homeCardPrice">
+                            {{ newestProducts.prod2.price }}$
+                        </div>
                     </div>
-                </a>
-            </div>
+                </div>
+            </a>
 
-            <div class="rowItem">
-                <a href="{{ path('show_product', {'productId': newestProducts.prod5.id}) }}">
-                    <figure class="popularCardImg">
+            <a href="{{ path('show_product', {'productId': newestProducts.prod3.id}) }}">
+                <div class="rowCard">
+                    <figure class="homeCardImg">
                         <img src="" alt="card image">
                     </figure>
-                    <div class="popularCardDesc">
-                        {{newestProducts.prod5.label}}
+                    <div class="homeCardDesc">
+                        <div class="homeCardLabel">
+                            {{ newestProducts.prod3.label }}
+                        </div>
+
+                        <div class="homeCardPrice">
+                            {{ newestProducts.prod3.price }}$
+                        </div>
                     </div>
-                </a>
-            </div>
+                </div> 
+            </a>
+
+            <a href="{{ path('show_product', {'productId': newestProducts.prod4.id}) }}">
+                <div class="rowCard">
+                    <figure class="homeCardImg">
+                        <img src="" alt="card image">
+                    </figure>
+                    <div class="homeCardDesc">
+                        <div class="homeCardLabel">
+                            {{ newestProducts.prod4.label }}
+                            
+                        </div>
+
+                        <div class="homeCardPrice">
+                            {{ newestProducts.prod4.price }}$
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="{{ path('show_product', {'productId': newestProducts.prod5.id}) }}">
+                <div class="rowCard">
+                    <figure class="homeCardImg">
+                        <img src="" alt="card image">
+                    </figure>
+                    <div class="homeCardDesc">
+                        <div class="homeCardLabel">
+                            {{ newestProducts.prod5.label }}
+                        </div>
+
+                        <div class="homeCardPrice">
+                            {{ newestProducts.prod5.price }}$
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
         
     </section>
