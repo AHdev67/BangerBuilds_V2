@@ -399,27 +399,50 @@ main{
 
 .homepageRow{
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-evenly;
-    gap: 25px;
+    list-style: none;
+    gap: 50px;
     
 }
 
-.popularCategory{
-    height: 20vw;
-    width: 20vw;
-    background-color: #6eca5e;
+.homeCard{
+    width: 300px;
+    height: 300px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 7px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.popularCardImg{
-    height: 80%;
-    width: 100%;
-    background-color: #d4d4d4;
+.homeCardImg{
+    height: 100%;
+    width: inherit;
+    background-color: #ffffff;
 }
 
-.popularCardDesc{
-    height: 20%;
-    width: 100%;
+.homeCardDesc{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.homeCardLabel{
+    padding: 10px;
+    background-color: var(--bgDark);
+    color: white;
+    font-size: 20px;
+    line-height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-overflow: ellipsis;
+}
+
+.homeCardPrice{
     padding: 10px;
     background-color: var(--bgDark);
     color: white;
@@ -430,11 +453,47 @@ main{
     align-items: center;
 }
 
-.rowItem{
-    height: 20vw;
-    width: 15vw;
-    background-color: #6eca5e;
+.rowCard{
+    width: 300px;
+    height: 400px;
+    background-color: #ffffff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 7px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.paginationContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+ 
+.pagination a, .pagination span {
+    /* color: #9b9b9b; */
+    padding: 10px 15px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: ease-in-out background-color 0.2s, color 0.2s ;
+}
+ 
+.pagination .current, .pagination a:hover {
+    background-color: var(--secondary-color);
+    border-radius: 25px;
+    overflow: hidden;
+    color: white;
+    background-color: var(--bgDark);
 }
 
 h1{
@@ -563,12 +622,16 @@ ul{
     width: 200px;
     border-radius: 7px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 7px;
+    overflow: hidden;
 }
 
 .cardLarge{
     width: 300px;
     border-radius: 7px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 7px;
+    overflow: hidden;
 }
 
 .cardImg{
@@ -592,8 +655,6 @@ ul{
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
 }
 
 .cardDescription{
@@ -622,8 +683,6 @@ ul{
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
 }
 
 .itemList{
