@@ -6,17 +6,26 @@ use App\Entity\Build;
 use App\Form\BuildType;
 use App\Entity\Category;
 use App\Entity\BuildComponent;
-use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BuildController extends AbstractController
 {
 
+    #[Route('/{buildId}/build', name: 'show_build')]
+    public function show(#[MapEntity(id: 'buildId')] Build $build): Response
+    {
+
+        return $this->render('build/show_build.html.twig', [
+            'build' => $build,
+        ]);
+    }
 
     //  RETURNS THE CREATION FORM FOR A NEW BUILD / EDIT FORM FOR AN EXISITNG BUILD
 
@@ -68,7 +77,7 @@ class BuildController extends AbstractController
             $entityManager->persist($build);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_user');
+            return $this->redirectToRoute('show_build', ['buildId'=>$build->getId()]);
         }
 
         return $this->render('build/new_build.html.twig', [
