@@ -84,6 +84,10 @@ span{
     height: 45px;
 }
 
+.deleteBtnLarge{
+    background-color: var(--warningColor);
+}
+
 .validateBtn{
     background-color: var(--validateColor);
 }
@@ -92,6 +96,13 @@ span{
     background-color: var(--bgDark);
     color: white;
 }
+
+.addToCartBtnAlt{
+    width: 150px;
+    display: flex;
+    align-items: center;
+    background-color: var(--bgDark);
+    color: white;}
 
 .optGroupX{
     display: flex;
@@ -855,9 +866,24 @@ tfoot{
     padding: 25px;
 }
 
+.productInfoAlt{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 50px;
+    width: 100%;
+    background-color: var(--bgLight);
+    padding: 25px;}
+
 .infoList{
     display: flex;
     flex-direction: column;
+    gap: 50px;
+}
+
+.infoListAlt{
+    display: flex;
+    flex-direction: row;
     gap: 50px;
 }
 
