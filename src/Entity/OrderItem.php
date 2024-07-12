@@ -20,8 +20,8 @@ class OrderItem
     #[ORM\ManyToOne(inversedBy: 'orderItems')]
     private ?Product $product = null;
 
-    // #[ORM\ManyToOne(inversedBy: 'orderItems')]
-    // private ?Build $build = null;
+    #[ORM\ManyToOne(inversedBy: 'orderItems')]
+    private ?Build $build = null;
 
     #[ORM\Column]
     private ?int $quantity = null;
@@ -55,17 +55,17 @@ class OrderItem
         return $this;
     }
 
-    // public function getBuild(): ?Build
-    // {
-    //     return $this->build;
-    // }
+    public function getBuild(): ?Build
+    {
+        return $this->build;
+    }
 
-    // public function setBuild(?Build $build): static
-    // {
-    //     $this->build = $build;
+    public function setBuild(?Build $build): static
+    {
+        $this->build = $build;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
     public function getQuantity(): ?int
     {
