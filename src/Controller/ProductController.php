@@ -100,6 +100,17 @@ class ProductController extends AbstractController
         ]);
     }
 
+    //  DELETES AN EXISTING PRODUCT
+
+    #[Route('/product/{id}/delete', name: 'delete_product')]
+    public function delete(Product $product, EntityManagerInterface $entityManager)
+    {
+        $entityManager->remove($product);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_product');
+    }
+
 
     //  RETURNS THE PRODUCT CONTROL PANEL FOR ADMIN USERS ONLY
 
