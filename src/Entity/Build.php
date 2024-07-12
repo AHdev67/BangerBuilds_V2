@@ -25,8 +25,14 @@ class Build
     /**
      * @var Collection<int, BuildComponent>
      */
-    #[ORM\OneToMany(targetEntity: BuildComponent::class, mappedBy: 'relatedBuild', cascade:["persist"])]
+    #[ORM\OneToMany(targetEntity: BuildComponent::class, mappedBy: 'relatedBuild', cascade:["persist"], orphanRemoval: true)]
     private Collection $buildComponents;
+
+    #[ORM\Column]
+    private ?bool $prebuilt = false;
+
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
 
     public function __construct()
     {
@@ -96,6 +102,30 @@ class Build
     public function addToTotal(float $itemPrice): static
     {
         $this->total += $itemPrice;
+
+        return $this;
+    }
+
+    public function isPrebuilt(): ?bool
+    {
+        return $this->prebuilt;
+    }
+
+    public function setPrebuilt(bool $prebuilt): static
+    {
+        $this->prebuilt = $prebuilt;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
 
         return $this;
     }
