@@ -16,6 +16,11 @@ class BuildRepository extends ServiceEntityRepository
         parent::__construct($registry, Build::class);
     }
 
+    public function findAllPrebuilts(): array
+    {
+        return $this->findBy(['prebuilt' => true]);
+    }
+
     //    /**
     //     * @return Build[] Returns an array of Build objects
     //     */
