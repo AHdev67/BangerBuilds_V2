@@ -10,6 +10,7 @@
 
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('edit_product', {'id': product.id}) }}" class="btn editBtn"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a href="{{ path('delete_product', {'id': product.id}) }}" class="btn deleteBtn"><i class="fa-solid fa-trash"></i></a>
             {% endif %}
         </div>
         
