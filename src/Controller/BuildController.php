@@ -6,9 +6,11 @@ use App\Entity\Build;
 use App\Form\BuildType;
 use App\Entity\Category;
 use App\Entity\BuildComponent;
+use App\Repository\BuildRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,32 +19,53 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BuildController extends AbstractController
 {
+    #[Route('/prebuilts', name: 'app_prebuilts')]
+    public function index(PaginatorInterface $paginator, BuildRepository $buildRepository, Request $request): Response
+    {
+        $prebuilts = $paginator->paginate(
+            $prebuilts = $buildRepository->findAllPrebuilts(),
+            $request->query->getInt('page', 1), /*page number*/
+            8 /*limit per page*/
+        );
+        
+        return $this->render('build/list_prebuilts.html.twig', [
+            'prebuilts' => $prebuilts
+        ]);
+    }
+
+
 
     #[Route('/{buildId}/build', name: 'show_build')]
     public function show(#[MapEntity(id: 'buildId')] Build $build): Response
     {
-
         return $this->render('build/show_build.html.twig', [
             'build' => $build,
         ]);
     }
 
+
     //  RETURNS THE CREATION FORM FOR A NEW BUILD / EDIT FORM FOR AN EXISITNG BUILD
 
     #[Route('/build/new', name: 'new_build')]
-    public function newBuild(Request $request, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
+    #[Route('/build/{id}/edit', name: 'edit_build')]
+
+    public function newBuild(Build $build = null ,Request $request, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
     {
 
         //  BUILD OBJECT INITIALIZATION
 
-        $build = new Build();
-        $build->setTotal(0);
-
-        $form = $this->createForm(BuildType::class);
+        if(!$build){
+            $build = new Build();
+            $build->setTotal(0); 
+        }
+       
+        $form = $this->createForm(BuildType::class, $build);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $build = $form->getData();
+
             $components = [
                 $form->get('cpu')->getData(),
                 $form->get('cpuCooler')->getData(),
@@ -69,7 +92,6 @@ class BuildController extends AbstractController
                     $build->addBuildComponent($buildComponent);
                     $build->addToTotal($buildComponent->getComponent()->getPrice() * $buildComponent->getQuantity());
                 }
-                
             }
 
             $build->setAuthor($this->getUser());
@@ -82,6 +104,17 @@ class BuildController extends AbstractController
 
         return $this->render('build/new_build.html.twig', [
             'formBuild' => $form->createView(),
+            'edit' => $build->getId(),
+            'build' => $build
         ]);
+    }
+
+    #[Route('/build/{id}/delete', name: 'delete_build')]
+    public function delete(Build $build, EntityManagerInterface $entityManager)
+    {
+        $entityManager->remove($build);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_user');
     }
 }
