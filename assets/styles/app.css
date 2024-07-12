@@ -80,6 +80,8 @@ span{
 
 .deleteBtn{
     background-color: var(--warningColor);
+    width: 45px;
+    height: 45px;
 }
 
 .validateBtn{
@@ -94,7 +96,7 @@ span{
 .optGroupX{
     display: flex;
     gap: 50px;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 
 .optGroupY{
@@ -766,6 +768,13 @@ form div select option{
     border-style: none;
     font-size: 30px;
     font-weight: bold;
+}
+
+.checkboxField{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 10px;
 }
 
 /* --------------------------------TABLES-------------------------------- */
