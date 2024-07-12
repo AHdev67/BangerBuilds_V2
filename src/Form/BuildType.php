@@ -13,9 +13,11 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
 
 class BuildType extends AbstractType
 {
@@ -227,6 +229,9 @@ class BuildType extends AbstractType
             'placeholder' => 'Choose a product',
         ])
 
+        ->add('name')
+        ->add('prebuilt')
+
         ->add('save', SubmitType::class, [
             'label' => 'Save Build',
             'attr' => ['class' => 'validateBtn submitBtn btn'],
@@ -237,6 +242,7 @@ class BuildType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'data_class' => Build::class,
         ]);
     }
 }
