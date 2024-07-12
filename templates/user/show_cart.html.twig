@@ -22,25 +22,47 @@
                 {% for item in items %}
                     <tr>
                         <td class="itemLabel">
-                            <span class="itemCategory">{{ item.product.category.name }}</span>
-                            <span><b>{{ item.product.label }}</b></span>
+                            {% if item.type == 'product' %}
+                                <span><b>{{ item.product.label }}</b></span>
+                            {% elseif item.type == 'build' %}
+                                <span><b>{{ item.build.name }}</b></span>
+                            {% endif %}
                         </td>
 
                         <td class="qtt">
-                            <a href="{{ path('up_quantity', {'itemId': item.product.id}) }}"><button class="qttBtn"><i class="fa-solid fa-plus"></i></button></a>
-                                {{ item.qtt }}
-                            <a href="{{ path('down_quantity', {'itemId': item.product.id}) }}"><button class="qttBtn"><i class="fa-solid fa-minus"></i></button></a>
-                        </td>
+                            {% if item.type == 'product' %}
+                                <a href="{{ path('up_quantity', {'itemId': item.product.id}) }}"><button class="qttBtn"><i class="fa-solid fa-plus"></i></button></a>
+                                    {{ item.qtt }}
+                                <a href="{{ path('down_quantity', {'itemId': item.product.id}) }}"><button class="qttBtn"><i class="fa-solid fa-minus"></i></button></a>
+                            {% elseif item.type == 'build' %}
+                                <a href="{{ path('up_quantity', {'itemId': item.build.id}) }}"><button class="qttBtn"><i class="fa-solid fa-plus"></i></button></a>
+                                    {{ item.qtt }}
+                                <a href="{{ path('down_quantity', {'itemId': item.build.id}) }}"><button class="qttBtn"><i class="fa-solid fa-minus"></i></button></a>
+                            {% endif %}
 
-                        <td>{{ item.product.price }}$</td>
+                        </td>
 
                         <td>
-                            <a href="{{ path('remove_item', {'itemId': item.product.id}) }}">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
+                            {% if item.type == 'product' %}
+                                {{ item.product.price }}$
+                            {% elseif item.type == 'build' %}
+                                {{ item.build.total }}$
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if item.type == 'product' %}
+                                <a href="{{ path('remove_item', {'itemId': item.product.id}) }}">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            {% elseif item.type == 'build' %}
+                                <a href="{{ path('remove_item', {'itemId': item.build.id}) }}">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            {% endif %}
                         </td>
                     </tr>
-                    {% else %}
+                    {# {% else %}
                     <tr>
                         <td class="itemLabel">Err: Invalid object in cart</td>
                         <td class="qtt"><a href="{{ path('up_quantity', {'itemId': item.product.id}) }}"><button class="qttBtn"><i class="fa-solid fa-plus"></i></button></a>
@@ -48,7 +70,7 @@
                         <a href="{{ path('down_quantity', {'itemId': item.product.id}) }}"><button class="qttBtn"><i class="fa-solid fa-minus"></i></button></a></td>
                         <td>Err: Invalid object in cart</td>
                         <td><a href="{{ path('remove_item', {'itemId': item.product.id}) }}"><i class="fa-solid fa-trash"></i></a></td>
-                    </tr>
+                    </tr> #}
                 {% endfor %}
 
             </tbody>
@@ -67,7 +89,7 @@
     
 
     <div class="optGroupX">
-        <a href="{{ path('flush_cart') }}" class="deleteBtn btn">
+        <a href="{{ path('flush_cart') }}" class="deleteBtnLarge btn">
             Empty out your cart <i class="fa-solid fa-trash"></i>
         </a>
         {% if app.user %}
