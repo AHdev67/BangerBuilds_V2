@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List of prebuilt PCs{% endblock %}
+
+{% block body %}
+<main>
+    <h1 class="mainTitle">
+        Our prebuilt PCs, made with love
+    </h1>
+
+    <ul class="cardList">
+
+        {% for prebuilt in prebuilts|sort((b, a) => a.total <=> b.total) %}
+            <li>
+                <a href="{{ path('show_build', {'buildId': prebuilt.id}) }}">
+                    <div class="cardLarge">
+
+                        <figure class="cardImgLarge">
+                            <img src="" alt="{{prebuilt.name}} image">
+                        </figure>
+
+                        <div class="cardDescription">
+
+                            <div class="cardLabel">
+                                {{ prebuilt.name }}
+                                
+                            </div>
+
+                            <div class="cardPricetag">
+                                {{ prebuilt.total }}$
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="paginationContainer">
+        {{ knp_pagination_render(prebuilts) }}
+    </div>
+</main>
+{% endblock %}
