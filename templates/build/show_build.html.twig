@@ -4,15 +4,145 @@
 
 {% block body %}
 <main>
-    <ul class="historyItem">
-        <li><h3>Build</h3></li>
-        <li><b>Components : </b></li>
-            <ul class="itemContent">
-            {% for buildComponent in build.buildComponents %}
-                <li><b>{{ buildComponent.component.category }} : </b>{{ buildComponent.component.label }} | <b>{{ buildComponent.component.price }}</b>$</li>
-            {% endfor %}
-            </ul>
-        <li><b>Total : </b>{{ build.total }}$</li>
-    </ul>
+    <div class="productContainer">
+        <div class="productHeader">
+            <h1 class="productTitle">{{ build.name }}</h1>
+
+            {% if build.author == app.user %}
+                <a href="{{ path('edit_build', {'id': build.id}) }}" class="btn editBtn"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a href="{{ path('delete_build', {'id': build.id}) }}" class="btn deleteBtn"><i class="fa-solid fa-trash"></i></a>
+            {% endif %}
+        </div>
+        
+        <section class="productMain">
+            {% if build.prebuilt == true %}
+                <div class="productGallery">
+                    <div class="galleryMenu">
+                        <figure class="thumbnail">
+                            <img src="" alt="Picture of the product">
+                        </figure>
+
+                        <figure class="thumbnail">
+                            <img src="" alt="Picture of the product">
+                        </figure>
+
+                        <figure class="thumbnail">
+                            <img src="" alt="Picture of the product">
+                        </figure>
+                    </div>
+
+                    <figure class="mainImg">
+                        <img src="" alt="Picture of the product">
+                    </figure>
+                </div>
+
+                <div class="productInfo">
+                    <div class="infoList">
+                        {# <div>
+                            <b>Rating : </b>
+                            <a href="#reviewSection">
+                            <div class="productStars"> 
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            </a>
+
+                            <div id="globalRating" class="hidden">{{ build.globalRating }}</div>
+                        </div> #}
+
+                        <div>
+                            <b>Price : </b>{{ build.total }} $
+                        </div>
+                    </div>
+
+                    <a href="{{ path('addBuild_ToCart', {'buildId': build.id}) }}" class= "addToCartBtn btn">
+                        <i class="fa-solid fa-arrow-right"></i>
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <br>
+                        Add to cart
+                    </a>
+                </div>
+            {% else %}
+                <div class="productInfoAlt">
+                    <div class="infoList">
+                        <div>
+                            <b>Price : </b>{{ build.total }} $
+                        </div>
+                    </div>
+
+                    <a href="{{ path('addBuild_ToCart', {'buildId': build.id}) }}" class= "addToCartBtnAlt btn">
+                        <i class="fa-solid fa-arrow-right"></i>
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span>Add to cart</span>
+                    </a>
+                    
+                </div>
+            {% endif %}
+            
+            
+        </section>
+
+        <section class="productDesc">
+            {# <h2>Description</h2>
+            <p class="description">
+                {{ build.description }}
+            </p> #}
+            
+            <div class="productSpecs">
+                <h2>Specifications</h2>
+                <table class="specs">
+                    <tbody>
+                        {% for buildComponent in build.buildComponents %}
+                            <tr>
+                                <td>{{ buildComponent.component.category }} :</td>
+                                <td>
+                                    {{ buildComponent.component.label }}                                    
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        {% if build.prebuilt == true %}
+            <section class="productReviews" id="reviewSection">
+                <div class="reviewsHeader">
+                    <h2>User reviews</h2>
+
+                    {# <a href="{{ path('new_review', {'productId': product.id}) }}" class="neutralBtn btn">
+                        Review this product
+                    </a> #}
+                </div>
+                
+                {# {% for review in product.reviews %}
+                    <div class="review">
+                        <h3>{{ review.title }}</h3>
+                        <div class="reviewStars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+
+                        <div class="reviewRating hidden">
+                            {{ review.rating }}
+                        </div>
+                        <p>
+                            {{ review.content }}
+                        </p>
+                        <p>
+                            By : <b>{{ review.author }}</b>
+                        </p>
+                    </div>
+                {% endfor %} #}
+            </section>
+        {% endif %}
+            
+    </div>
 </main>
 {% endblock %}
