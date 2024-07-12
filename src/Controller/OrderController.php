@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Order;
 use App\Entity\OrderItem;
 use App\Form\OrderType;
+use App\Repository\BuildRepository;
 use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,7 +23,7 @@ class OrderController extends AbstractController
     #[Route('/order/new', name: 'new_order')]
     #[Route('/order/{orderId}/edit', name: 'edit_order')]
 
-    public function updateOrder(Order $order = null, Request $request, EntityManagerInterface $entityManager, ProductRepository $productRepository): Response
+    public function updateOrder(Order $order = null, Request $request, EntityManagerInterface $entityManager, ProductRepository $productRepository, BuildRepository $buildRepository): Response
     {
         if (!$order){
             $order = new Order();
@@ -42,14 +43,26 @@ class OrderController extends AbstractController
             $session = $request->getSession();
             $cart = $session->get('cart');
             if (!empty($cart)) {
-                foreach ($cart as $productId => $item) {
-                    $product = $productRepository->find($productId);
-                    $orderItem = new OrderItem;
-                    $orderItem->setProduct($product);
-                    $orderItem->setQuantity($item['qtt']);
-                    $entityManager->persist($orderItem);
-                    $order->addOrderItem($orderItem);
-                    $order->setTotal($order->getTotal() + $orderItem->getProduct()->getPrice() * $orderItem->getQuantity());
+                foreach ($cart as $itemId => $item) {
+                    if($item['type'] == 'product'){
+                        $product = $productRepository->find($itemId);
+                        $orderItem = new OrderItem;
+                        $orderItem->setProduct($product);
+                        $orderItem->setQuantity($item['qtt']);
+                        $entityManager->persist($orderItem);
+                        $order->addOrderItem($orderItem);
+                        $order->setTotal($order->getTotal() + $orderItem->getProduct()->getPrice() * $orderItem->getQuantity());
+                    }
+                    elseif ($item['type'] == 'build'){
+                        $build = $buildRepository->find($itemId);
+                        $orderItem = new OrderItem;
+                        $orderItem->setBuild($build);
+                        $orderItem->setQuantity($item['qtt']);
+                        $entityManager->persist($orderItem);
+                        $order->addOrderItem($orderItem);
+                        $order->setTotal($order->getTotal() + $orderItem->getBuild()->getTotal() * $orderItem->getQuantity());
+                    }
+                    
                 }   
             }
             $entityManager->persist($order);
