@@ -68,7 +68,13 @@
                             <li><b>Content : </b></li>
                                 <ul class="itemContent">
                                 {% for item in order.orderItems %}
-                                    <li>{{ item.quantity }}x <b>{{ item.product.label }}</b></li>
+                                    <li>
+                                        {% if item.product %}
+                                            {{ item.quantity }}x <b>{{ item.product.label }}</b>
+                                        {% elseif item.build %}
+                                            {{ item.quantity }}x <b>{{ item.build.name }}</b>
+                                        {% endif %}
+                                    </li>
                                 {% endfor %}
                                 </ul>
                             <li><b>Total : </b>{{ order.total }}$</li>
@@ -76,5 +82,8 @@
                     {% endfor %}
             </section>
         </div>
+        <a href="{{ path('flush_cart') }}" class="deleteBtnLarge btn">
+            Emegency cart flush <i class="fa-solid fa-trash"></i>
+        </a>
     </main>
 {% endblock %}
