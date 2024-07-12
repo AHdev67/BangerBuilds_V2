@@ -4,9 +4,15 @@
 
 {% block body %}
 <main>
-    <a href="{{ path('app_home') }}" class="returnBtn btn">
-        <i class="fa-solid fa-arrow-left"></i> Return to homepage
-    </a>
+    {% if edit %}
+        <a href="{{ path('show_build', {'buildId': build.id}) }}" class="returnBtn btn">
+            <i class="fa-solid fa-arrow-left"></i> Cancel edit
+        </a>
+    {% else %}
+        <a href="{{ path('app_home') }}" class="returnBtn btn">
+            <i class="fa-solid fa-arrow-left"></i> Return to homepage
+        </a>
+    {% endif %}
 
     <h1 style="margin-top: 50px;">Create a new PC build</h1>
 
@@ -45,6 +51,11 @@
                 {{ form_row(formBuild.service) }}
             </div>
 
+
+            {{ form_row(formBuild.name) }}
+            {% if is_granted('ROLE_ADMIN') %}
+                {{ form_row(formBuild.prebuilt) }}
+            {% endif %}
                     
         {{ form_end(formBuild) }}
     </div>
