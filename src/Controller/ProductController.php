@@ -45,6 +45,10 @@ class ProductController extends AbstractController
     #[Route('/{productId}/product', name: 'show_product')]
     public function show(#[MapEntity(id: 'productId')] Product $product): Response
     {
+        if(str_contains($product->getLabel(), "AMD")){
+            dd('YES');
+        }
+
         $formattedSpecs = [];
         foreach ($product->getSpecs() as $key => $value) {
             if ($key == "smt") {
