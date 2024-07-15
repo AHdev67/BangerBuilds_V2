@@ -35,8 +35,6 @@ const swiper = new Swiper('.swiper', {
     },
   });
 
-
-
 //--------------------------------------------BURGER MENU SCRIPT--------------------------------------------
 
 const menu = document.querySelector("#menu");
@@ -58,8 +56,6 @@ function toggleMenu() {
 }
 
 hamburger.addEventListener('click', toggleMenu);
-
-
 
 //--------------------------------------------SCORE STARS SCRIPT--------------------------------------------
 
@@ -83,6 +79,31 @@ reviews.forEach(review => {
     }
       
 });
+
+//----------------------BUILDER COMPATIBILITY SCRIPT-----------------------------------
+
+document.addEventListener('DOMContentLoaded', function () {
+  const cpuField = document.getElementById('build_cpu');
+  const motherboardField = document.getElementById('build_motherboard');
+
+  cpuField.addEventListener('change', function () {
+      const cpuId = this.value;
+
+      fetch(`/get-motherboards?cpuId=${cpuId}`)
+          .then(response => response.json())
+          .then(data => {
+            motherboardField.innerHTML = '';
+
+            data.forEach(motherboard => {
+                const option = document.createElement('option');
+                option.value = motherboard.id;
+                option.textContent = motherboard.label;
+                motherboardField.appendChild(option);
+              });
+          });
+  });
+});
+
 //----------------------SEARCHBAR SCRIPT----------------------
 
 // document.addEventListener('DOMContentLoaded', function() {
