@@ -23,32 +23,36 @@ class BuildType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+//-------------------------------------------------------------------------------------------------------------------------------------      
+        // $productsByCategory = $options['products_by_category'] ?? [];
 
-        $builder          
-        // ->add('buildComponents', CollectionType::class, [
+        // $builder 
+        //     ->add('buildComponents', CollectionType::class, [
         //     'entry_type' => BuildComponentType::class,
-        //     'entry_options' => function (FormBuilderInterface $builder) {
-        //         $data = $builder->getData();
-        //         $category = $data->getCategory() ? $data->getCategory()->getId() : null;
-
-        //         return [
-        //             'label' => false,
-        //             'category' => $category,
-        //         ];
-        //     },
+        //     'entry_options' => function($categoryKey, $productsByCategory) use ($productsByCategory) {
+        //             return [
+        //                 'label' => false,
+        //                 'category' => $categoryKey,
+        //                 'products_by_category' => $productsByCategory,
+        //             ];
+        //         },
         //     'by_reference' => false,
         //     'allow_add' => true,
         //     'allow_delete' => true,
         //     'prototype' => true,
         // ])
+//-------------------------------------------------------------------------------------------------------------------------------------
+// # STATIC UNMAPPED FIELDS WITH MANUAL DATA FETCH
 
+    $builder 
         ->add('cpu', EntityType::class, [
             'class' => Product::class,
             'mapped' => false,
             'query_builder' => function (EntityRepository $entityRepository) {
                 return $entityRepository->createQueryBuilder('p')
-                    ->where('p.category = :category')
-                    ->setParameter('category', 1);
+                ->where('p.category = :category')
+                ->setParameter('category', 1)
+                ;
             },
             'choice_label' => 'label',
             'placeholder' => 'Choose a product',
@@ -228,21 +232,23 @@ class BuildType extends AbstractType
             'choice_label' => 'label',
             'placeholder' => 'Choose a product',
         ])
-
+//-------------------------------------------------------------------------------------------------------------------------------------
         ->add('name')
         ->add('prebuilt')
 
         ->add('save', SubmitType::class, [
             'label' => 'Save Build',
             'attr' => ['class' => 'validateBtn submitBtn btn'],
-        ])
-        ;
+        ]);
     }
     
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Build::class,
+            'products_by_category' => [],
         ]);
+
+        $resolver->setAllowedTypes('products_by_category', 'array');
     }
 }
