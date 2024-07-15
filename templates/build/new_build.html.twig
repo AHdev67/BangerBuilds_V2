@@ -20,6 +20,9 @@
 
         {{ form_start(formBuild) }}
 
+{# -------------------------------------------------------------------------------------------------------------------------------------
+ # STATIC UNMAPPED FIELDS WITH MANUAL DATA FETCH : LAME BUT STABLE #}
+
             <h2>Core components :</h2>
             <div>
                 {{ form_row(formBuild.cpu) }}
@@ -50,7 +53,8 @@
             <div>
                 {{ form_row(formBuild.service) }}
             </div>
-
+{# ------------------------------------------------------------------------------------------------------------------------------------- #}
+            {# {{ form_row(formBuild.buildComponents) }} #}
 
             {{ form_row(formBuild.name) }}
             {% if is_granted('ROLE_ADMIN') %}
