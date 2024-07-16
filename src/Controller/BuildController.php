@@ -20,6 +20,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Config\Doctrine\Orm\EntityManagerConfig\SecondLevelCache\LoggerConfig;
 
 class BuildController extends AbstractController
@@ -33,6 +34,9 @@ class BuildController extends AbstractController
         $this->logger = $logger;
     }
     
+
+    // RETURNS THE LIST VIEW OF BUILDS WITH THE PREBUILT ATTRIBUTE SET TO TRUE
+
     #[Route('/prebuilts', name: 'app_prebuilts')]
     public function index(PaginatorInterface $paginator, BuildRepository $buildRepository, Request $request): Response
     {
@@ -48,6 +52,7 @@ class BuildController extends AbstractController
     }
 
 
+    // RETURNS THE DISPLAY VIEW FOR A BUILD
 
     #[Route('/{buildId}/build', name: 'show_build')]
     public function show(#[MapEntity(id: 'buildId')] Build $build): Response
@@ -171,7 +176,12 @@ class BuildController extends AbstractController
         return $this->redirectToRoute('app_user');
     }
 
-//----------------------------------------------------AJAX RESPONSE METHOD--------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------
+//                                                      AJAX RESPONSE METHOD
+//-------------------------------------------------------------------------------------------------------------------------------------
+
+
+    // RETURNS THE LIST OF COMPATIBLE MOTHERBOARDS WITH THE SELECTED CPU
 
     #[Route('/get-motherboards', name: 'get_motherboards')]
     public function getMotherboards(Request $request): JsonResponse
@@ -183,15 +193,120 @@ class BuildController extends AbstractController
 
         $this->logger->info('Fetched CPU', ['cpu' => $cpu]);
 
-        if ($cpu && strpos($cpu->getLabel(), 'Intel') !== false &&(
-            strpos($cpu->getLabel(), '-12') !== false || 
-            strpos($cpu->getLabel(), '-13') !== false || 
-            strpos($cpu->getLabel(), '-14') !== false
-            )) {
-            $motherboards = $this->entityManager->getRepository(Product::class)->findMotherboardsBySocket('LGA1700');
-            $this->logger->info('Motherboards fetched', ['motherboards' => $motherboards]);
+        // IF SELECTED CPU IS INTEL
+        if ($cpu && strpos($cpu->getLabel(), 'Intel') !== false) {
+            if ((
+                // 12th, 13th & 14th gen Intel CPUs
+                strpos($cpu->getLabel(), '-14') !== false || 
+                strpos($cpu->getLabel(), '-13') !== false || 
+                strpos($cpu->getLabel(), '-12') !== false
+            )){
+                $motherboards = $this->entityManager->getRepository(Product::class)->findMotherboardsBySocket('LGA1700');
+                $this->logger->info('Motherboards fetched', ['motherboards' => $motherboards]);
+            }
+
+            else if ((
+                // 10th & 11th gen Intel CPUs 
+                strpos($cpu->getLabel(), '-11') !== false || 
+                strpos($cpu->getLabel(), '-10') !== false
+            )){
+                $motherboards = $this->entityManager->getRepository(Product::class)->findMotherboardsBySocket('LGA1200');
+                $this->logger->info('Motherboards fetched', ['motherboards' => $motherboards]);
+            }
+
+            else if ((
+                // 6th, 7th,8th & 9th gen Intel CPUs
+                strpos($cpu->getLabel(), '-9') !== false || 
+                strpos($cpu->getLabel(), '-8') !== false ||
+                strpos($cpu->getLabel(), '-7') !== false ||
+                strpos($cpu->getLabel(), '-6') !== false
+            )){
+                $motherboards = $this->entityManager->getRepository(Product::class)->findMotherboardsBySocket('LGA1151');
+                $this->logger->info('Motherboards fetched', ['motherboards' => $motherboards]);
+            }
+        }
+
+        // ELSE IF SELECTED CPU IS AMD
+        else if ($cpu && strpos($cpu->getLabel(), 'AMD') !== false) {
+            if ((
+                // Ryzen 7xxx
+                strpos($cpu->getLabel(), 'Ryzen 9 7') !== false || 
+                strpos($cpu->getLabel(), 'Ryzen 7 7') !== false || 
+                strpos($cpu->getLabel(), 'Ryzen 5 7') !== false ||
+                // Ryzen 8xxx
+                strpos($cpu->getLabel(), 'Ryzen 9 8') !== false || 
+                strpos($cpu->getLabel(), 'Ryzen 7 8') !== false || 
+                strpos($cpu->getLabel(), 'Ryzen 5 8') !== false
+            )){
+                $motherboards = $this->entityManager->getRepository(Product::class)->findMotherboardsBySocket('AM5');
+                $this->logger->info('Motherboards fetched', ['motherboards' => $motherboards]);
+            }
+
+            else if (
+                // Litteraly any Ryzen CPU from zen to zen3 
+                strpos($cpu->getLabel(), 'Ryzen') !== false
+            ) {
+                $motherboards = $this->entityManager->getRepository(Product::class)->findMotherboardsBySocket('AM4');
+                $this->logger->info('Motherboards fetched', ['motherboards' => $motherboards]);
+            }
         }
 
         return $this->json($motherboards);
     }
+//-------------------------------------------------------------------------------------------------------------------------------------
+
+
+    // RETURNS THE LIST OF COMPATIBLE CPUS WITH THE SELECTED MOTHERBOARD
+
+    #[Route('/get-cpus', name: 'get_cpus')]
+    public function getCpus(Request $request): JsonResponse
+    {
+        $moboId = $request->query->get('moboId');
+        $motherboard = $this->entityManager->getRepository(Product::class)->find($moboId);
+
+        if (!$motherboard) {
+            $this->logger->error('Motherboard not found', ['moboId' => $moboId]);
+            throw new NotFoundHttpException('Motherboard not found');
+        }
+
+        $this->logger->info('Fetched motherboard', ['motherboard' => $motherboard]);
+
+        $specs = $motherboard->getSpecs();
+        $this->logger->info('Motherboard specs', ['specs' => $specs]);
+
+        $cpus = [];
+
+        if (isset($specs['socket']) && $specs['socket'] === "LGA1700") {
+            $cpus = array_merge(
+                $this->entityManager->getRepository(Product::class)->findIntelCpusByGeneration('-14'),
+                $this->entityManager->getRepository(Product::class)->findIntelCpusByGeneration('-13'),
+                $this->entityManager->getRepository(Product::class)->findIntelCpusByGeneration('-12')
+            );
+            $this->logger->info('CPUs fetched', ['cpus' => $cpus]);
+        } else {
+            $this->logger->info('Motherboard does not support LGA1700 socket');
+        }
+
+        return $this->json($cpus);
+    }
+
+    // #[Route('/get-cpus', name: 'get_cpus')]
+    // public function getCpus(Request $request): JsonResponse
+    // {
+    //     $moboId = $request->query->get('moboId');
+    //     $motherboard = $this->entityManager->getRepository(Product::class)->find($moboId);
+
+    //     $cpus = [];
+
+    //     $this->logger->info('Fetched motherboard', ['motherboard' => $motherboard]);
+
+    //     if (in_array("LGA1700", $motherboard->getSpecs())){
+    //         $cpus[] = $this->entityManager->getRepository(Product::class)->findIntelCpusByGeneration('-14');
+    //         $cpus[] = $this->entityManager->getRepository(Product::class)->findIntelCpusByGeneration('-13');
+    //         $cpus[] = $this->entityManager->getRepository(Product::class)->findIntelCpusByGeneration('-12');
+    //         $this->logger->info('CPUs fetched', ['cpus' => $cpus]);
+    //     }
+
+    //     return $this->json($cpus);
+    // }
 }
