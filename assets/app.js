@@ -58,49 +58,58 @@ function toggleMenu() {
 hamburger.addEventListener('click', toggleMenu);
 
 //--------------------------------------------SCORE STARS SCRIPT--------------------------------------------
+document.addEventListener('DOMContentLoaded', function () {
+  const productScore = document.querySelector("#globalRating");
+  const productStars = document.querySelector(".productStars");
+  const pStars = productStars.querySelectorAll(".fa-star");
 
-const productScore = document.querySelector("#globalRating");
-const productStars = document.querySelector(".productStars");
-const pStars = productStars.querySelectorAll(".fa-star");
+  for (let i = 0; i < productScore.innerHTML; i++) {
+      pStars[i].classList.add("star-active");
+  }
 
-for (let i = 0; i < productScore.innerHTML; i++) {
-    pStars[i].classList.add("star-active");
-}
+  const reviews = document.querySelectorAll(".review")
 
-const reviews = document.querySelectorAll(".review")
-
-reviews.forEach(review => {
-    let reviewScore = review.querySelector(".reviewRating");
-    let reviewStars = review.querySelector(".reviewStars");
-    let rStars = reviewStars.querySelectorAll(".fa-star");
-    
-    for (let i = 0; i < reviewScore.innerHTML; i++) {
-        rStars[i].classList.add("star-active");
-    }
+  reviews.forEach(review => {
+      let reviewScore = review.querySelector(".reviewRating");
+      let reviewStars = review.querySelector(".reviewStars");
+      let rStars = reviewStars.querySelectorAll(".fa-star");
       
+      for (let i = 0; i < reviewScore.innerHTML; i++) {
+          rStars[i].classList.add("star-active");
+      }
+        
+  });
 });
 
-//----------------------BUILDER COMPATIBILITY SCRIPT-----------------------------------
-
+//-----------------------------------------BUILDER COMPATIBILITY SCRIPT---------------------------------------------------
 document.addEventListener('DOMContentLoaded', function () {
   const cpuField = document.getElementById('build_cpu');
   const motherboardField = document.getElementById('build_motherboard');
 
-  cpuField.addEventListener('change', function () {
+  cpuField.addEventListener('change', function() {
+      console.log("bonjour :)");
       const cpuId = this.value;
 
       fetch(`/get-motherboards?cpuId=${cpuId}`)
-          .then(response => response.json())
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
+              return response.json();
+          })
           .then(data => {
-            motherboardField.innerHTML = '';
-
-            data.forEach(motherboard => {
-                const option = document.createElement('option');
-                option.value = motherboard.id;
-                option.textContent = motherboard.label;
-                motherboardField.appendChild(option);
+              if(data.length > 0){
+                console.log("data recieved !")
+              }
+              motherboardField.innerHTML = '';
+              data.forEach(motherboard => {
+                  const option = document.createElement('option');
+                  option.value = motherboard.id;
+                  option.textContent = motherboard.label;
+                  motherboardField.appendChild(option);
               });
-          });
+          })
+          .catch(error => console.error('Fetch error:', error));
   });
 });
 
