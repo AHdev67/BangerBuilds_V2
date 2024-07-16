@@ -234,11 +234,13 @@ class BuildType extends AbstractType
         ])
 //-------------------------------------------------------------------------------------------------------------------------------------
         ->add('name')
-        ->add('prebuilt')
+        ->add('prebuilt', CheckboxType::class, [
+            'label' => 'Tag as prebuilt ?',
+        ])
 
         ->add('save', SubmitType::class, [
-            'label' => 'Save Build',
-            'attr' => ['class' => 'validateBtn submitBtn btn'],
+            'label' => 'Save build',
+            'attr' => ['class' => 'validateBtn btn'],
         ]);
     }
     
