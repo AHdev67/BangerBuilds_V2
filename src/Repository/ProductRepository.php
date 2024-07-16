@@ -5,15 +5,19 @@ namespace App\Repository;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\DBAL\Connection;
 
 /**
  * @extends ServiceEntityRepository<Product>
  */
 class ProductRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $connection;
+
+    public function __construct(ManagerRegistry $registry, Connection $connection)
     {
         parent::__construct($registry, Product::class);
+        $this->connection = $connection;
     }
 
     //    /**
@@ -61,5 +65,12 @@ class ProductRepository extends ServiceEntityRepository
             ->setParameter('query', '%' . $query . '%')
             ->getQuery()
             ->getResult();
+    }
+
+    public function findMotherboardsBySocket(string $socket)
+    {
+        $sql = 'SELECT * FROM product WHERE category_id = :categoryId AND JSON_UNQUOTE(JSON_EXTRACT(specs, "$.socket")) = :socket';
+        $params = ['categoryId' => 3, 'socket' => $socket];
+        return $this->connection->executeQuery($sql, $params)->fetchAllAssociative();
     }
 }
