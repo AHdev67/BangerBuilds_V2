@@ -73,4 +73,24 @@ class ProductRepository extends ServiceEntityRepository
         $params = ['categoryId' => 3, 'socket' => $socket];
         return $this->connection->executeQuery($sql, $params)->fetchAllAssociative();
     }
+
+    public function findAllIntelCpus()
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.label LIKE :label')
+            ->setParameter('label', 'Intel%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findIntelCpusByGeneration(string $gen)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.label LIKE :label')
+            ->andWhere('p.label LIKE :pattern')
+            ->setParameter('label', 'Intel%')
+            ->setParameter('pattern', '%' . $gen . '%')
+            ->getQuery()
+            ->getResult();
+    }
 }
