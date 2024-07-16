@@ -12,7 +12,6 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 
 
 //--------------------------------------------SWIPER SCRIPT--------------------------------------------
-
 const swiper = new Swiper('.swiper', {
     // Optional parameters
     direction: 'horizontal',
@@ -36,7 +35,6 @@ const swiper = new Swiper('.swiper', {
   });
 
 //--------------------------------------------BURGER MENU SCRIPT--------------------------------------------
-
 const menu = document.querySelector("#menu");
 const menuItems = document.querySelectorAll(".menuItem");
 const hamburger= document.querySelector("#burger");
@@ -86,8 +84,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const cpuField = document.getElementById('build_cpu');
   const motherboardField = document.getElementById('build_motherboard');
 
+  // Handles motherboard compatibility with selected CPU
   cpuField.addEventListener('change', function() {
-      console.log("bonjour :)");
+      console.log("bonjour");
       const cpuId = this.value;
 
       fetch(`/get-motherboards?cpuId=${cpuId}`)
@@ -99,17 +98,49 @@ document.addEventListener('DOMContentLoaded', function () {
           })
           .then(data => {
               if(data.length > 0){
-                console.log("data recieved !")
+                  console.log("data recieved !")
+                  motherboardField.innerHTML = '';
+                  data.forEach(motherboard => {
+                      const option = document.createElement('option');
+                      option.value = motherboard.id;
+                      option.textContent = motherboard.label;
+                      motherboardField.appendChild(option);
+                  });
               }
-              motherboardField.innerHTML = '';
-              data.forEach(motherboard => {
-                  const option = document.createElement('option');
-                  option.value = motherboard.id;
-                  option.textContent = motherboard.label;
-                  motherboardField.appendChild(option);
-              });
+              else {
+                  console.log("no data recieved, field unchanged")
+              }
           })
           .catch(error => console.error('Fetch error:', error));
+  });
+
+  // Handles CPU compatibility with selected motherboard
+  motherboardField.addEventListener('change', function() {
+    console.log("Motherboard changed");
+    const moboId = this.value;
+
+    fetch(`/get-cpus?moboId=${moboId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.length > 0) {
+                console.log("Data received!");
+                cpuField.innerHTML = '';
+                data.forEach(cpu => {
+                    const option = document.createElement('option');
+                    option.value = cpu.id;
+                    option.textContent = cpu.label;
+                    cpuField.appendChild(option);
+                });
+            } else {
+                console.log("No data received, field unchanged");
+            }
+        })
+        .catch(error => console.error('Fetch error:', error));
   });
 });
 
