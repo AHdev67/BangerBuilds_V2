@@ -6,6 +6,7 @@ use App\Entity\Build;
 use App\Entity\Product;
 use App\Form\BuildType;
 use App\Entity\Category;
+use Psr\Log\LoggerInterface;
 use App\Entity\BuildComponent;
 use App\Form\ComponentSlotType;
 use App\Repository\BuildRepository;
@@ -19,9 +20,19 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Config\Doctrine\Orm\EntityManagerConfig\SecondLevelCache\LoggerConfig;
 
 class BuildController extends AbstractController
 {
+    private $entityManager;
+    private $logger;
+
+    public function __construct(EntityManagerInterface $entityManager, LoggerInterface $logger)
+    {
+        $this->entityManager = $entityManager;
+        $this->logger = $logger;
+    }
+    
     #[Route('/prebuilts', name: 'app_prebuilts')]
     public function index(PaginatorInterface $paginator, BuildRepository $buildRepository, Request $request): Response
     {
@@ -160,22 +171,25 @@ class BuildController extends AbstractController
         return $this->redirectToRoute('app_user');
     }
 
+//----------------------------------------------------AJAX RESPONSE METHOD--------------------------------------------------------------
 
-    public function getMotherboards(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    #[Route('/get-motherboards', name: 'get_motherboards')]
+    public function getMotherboards(Request $request): JsonResponse
     {
         $cpuId = $request->query->get('cpuId');
-        $cpu = $this->$entityManager->getRepository(Product::class)->find($cpuId);
+        $cpu = $this->entityManager->getRepository(Product::class)->find($cpuId);
 
         $motherboards = [];
 
-        if ($cpu && strpos($cpu->getLabel(), 'Intel') !== false) {
-            $motherboards = $this->$entityManager->getRepository(Product::class)->createQueryBuilder('p')
-                ->where('p.category = :category')
-                ->andWhere('p.label LIKE :pattern')
-                ->setParameter('category', 2)
-                ->setParameter('pattern', 'Z%')
-                ->getQuery()
-                ->getResult();
+        $this->logger->info('Fetched CPU', ['cpu' => $cpu]);
+
+        if ($cpu && strpos($cpu->getLabel(), 'Intel') !== false &&(
+            strpos($cpu->getLabel(), '-12') !== false || 
+            strpos($cpu->getLabel(), '-13') !== false || 
+            strpos($cpu->getLabel(), '-14') !== false
+            )) {
+            $motherboards = $this->entityManager->getRepository(Product::class)->findMotherboardsBySocket('LGA1700');
+            $this->logger->info('Motherboards fetched', ['motherboards' => $motherboards]);
         }
 
         return $this->json($motherboards);
