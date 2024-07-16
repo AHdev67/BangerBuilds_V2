@@ -732,6 +732,7 @@ ul{
 }
 
 form div{
+    margin-bottom: 25px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -747,6 +748,11 @@ form div input{
     padding: 15px;
     font-size: 30px;
     border-radius: 7px;
+}
+
+form div input[type=checkbox] {
+    transform: scale(2.5);
+    margin: 10px;
 }
 
 form div select{
