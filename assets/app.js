@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Handles CPU compatibility with selected motherboard
   motherboardField.addEventListener('change', function() {
-    console.log("Motherboard changed");
+    console.log("bonsoir");
     const moboId = this.value;
 
     fetch(`/get-cpus?moboId=${moboId}`)
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(data => {
             if (data.length > 0) {
-                console.log("Data received!");
+                console.log("data received!", data);
                 cpuField.innerHTML = '';
                 data.forEach(cpu => {
                     const option = document.createElement('option');
