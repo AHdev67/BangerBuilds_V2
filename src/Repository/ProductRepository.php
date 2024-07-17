@@ -74,21 +74,21 @@ class ProductRepository extends ServiceEntityRepository
         return $this->connection->executeQuery($sql, $params)->fetchAllAssociative();
     }
 
-    public function findAllIntelCpus()
+    public function findCpusByManufacturer(string $manufacturer)
     {
         return $this->createQueryBuilder('p')
             ->where('p.label LIKE :label')
-            ->setParameter('label', 'Intel%')
+            ->setParameter('label', $manufacturer . '%')
             ->getQuery()
             ->getResult();
     }
 
-    public function findIntelCpusByGeneration(string $gen)
+    public function findCpusByGeneration(string $manufacturer, string $gen)
     {
         return $this->createQueryBuilder('p')
             ->where('p.label LIKE :label')
             ->andWhere('p.label LIKE :pattern')
-            ->setParameter('label', 'Intel%')
+            ->setParameter('label', $manufacturer . '%')
             ->setParameter('pattern', '%' . $gen . '%')
             ->getQuery()
             ->getResult();
