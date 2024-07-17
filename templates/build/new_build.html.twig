@@ -16,15 +16,16 @@
 
     <h1 style="margin-top: 50px;">Create a new PC build</h1>
 
-    <div class="formContainer">
+    < class="formContainer">
 
         {{ form_start(formBuild) }}
 
-{# -------------------------------------------------------------------------------------------------------------------------------------
- # STATIC UNMAPPED FIELDS WITH MANUAL DATA FETCH : LAME BUT STABLE #}
+{# ------------------------------------------------------------------------------------------------------------------------------------#}
 
-            <h2>Core components :</h2>
-            <div>
+            
+            <div class="formSegment">
+                <h2>Core components :</h2>
+
                 {{ form_row(formBuild.cpu) }}
                 {{ form_row(formBuild.cpuCooler) }}
                 {{ form_row(formBuild.motherboard) }}
@@ -35,8 +36,10 @@
                 {{ form_row(formBuild.case) }}
             </div>
 
-            <h2>Optional components :</h2>
-            <div>
+            
+            <div class="formSegment">
+                <h2>Optional components :</h2>
+
                 {{ form_row(formBuild.opticalDrive) }}
                 {{ form_row(formBuild.wiredNetworkCard) }}
                 {{ form_row(formBuild.wirelessNetworkCard) }}
@@ -44,19 +47,24 @@
                 {{ form_row(formBuild.caseFan) }}
             </div>
 
-            <h2>Software</h2>
-            <div>
+            
+            <div class="formSegment">
+                <h2>Software</h2>
+
                 {{ form_row(formBuild.operatingSystem) }}
             </div>
 
-            <h2>Services</h2>
-            <div>
+            
+            <div class="formSegment">
+                <h2>Services</h2>
+
                 {{ form_row(formBuild.service) }}
             </div>
 {# ------------------------------------------------------------------------------------------------------------------------------------- #}
             {# {{ form_row(formBuild.buildComponents) }} #}
 
             {{ form_row(formBuild.name) }}
+
             {% if is_granted('ROLE_ADMIN') %}
                 {{ form_row(formBuild.prebuilt) }}
             {% endif %}
