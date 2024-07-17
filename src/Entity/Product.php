@@ -7,9 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
-class Product
+class Product implements JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -278,5 +279,20 @@ class Product
         }
 
         return $totalRating / $count;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'category' => $this->getCategory()->getId(),
+            'label' => $this->getLabel(),
+            'price' => $this->getPrice(),
+            'inStock' => $this->isInStock(),
+            'restockDelay' => $this->getRestockDelay(),
+            'specs' => $this->getSpecs(),
+            'image' => $this->getImage(),
+            'description' => $this->getDescription()
+        ];
     }
 }
