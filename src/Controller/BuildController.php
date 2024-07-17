@@ -264,49 +264,21 @@ class BuildController extends AbstractController
         $moboId = $request->query->get('moboId');
         $motherboard = $this->entityManager->getRepository(Product::class)->find($moboId);
 
-        if (!$motherboard) {
-            $this->logger->error('Motherboard not found', ['moboId' => $moboId]);
-            throw new NotFoundHttpException('Motherboard not found');
-        }
+        $cpus = [];
 
         $this->logger->info('Fetched motherboard', ['motherboard' => $motherboard]);
 
-        $specs = $motherboard->getSpecs();
-        $this->logger->info('Motherboard specs', ['specs' => $specs]);
-
-        $cpus = [];
-
-        if (isset($specs['socket']) && $specs['socket'] === "LGA1700") {
+        if (in_array("LGA1700", $motherboard->getSpecs())){
             $cpus = array_merge(
-                $this->entityManager->getRepository(Product::class)->findIntelCpusByGeneration('-14'),
-                $this->entityManager->getRepository(Product::class)->findIntelCpusByGeneration('-13'),
-                $this->entityManager->getRepository(Product::class)->findIntelCpusByGeneration('-12')
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('Intel', '-14'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('Intel', '-13'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('Intel', '-12')
             );
             $this->logger->info('CPUs fetched', ['cpus' => $cpus]);
-        } else {
-            $this->logger->info('Motherboard does not support LGA1700 socket');
         }
+
+        // dd($cpus);
 
         return $this->json($cpus);
     }
-
-    // #[Route('/get-cpus', name: 'get_cpus')]
-    // public function getCpus(Request $request): JsonResponse
-    // {
-    //     $moboId = $request->query->get('moboId');
-    //     $motherboard = $this->entityManager->getRepository(Product::class)->find($moboId);
-
-    //     $cpus = [];
-
-    //     $this->logger->info('Fetched motherboard', ['motherboard' => $motherboard]);
-
-    //     if (in_array("LGA1700", $motherboard->getSpecs())){
-    //         $cpus[] = $this->entityManager->getRepository(Product::class)->findIntelCpusByGeneration('-14');
-    //         $cpus[] = $this->entityManager->getRepository(Product::class)->findIntelCpusByGeneration('-13');
-    //         $cpus[] = $this->entityManager->getRepository(Product::class)->findIntelCpusByGeneration('-12');
-    //         $this->logger->info('CPUs fetched', ['cpus' => $cpus]);
-    //     }
-
-    //     return $this->json($cpus);
-    // }
 }
