@@ -268,11 +268,73 @@ class BuildController extends AbstractController
 
         $this->logger->info('Fetched motherboard', ['motherboard' => $motherboard]);
 
-        if (in_array("LGA1700", $motherboard->getSpecs())){
+        if (in_array("LGA1700", $motherboard->getSpecs())) {
             $cpus = array_merge(
                 $this->entityManager->getRepository(Product::class)->findCpusByGeneration('Intel', '-14'),
                 $this->entityManager->getRepository(Product::class)->findCpusByGeneration('Intel', '-13'),
                 $this->entityManager->getRepository(Product::class)->findCpusByGeneration('Intel', '-12')
+            );
+            $this->logger->info('CPUs fetched', ['cpus' => $cpus]);
+        }
+        else if (in_array("LGA1200", $motherboard->getSpecs())) {
+            $cpus = array_merge(
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('Intel', '-11'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('Intel', '-10')
+            );
+            $this->logger->info('CPUs fetched', ['cpus' => $cpus]);
+        }
+        else if (in_array("LGA1151", $motherboard->getSpecs())) {
+            $cpus = array_merge(
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('Intel', '-9'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('Intel', '-8'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('Intel', '-7'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('Intel', '-6')
+            );
+            $this->logger->info('CPUs fetched', ['cpus' => $cpus]);
+        }
+
+        else if (in_array("AM5", $motherboard->getSpecs())) {
+            $cpus = array_merge(
+
+                // Zen4
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 9 7'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 7 7'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 5 7'),
+
+                // Also Zen4
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 9 8'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 7 8'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 5 8')
+            );
+            $this->logger->info('CPUs fetched', ['cpus' => $cpus]);
+        }
+        else if (in_array("AM4", $motherboard->getSpecs())) {
+            $cpus = array_merge(
+
+                // Zen 3
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 9 5'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 7 5'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 5 5'),
+
+                // Zen 2
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 9 4'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 7 4'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 5 4'),
+
+                // Zen + & Zen 2
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 9 3'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 7 3'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 5 3'),
+
+                // Zen & Zen +
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 9 2'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 7 2'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 5 2'),
+
+                // Zen
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 9 1'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 7 1'),
+                $this->entityManager->getRepository(Product::class)->findCpusByGeneration('AMD', 'Ryzen 5 1'),
             );
             $this->logger->info('CPUs fetched', ['cpus' => $cpus]);
         }
