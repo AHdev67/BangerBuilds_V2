@@ -243,8 +243,25 @@ class BuildController extends AbstractController
             }
 
             else if (
-                // Litteraly any Ryzen CPU from zen to zen3 
-                strpos($cpu->getLabel(), 'Ryzen') !== false
+                strpos($cpu->getLabel(), 'Ryzen 9 5') !== false || 
+                strpos($cpu->getLabel(), 'Ryzen 7 5') !== false || 
+                strpos($cpu->getLabel(), 'Ryzen 5 5') !== false ||
+
+                strpos($cpu->getLabel(), 'Ryzen 9 4') !== false || 
+                strpos($cpu->getLabel(), 'Ryzen 7 4') !== false || 
+                strpos($cpu->getLabel(), 'Ryzen 5 4') !== false ||
+
+                strpos($cpu->getLabel(), 'Ryzen 9 3') !== false || 
+                strpos($cpu->getLabel(), 'Ryzen 7 3') !== false || 
+                strpos($cpu->getLabel(), 'Ryzen 5 3') !== false ||
+
+                strpos($cpu->getLabel(), 'Ryzen 9 2') !== false || 
+                strpos($cpu->getLabel(), 'Ryzen 7 2') !== false || 
+                strpos($cpu->getLabel(), 'Ryzen 5 2') !== false ||
+
+                strpos($cpu->getLabel(), 'Ryzen 9 1') !== false || 
+                strpos($cpu->getLabel(), 'Ryzen 7 1') !== false || 
+                strpos($cpu->getLabel(), 'Ryzen 5 1') !== false
             ) {
                 $motherboards = $this->entityManager->getRepository(Product::class)->findMotherboardsBySocket('AM4');
                 $this->logger->info('Motherboards fetched', ['motherboards' => $motherboards]);
