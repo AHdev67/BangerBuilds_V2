@@ -3,9 +3,13 @@
 namespace App\Repository;
 
 use App\Entity\Product;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Connection;
+use PhpParser\Builder\Function_;
+use PhpParser\Node\Expr\FuncCall;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\Cache\CacheInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Product>
@@ -13,11 +17,13 @@ use Doctrine\DBAL\Connection;
 class ProductRepository extends ServiceEntityRepository
 {
     private $connection;
+    private $cache;
 
-    public function __construct(ManagerRegistry $registry, Connection $connection)
+    public function __construct(ManagerRegistry $registry, Connection $connection, CacheInterface $cache)
     {
         parent::__construct($registry, Product::class);
         $this->connection = $connection;
+        $this->cache = $cache;
     }
 
     //    /**
@@ -92,5 +98,20 @@ class ProductRepository extends ServiceEntityRepository
             ->setParameter('pattern', '%' . $gen . '%')
             ->getQuery()
             ->getResult();
+    }
+
+    public function findProductsBySearchQuery(string $query)
+    {
+        $cacheKey = 'search_' . md5($query);
+
+        return $this->cache->get($cacheKey, function (ItemInterface $item) use ($query) {
+            $item->expiresAfter(3600); // Cache for 1 hour
+
+            return $this->createQueryBuilder('p')
+                ->where('p.label LIKE :pattern')
+                ->setParameter('pattern', '%' . $query . '%')
+                ->getQuery()
+                ->getResult();
+        });
     }
 }
