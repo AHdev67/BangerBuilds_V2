@@ -232,15 +232,16 @@ nav{
         overflow-x: hidden;
         z-index: 1;
         max-height: 350px;
-        max-width: 930px;
+        width: 875px;
     }
 
     #suggestionList li{
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        padding: 5px;
+        padding: 10px;
         color: white;
+        font-size: 40px;
     }
 
     /* ----------------------------BURGER MENU---------------------------- */
@@ -380,8 +381,8 @@ main{
 .swiper-button-prev{
     margin-left: 50px;
     background-color: var(--bgDark);
-    width: 4vw;
-    height: 4vw;
+    width: 8vw;
+    height: 8vw;
     border-radius: 50px;
     color: white;
 }
@@ -389,8 +390,8 @@ main{
 .swiper-button-next{
     margin-right: 50px;
     background-color: var(--bgDark);
-    width: 4vw;
-    height: 4vw;
+    width: 8vw;
+    height: 8vw;
     border-radius: 50px;
     color: white;
 }
@@ -1093,6 +1094,16 @@ footer h2{
             border-style: none;
             color: var(--bgDark);
         }
+
+        #suggestionList{
+            top: 55px;
+            max-height: 350px;
+            width: 830px;
+        }
+    
+        #suggestionList li{
+            font-size: 20px;
+        }
         
         /* ----------------------------BURGER MENU---------------------------- */
         #burger{
@@ -1146,6 +1157,17 @@ footer h2{
         margin-top: 200px;
         /* margin-left: 300px;
         margin-right: 300px; */
+    }
+
+    /* --------------------------------HOMEPAGE-------------------------------- */
+    .swiper-button-prev{
+        height: 5vw;
+        width: 5vw;
+    }
+
+    .swiper-button-next{
+        height: 5vw;
+        width: 5vw;
     }
 
     /* --------------------------------INFO PAGE-------------------------------- */
