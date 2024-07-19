@@ -151,14 +151,18 @@ document.addEventListener('DOMContentLoaded', function () {
 //---------------------------------------------------------SEARCHBAR SCRIPT---------------------------------------------------------
 document.addEventListener('DOMContentLoaded', function() {
     const searchField = document.getElementById("searchbar");
+    const searchBtn = document.getElementById("searchButton");
     const resultsList = document.getElementById("suggestionList");
+    const queryUrlTemplate = searchBtn.getAttribute('query-url-template');
+    const productUrlTemplate = resultsList.getAttribute('data-product-url-template');
     let debounceTimeout = null;
 
     function handleSearch() {
-        const searchQuery = searchField.value;
-        console.log("Searching for : ", searchQuery);
+        const searchQuery = searchField.value.trim();
+        console.log("Searching for: ", searchQuery);
 
         if (searchQuery.length > 1) {
+            searchBtn.href = queryUrlTemplate.replace('PLACEHOLDER', searchQuery);
             fetch(`/search?searchQuery=${searchQuery}`)
                 .then(response => {
                     if (!response.ok) {
@@ -167,22 +171,31 @@ document.addEventListener('DOMContentLoaded', function() {
                     return response.json();
                 })
                 .then(data => {
-                    resultsList.innerHTML = ''; // Ensure the list is cleared before populating
-                    if (data.length > 0) {
-                        data.forEach(product => {
-                            const result = document.createElement('li');
-                            result.textContent = product.label; // Ensure this matches your Product entity field
-                            resultsList.appendChild(result);
-                        });
-                    } else {
-                        const noResult = document.createElement('li');
-                        noResult.textContent = "Sorry, couldn't find what you're looking for :(";
-                        resultsList.appendChild(noResult);
+                    // Clear the results list before populating
+                    resultsList.innerHTML = '';
+
+                    // Populate the results list only if the search field is not empty
+                    if (searchField.value.trim().length > 0) {
+                        if (data.length > 0) {
+                            data.forEach(product => {
+                                const resultLink = document.createElement('a');
+                                resultLink.href = productUrlTemplate.replace('PLACEHOLDER', product.id);
+                                const result = document.createElement('li');
+                                result.textContent = product.label; // Ensure this matches your Product entity field
+                                resultLink.appendChild(result);
+                                resultsList.appendChild(resultLink);
+                            });
+                        } else {
+                            const noResult = document.createElement('li');
+                            noResult.textContent = "Sorry, couldn't find what you're looking for :(";
+                            resultsList.appendChild(noResult);
+                        }
                     }
                 })
                 .catch(error => console.error('Error:', error));
         } else {
-            resultsList.innerHTML = ''; // Clear the list if the query length is 0 or 1
+            searchBtn.href = '';
+            resultsList.innerHTML = ''; // Clear the list if the query length is 1 or less
         }
     }
 
@@ -193,5 +206,24 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
+    // Check if the search field is empty and clear the results list
+    function clearResultsIfEmpty() {
+        if (searchField.value.trim().length === 0) {
+            resultsList.innerHTML = '';
+        }
+    }
+
     searchField.addEventListener('input', debounce(handleSearch, 300));
+    
+    searchField.addEventListener('input', clearResultsIfEmpty);
+
+    searchField.addEventListener("keypress", function(event) {
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") {
+          // Cancel the default action, if needed
+          event.preventDefault();
+          // Trigger the button element with a click
+          searchBtn.click();
+        }
+      });
 });
