@@ -59,7 +59,6 @@ class ProductRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.category = :category')
             ->setParameter('category', $category)
-            ->orderBy('p.name', 'ASC')
             ->getQuery()
             ->getResult();
     }
