@@ -145,7 +145,8 @@ class ProductController extends AbstractController
         $products = $productRepository->findAll();
 
         foreach ($products as $product) {
-            $product->setDescription(
+            if ($product->getDescription() !== null){
+                $product->setDescription(
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin lectus ut ex dictum mollis. 
                 Etiam ornare mauris nec lorem interdum, ut pellentesque dolor iaculis. 
                 Aliquam erat volutpat. In et ligula tincidunt, sollicitudin turpis nec, tempus turpis. 
@@ -153,7 +154,8 @@ class ProductController extends AbstractController
                 Pellentesque accumsan arcu vel neque ultricies gravida. Etiam fringilla egestas ante, 
                 in laoreet felis consectetur vel. Nam elementum eros et ligula faucibus tempus. 
                 Curabitur porta dolor sit amet nisl pellentesque tempus."
-            );
+                );
+            }            
             $entityManager->persist($product);
         }
 
