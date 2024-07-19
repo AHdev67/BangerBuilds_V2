@@ -39,6 +39,19 @@ class ProductController extends AbstractController
         ]);
     }
 
+    #[Route('/services', name: 'app_services')]
+    public function listServices(ProductRepository $productRepository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $services = $paginator->paginate(
+            $productRepository->findByCategory(26),
+            $request->query->getInt('page', 1), /*page number*/
+            8 /*limit per page*/
+        );
+        
+        return $this->render('product/list_services.html.twig', [
+            'services' => $services
+        ]);
+    }
 
     //  RETURNS INFOPAGE OF A SPECIFIC PRODUCT (BY ID)
 
