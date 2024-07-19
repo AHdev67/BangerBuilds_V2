@@ -240,8 +240,13 @@ nav{
         white-space: nowrap;
         text-overflow: ellipsis;
         padding: 10px;
-        color: white;
         font-size: 40px;
+        color: white;
+    }
+
+    #suggestionList li:hover{
+        background-color: var(--bgLight);
+        color: var(--bgDark);
     }
 
     /* ----------------------------BURGER MENU---------------------------- */
