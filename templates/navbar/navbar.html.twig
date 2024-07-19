@@ -67,7 +67,7 @@
     
     <div id="searchContainer">
         <input type="text" placeholder="Search for a product" id="searchbar"></input>
-        <a id="searchButton" href="" aria-label="search"><i class="fa-solid fa-magnifying-glass"></i></a>
-        <ul id="suggestionList"></ul>
+        <a id="searchButton" href="" aria-label="search" query-url-template="{{ path('show_results', {'slug': 'PLACEHOLDER'}) }}"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <ul id="suggestionList" data-product-url-template="{{ path('show_product', {'productId': 'PLACEHOLDER'}) }}"></ul>
     </div>
 </nav>
