@@ -19,27 +19,21 @@
             <div class="swiper-wrapper">
                 <!-- Slides -->
                 <div class="swiper-slide">
-                    <div class="carouselItem">
-                        <figure>
-                            <img src="" alt="Promo banner 1">
-                        </figure>
-                    </div>
+                    <figure class="carouselItem">
+                        <img src="{{ asset('images/promo1.png') }}" alt="Promo banner 1">
+                    </figure>
                 </div>
                 
                 <div class="swiper-slide">
-                    <div class="carouselItem">
-                        <figure>
-                            <img src="" alt="Promo banner 2">
-                        </figure>
-                    </div>    
+                    <figure class="carouselItem">
+                        <img src="" alt="Promo banner 2">
+                    </figure>    
                 </div>
                     
                 <div class="swiper-slide">
-                    <div class="carouselItem">
-                        <figure>
-                            <img src="" alt="Promo banner 3">
-                        </figure>
-                    </div>
+                    <figure class="carouselItem">
+                        <img src="" alt="Promo banner 3">
+                    </figure>
                 </div>
             </div>
             <!-- If we need pagination -->
@@ -60,7 +54,7 @@
             <a href="{{ path('app_product', {'categoryId': popularCategories.categ1.id}) }}">
                 <div class="homeCard">
                     <figure class="homeCardImg">
-                        <img src="" alt="card image">
+                        <img src="{{ asset('images/icons/' ~ popularCategories.categ1.image) }}" alt="card image">
                     </figure>
                     <div class="homeCardDesc">
                         <div class="homeCardLabel">
@@ -74,7 +68,7 @@
             <a href="{{ path('app_product', {'categoryId': popularCategories.categ2.id}) }}">
                 <div class="homeCard">
                     <figure class="homeCardImg">
-                        <img src="" alt="card image">
+                        <img src="{{ asset('images/icons/' ~ popularCategories.categ2.image) }}" alt="card image">
                     </figure>
                     <div class="homeCardDesc">
                         <div class="homeCardLabel">
@@ -88,7 +82,7 @@
             <a href="{{ path('app_product', {'categoryId': popularCategories.categ3.id}) }}">
                 <div class="homeCard">
                     <figure class="homeCardImg">
-                        <img src="" alt="card image">
+                        <img src="{{ asset('images/icons/' ~ popularCategories.categ3.image) }}" alt="card image">
                     </figure>
                     <div class="homeCardDesc">
                         <div class="homeCardLabel">
@@ -102,7 +96,7 @@
             <a href="{{ path('new_build') }}">
                 <div class="homeCard">
                     <figure class="homeCardImg">
-                        <img src="" alt="card image">
+                        <img src="{{ asset('images/icons/buildIcon.png') }}" alt="card image">
                     </figure>
                     <div class="homeCardDesc">
                         <div class="homeCardLabel">
