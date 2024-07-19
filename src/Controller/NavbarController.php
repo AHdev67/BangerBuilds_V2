@@ -7,6 +7,7 @@ use App\Form\SearchbarType;
 use Psr\Log\LoggerInterface;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -51,4 +52,22 @@ class NavbarController extends AbstractController
 
         return $this->json($results);
     }
+
+    #[Route('/search/{slug}', name: 'show_results')]
+    public function showResults($slug, PaginatorInterface $paginator, Request $request):Response
+    {
+        $searchQuery = strtolower($slug);
+
+        $results = $paginator->paginate(
+            $this->entityManager->getRepository(Product::class)->findProductsBySearchQuery($searchQuery),
+            $request->query->getInt('page', 1), /*page number*/
+            8 /*limit per page*/
+        );
+
+        return $this->render('product/show_results.html.twig', [
+            'query' => $searchQuery,
+            'results' => $results,
+        ]);
+    }
+
 }
