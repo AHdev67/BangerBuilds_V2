@@ -5,6 +5,7 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Product;
 use App\Entity\Category;
+use App\Form\FilterType;
 use App\Form\ProductType;
 use PhpParser\Node\Stmt\Label;
 use App\Repository\ProductRepository;
@@ -25,19 +26,47 @@ class ProductController extends AbstractController
     //  RETURNS LIST OF PRODUCTS BY CATEGORY
 
     #[Route('/category/{categoryId}/products', name: 'app_product')]
-    public function index(#[MapEntity(id: 'categoryId')] Category $category, PaginatorInterface $paginator, Request $request): Response
+    public function index(#[MapEntity(id: 'categoryId')] Category $category, Array $filters = null, PaginatorInterface $paginator, Request $request): Response
     {
-        $products = $paginator->paginate(
-            $category->getProducts(),
-            $request->query->getInt('page', 1), /*page number*/
-            8 /*limit per page*/
-        );
+        if (!$filters){
+            $filters = [
+                "orderBy" => null,
+                "filterByBrand" => null,
+                "filterByGen" => null,
+                "filterByGrade" => null
+            ];
+            $products = $paginator->paginate(
+                $category->getProducts(),
+                $request->query->getInt('page', 1), /*page number*/
+                8 /*limit per page*/
+            );
+        }
+
+        $form = $this->createForm(FilterType::class, $filters, ['category' => $category]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $filters = [
+                "orderBy" => $form->get('orderBy')->getData(),
+                "filterByBrand" => $form->get('filterByBrand')->getData(),
+                "filterByGen" => null,
+                "filterByGrade" => null
+            ];
+
+            return $this->redirectToRoute('app_product', ['categoryId'=>$category->getId()]);
+        }
         
         return $this->render('product/list_products.html.twig', [
+            'formFilters' => $form->createView(),
+            'filters' => $filters,
             'category' => $category,
             'products' => $products
         ]);
     }
+
+
+    //  RETURNS LIST OF SERVICES
 
     #[Route('/services', name: 'app_services')]
     public function listServices(ProductRepository $productRepository, PaginatorInterface $paginator, Request $request): Response
