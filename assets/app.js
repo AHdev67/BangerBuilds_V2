@@ -61,25 +61,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //-------------------------------------------------------SCORE STARS SCRIPT-------------------------------------------------------
 document.addEventListener('DOMContentLoaded', function () {
-    const productScore = document.querySelector("#globalRating");
-    const productStars = document.querySelector(".productStars");
-    const pStars = productStars.querySelectorAll(".fa-star");
+    const productStars = document.querySelectorAll(".productStars");
 
-    for (let i = 0; i < productScore.innerHTML; i++) {
-        pStars[i].classList.add("star-active");
-    }
-
-    const reviews = document.querySelectorAll(".review")
-
-    reviews.forEach(review => {
-        let reviewScore = review.querySelector(".reviewRating");
-        let reviewStars = review.querySelector(".reviewStars");
-        let rStars = reviewStars.querySelectorAll(".fa-star");
-      
-        for (let i = 0; i < reviewScore.innerHTML; i++) {
-            rStars[i].classList.add("star-active");
+    productStars.forEach(starGroup => {
+        let productScore = document.querySelector(".globalRating");
+        let pStars = starGroup.querySelectorAll(".fa-star");
+        for (let i = 0; i < productScore.innerHTML; i++) {
+            pStars[i].classList.add("star-active");
         }
+
+        const reviews = document.querySelectorAll(".review")
+
+        reviews.forEach(review => {
+            let reviewScore = review.querySelector(".reviewRating");
+            let reviewStars = review.querySelector(".reviewStars");
+            let rStars = reviewStars.querySelectorAll(".fa-star");
         
+            for (let i = 0; i < reviewScore.innerHTML; i++) {
+                rStars[i].classList.add("star-active");
+            }
+            
+        });
     });
 });
 
