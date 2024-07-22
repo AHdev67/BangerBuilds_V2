@@ -501,6 +501,23 @@ main{
     justify-content: space-between;
 }
 
+.productTable{
+    
+}
+
+
+.productImg{
+    height: 200px;
+    width: 200px;
+    background-color: white;
+    overflow: hidden;
+}
+
+.productImg img{
+    text-overflow: ellipsis;
+    color: black;
+}
+
 .paginationContainer{
     width: 100%;
     display: flex;
@@ -530,6 +547,15 @@ main{
     overflow: hidden;
     color: white;
     background-color: var(--bgDark);
+}
+
+.filterFormContainer{
+    background-color: var(--bgDark); 
+    padding: 25px;
+    color: white;
+}
+  
+.filterSide{
 }
 
 h1{
