@@ -16,35 +16,39 @@
         {% endif %}
     </h1>
 
-    <ul class="cardList">
 
-        {% for product in products|sort((b, a) => a.globalRating <=> b.globalRating) %}
-            <li>
+    <div class="filterFormContainer">
+        {{ form_start(formFilters) }}
+            {{ form_row(formFilters.orderBy) }}
+            <div class="filterSide">
+                {{ form_row(formFilters.filterByBrand) }}
+            </div>
+        {{ form_end(formFilters) }}
+    </div>
+
+    <table class="productTable">
+        <tbody>
+            {% for product in products|sort((b, a) => a.globalRating <=> b.globalRating) %}
                 <a href="{{ path('show_product', {'productId': product.id}) }}">
-                    <div class="cardLarge">
-
-                        <figure class="cardImgLarge">
-                            <img src="" alt="{{product.label}} image">
-                        </figure>
-
-                        <div class="cardDescription">
-
-                            <div class="cardLabel">
-                                {{ product.label }}
-                                
-                            </div>
-
-                            <div class="cardPricetag">
-                                {{ product.price }}$
-                            </div>
-                            
-                        </div>
+                    <tr>
+                        <td>
+                            <figure class="productImg">
+                                <img src="" alt="{{product.label}} image">
+                            </figure>
+                        </td>
                         
-                    </div>
+                        <td class="productLabel">
+                            {{ product.label }}
+                        </td>
+
+                        <td class="productPrice">
+                            {{ product.price }}$
+                        </td>
+                    </tr>
                 </a>
-            </li>
-        {% endfor %}
-    </ul>
+            {% endfor %}
+        </tbody>
+    </table>
 
     <div class="paginationContainer">
         {{ knp_pagination_render(products) }}
