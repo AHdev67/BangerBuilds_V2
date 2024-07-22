@@ -225,5 +225,5 @@ document.addEventListener('DOMContentLoaded', function() {
           // Trigger the button element with a click
           searchBtn.click();
         }
-      });
+    });
 });
