@@ -40,16 +40,16 @@
                     <div>
                         <b>Rating : </b>
                         <a href="#reviewSection">
-                        <div class="productStars"> 
+                        <div id="rating-{{ product.id }}" class="productStars"> 
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
+                            <div class="globalRating hidden">{{ product.globalRating }}</div>
                         </div>
                         </a>
 
-                        <div id="globalRating" class="hidden">{{ product.globalRating }}</div>
                     </div>
 
                     <div>
