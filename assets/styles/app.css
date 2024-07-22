@@ -340,8 +340,8 @@ main{
     font-size: 30px;
     min-height: 100vh;
     margin-top: 250px;
-    margin-left: 10vw;
-    margin-right: 10vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
     padding: 10px;
     overflow-x: hidden;
 
@@ -501,14 +501,55 @@ main{
     justify-content: space-between;
 }
 
-.productTable{
-    
+.productUl{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
+.productUl li{
+    background-color: var(--bgLight);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.productInfoMid{
+    display: grid;
+    row-gap: 15px;
+}
+
+.productInfoMid .label{
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.productInfoMid .desc{
+    grid-column: 1;
+    grid-row: 2;
+    font-size: 15px;
+    color: var(--bgDark);
+}
+
+.productInfoMid .inStock{
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.productInfoMid .productStars{
+    grid-column: 1;
+    grid-row: 4;
+}
+
+.productInfoMid .price{
+    font-size: 37px;
+}
 
 .productImg{
-    height: 200px;
-    width: 200px;
+    height: 180px;
+    width: 180px;
     background-color: white;
     overflow: hidden;
 }
@@ -516,6 +557,18 @@ main{
 .productImg img{
     text-overflow: ellipsis;
     color: black;
+}
+
+.filterFormContainer{
+    background-color: var(--bgDark); 
+    padding: 25px;
+    color: white;
+    margin-bottom: 25px;
+}
+
+.filterMenu{
+    display: flex;
+    flex-direction: row;
 }
 
 .paginationContainer{
@@ -528,13 +581,13 @@ main{
 
 .pagination {
     display: flex;
+    align-items: center;
     list-style: none;
     padding: 0;
     margin: 0;
 }
  
 .pagination a, .pagination span {
-    /* color: #9b9b9b; */
     padding: 10px 15px;
     text-decoration: none;
     font-weight: 700;
@@ -543,19 +596,15 @@ main{
  
 .pagination .current, .pagination a:hover {
     background-color: var(--secondary-color);
-    border-radius: 25px;
+    height: 70px;
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
     overflow: hidden;
     color: white;
     background-color: var(--bgDark);
-}
-
-.filterFormContainer{
-    background-color: var(--bgDark); 
-    padding: 25px;
-    color: white;
-}
-  
-.filterSide{
 }
 
 h1{
@@ -574,7 +623,7 @@ h1{
     margin-bottom: 50px;
 }
 
-table{
+.cartTable{
     background-color: var(--bgLight);
     border: 1px solid;
     border-collapse: collapse;
@@ -583,7 +632,7 @@ table{
     min-width: 100%;
 }
 
-table tr td{
+.cartTable tr td{
     background-color: inherit;
     border: 1px solid;
     padding: 5px;
@@ -856,9 +905,6 @@ form div select option{
 }
 
 /* --------------------------------TABLES-------------------------------- */
-table{
-    border-style: none;
-}
 
 table tr th{
     padding: 25px;
