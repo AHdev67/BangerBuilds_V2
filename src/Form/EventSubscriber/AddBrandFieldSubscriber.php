@@ -45,8 +45,8 @@ class AddBrandFieldSubscriber implements EventSubscriberInterface
         switch ($category->getName()) {
             case 'Processor':
                 $choices = [
-                    'Intel' => 'Intel',
-                    'AMD' => 'AMD',
+                    'Intel' => 'intel',
+                    'Amd' => 'amd',
                 ];
                 break;
 
