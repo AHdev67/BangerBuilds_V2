@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use EventListener\AddBrandFieldSubscriber;
+use EventListener\AddGenerationFieldSubscriber;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -28,6 +29,9 @@ class FilterType extends AbstractType
             ])
 
             ->addEventSubscriber(new AddBrandFieldSubscriber($category))
+
+            ->addEventSubscriber(new AddGenerationFieldSubscriber($category))
+
             
             ->add('apply', SubmitType::class, [
                 'label' => 'Apply filters',
