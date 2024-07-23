@@ -61,17 +61,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //-------------------------------------------------------SCORE STARS SCRIPT-------------------------------------------------------
 document.addEventListener('DOMContentLoaded', function () {
-    const productStars = document.querySelectorAll(".productStars");
 
-    productStars.forEach(starGroup => {
-        let productScore = document.querySelector(".globalRating");
-        let pStars = starGroup.querySelectorAll(".fa-star");
+    //-----------------------------------------------------------
+    //-------for global product score on product info view-------
+    //-----------------------------------------------------------
+    const productStars = document.querySelector(".productStars");
+    const productScore = document.querySelector(".globalRating");
+    if (productStars && productScore) {
+        const pStars = productStars.querySelectorAll(".fa-star");
         for (let i = 0; i < productScore.innerHTML; i++) {
             pStars[i].classList.add("star-active");
-        }
+        };
+    };
 
-        const reviews = document.querySelectorAll(".review")
+    //-----------------------------------------------------------
+    //----------for review score on product info view------------
+    //-----------------------------------------------------------
+    const reviews = document.querySelectorAll(".review");
 
+    if (reviews) {
         reviews.forEach(review => {
             let reviewScore = review.querySelector(".reviewRating");
             let reviewStars = review.querySelector(".reviewStars");
@@ -82,7 +90,23 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             
         });
+    };
+
+    //-----------------------------------------------------------
+    //-------for product global score on product list view-------
+    //-----------------------------------------------------------
+    const productsList = document.querySelectorAll(".productLi");
+
+    productsList.forEach(product => {
+        let itemScore = product.querySelector(".itemGlobalRating");
+        let itemStars = product.querySelector(".itemStars");
+        let iStars = itemStars.querySelectorAll(".fa-star");
+
+        for (let i = 0; i < itemScore.innerHTML; i++) {
+            iStars[i].classList.add("star-active");
+        }
     });
+
 });
 
 //---------------------------------------------------BUILDER COMPATIBILITY SCRIPT---------------------------------------------------
@@ -90,64 +114,73 @@ document.addEventListener('DOMContentLoaded', function () {
     const cpuField = document.getElementById('build_cpu');
     const motherboardField = document.getElementById('build_motherboard');
 
-  // Handles motherboard compatibility with selected CPU
-    cpuField.addEventListener('change', function() {
-        console.log("bonjour");
-        const cpuId = this.value;
+    if (cpuField && motherboardField) {
 
-        fetch(`/get-motherboards?cpuId=${cpuId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if(data.length > 0){
-                    console.log("data recieved !")
-                    motherboardField.innerHTML = '';
-                    data.forEach(motherboard => {
-                        const option = document.createElement('option');
-                        option.value = motherboard.id;
-                        option.textContent = motherboard.label;
-                        motherboardField.appendChild(option);
-                    });
-                }
-                else {
-                    console.log("no data recieved, field unchanged")
-                }
-            })
-            .catch(error => console.error('Fetch error:', error));
-  });
+        //-----------------------------------------------------------
+        //----handles motherboard compatibility with selected CPU----
+        //-----------------------------------------------------------
+        cpuField.addEventListener('change', function() {
+            console.log("bonjour");
+            const cpuId = this.value;
 
-  // Handles CPU compatibility with selected motherboard
-  motherboardField.addEventListener('change', function() {
-        console.log("bonsoir");
-        const moboId = this.value;
+            fetch(`/get-motherboards?cpuId=${cpuId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if(data.length > 0){
+                        console.log("data recieved !")
+                        motherboardField.innerHTML = '';
+                        data.forEach(motherboard => {
+                            const option = document.createElement('option');
+                            option.value = motherboard.id;
+                            option.textContent = motherboard.label;
+                            motherboardField.appendChild(option);
+                        });
+                    }
+                    else {
+                        console.log("no data recieved, field unchanged")
+                    }
+                })
+                .catch(error => console.error('Fetch error:', error));
+        });
+    
 
-        fetch(`/get-cpus?moboId=${moboId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.length > 0) {
-                    console.log("data received!", data);
-                    cpuField.innerHTML = '';
-                    data.forEach(cpu => {
-                        const option = document.createElement('option');
-                        option.value = cpu.id;
-                        option.textContent = cpu.label;
-                        cpuField.appendChild(option);
-                    });
-                } else {
-                    console.log("No data received, field unchanged");
-                }
-            })
-            .catch(error => console.error('Fetch error:', error));
-    });
+
+        //-----------------------------------------------------------
+        //----handles CPU compatibility with selected motherboard----
+        //-----------------------------------------------------------
+        motherboardField.addEventListener('change', function() {
+            console.log("bonsoir");
+            const moboId = this.value;
+
+            fetch(`/get-cpus?moboId=${moboId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.length > 0) {
+                        console.log("data received!", data);
+                        cpuField.innerHTML = '';
+                        data.forEach(cpu => {
+                            const option = document.createElement('option');
+                            option.value = cpu.id;
+                            option.textContent = cpu.label;
+                            cpuField.appendChild(option);
+                        });
+                    } else {
+                        console.log("No data received, field unchanged");
+                    }
+                })
+                .catch(error => console.error('Fetch error:', error));
+        });
+    };
 });
 
 //---------------------------------------------------------SEARCHBAR SCRIPT---------------------------------------------------------
