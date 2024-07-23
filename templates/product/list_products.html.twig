@@ -4,7 +4,7 @@
 
 {% block body %}
 <main>
-    <h1 class="mainTitle">
+    <h1 class="mainTitleAlt">
         {% if category.name == "Headphones" or category.name == "Memory" %}
             {{ category.name }}
         {% elseif category.name == "Power supply" %}
@@ -22,6 +22,8 @@
             {{ form_row(formFilters.orderBy) }}
             <div class="filterMenu">
                 {{ form_row(formFilters.filterByBrand) }}
+                {{ form_row(formFilters.filterByGeneration) }}
+
             </div>
         {{ form_end(formFilters) }}
     </div>
@@ -29,39 +31,43 @@
     <ul class="productUl">
         {% for product in products|sort((b, a) => a.globalRating <=> b.globalRating) %}
             <a href="{{ path('show_product', {'productId': product.id}) }}">
-                <li>
-                    <figure class="productImg">
-                        <img src="" alt="{{product.label}} image">
-                    </figure>
-                    
-                    <div class="productInfoMid">
-                        <div class="label">
-                            <b>{{ product.label }}</b>
-                        </div>
+                <li class="productLi">
 
-                        <p class="desc">
-                            This is a very cool product.
-                        </p>
+                    <div class="productItemMain">
+                        <figure class="productItemImg">
+                            <img src="" alt="This is a {{product.label}}">
+                        </figure>
+                        
+                        <div class="productItemInfo">
+                            <div class="label">
+                                <b>{{ product.label }}</b>
+                            </div>
 
-                        <div class="inStock">Availability (web) : 
-                            {% if product.inStock == 1 %}
-                                In stock
-                            {% else %}
-                                Out of stock
-                            {% endif %}
-                        </div>
+                            <p class="desc">
+                                Hello :)
+                            </p>
 
-                        <div id="rating-{{ product.id }}" class="productStars"> 
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <span class="globalRating hidden">{{ product.globalRating }}</span>
+                            <div class="inStock">Availability : 
+                                {% if product.inStock == 1 %}
+                                    <b>In stock</b>
+                                {% else %}
+                                <b>Out of stock</b>
+                                {% endif %}
+                            </div>
+
+                            <div class="itemStars"> 
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <span class="itemGlobalRating hidden">{{ product.globalRating }}</span>
+                            </div>
                         </div>
                     </div>
+                    
 
-                    <div class="price"><b>{{ product.price }}$</b></div>
+                    <div class="productItemPrice"><b>{{ product.price }}$</b></div>
                 </li>
             </a>
         {% endfor %}
