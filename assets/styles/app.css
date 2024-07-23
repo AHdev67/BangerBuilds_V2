@@ -507,7 +507,7 @@ main{
     gap: 25px;
 }
 
-.productUl li{
+.productLi{
     background-color: var(--bgLight);
     display: flex;
     flex-direction: row;
@@ -516,47 +516,51 @@ main{
     padding: 15px;
 }
 
-.productInfoMid{
-    display: grid;
-    row-gap: 15px;
+.productItemMain{
+    display: flex;
+    gap: 25px;
 }
 
-.productInfoMid .label{
-    grid-column: 1;
-    grid-row: 1;
-}
-
-.productInfoMid .desc{
-    grid-column: 1;
-    grid-row: 2;
-    font-size: 15px;
-    color: var(--bgDark);
-}
-
-.productInfoMid .inStock{
-    grid-column: 1;
-    grid-row: 3;
-}
-
-.productInfoMid .productStars{
-    grid-column: 1;
-    grid-row: 4;
-}
-
-.productInfoMid .price{
-    font-size: 37px;
-}
-
-.productImg{
+.productItemImg{
     height: 180px;
     width: 180px;
     background-color: white;
     overflow: hidden;
 }
 
-.productImg img{
+.productItemImg img{
     text-overflow: ellipsis;
     color: black;
+}
+
+.productItemInfo{
+    display: grid;
+    row-gap: 15px;
+}
+
+.productItemInfo .label{
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.productItemInfo .desc{
+    grid-column: 1;
+    grid-row: 2;
+    color: var(--bgDark);
+}
+
+.productItemInfo .inStock{
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.productItemInfo .productStars{
+    grid-column: 1;
+    grid-row: 4;
+}
+
+.productItemPrice{
+    font-size: 37px;
 }
 
 .filterFormContainer{
@@ -614,6 +618,10 @@ h1{
 
 .mainTitle{
     margin-bottom: 80px;
+}
+
+.mainTitleAlt{
+    margin-bottom: 50px;
 }
 
 .optContainer{
@@ -1002,6 +1010,7 @@ tfoot{
 
 .productDesc{
     margin-top: 50px;
+    margin-bottom: 50px;
     display: flex;
     flex-direction: column;
 }
@@ -1015,9 +1024,12 @@ tfoot{
 
 .specs{
     margin-top: 25px;
+    border: var(--bgDark) solid 1px;
+    border-spacing: 0;
 }
 
 .specs td{
+    background-color: var(--bgLight);
     border: var(--bgDark) solid 1px;
 }
 
@@ -1059,11 +1071,12 @@ footer{
     width: 100%;
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
     justify-content: space-between;
     background-color: var(--bgDark);
     color: white;
     padding: 10px;
-    font-size: 20px;
+    font-size: 25px;
     font-family: Montserrat;
 }
 
@@ -1074,15 +1087,17 @@ footer a{
 
 footer h2{
     font-weight: bold;
-}
-
-#footer1 h2{
     margin-bottom: 5px;
 }
 
-#footer1 p{
-    font-weight: lighter;
-    line-height: 20px;
+#footer1 .contactBox{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#footer1 span{
+    font-weight: 20px;
 }
 
 #footer2 {
@@ -1091,16 +1106,36 @@ footer h2{
     justify-content: center;
 }
 
-#footer2 p{
-    font-weight: lighter;
-    line-height: 20px;
+#footer2 .creditBox{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
-#footer3 p{
+#footer2 span{
+    font-weight: 20px;
+}
+
+#footer3{
     display: flex;
-    justify-content: space-around;
-    font-size: 150%;
-    margin-top: 10px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+#footer3 span{
+    font-weight: 20px;
+}
+
+#footer4 .socials{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.socials a{
+    font-size: 35px;
 }
 
 /* --------------------------------DESKTOP-------------------------------- */
@@ -1262,6 +1297,14 @@ footer h2{
         width: 5vw;
     }
 
+    /* --------------------------------LIST PAGE---------------------------------*/
+        /* --------------------------------PRODUCTS LIST---------------------------------*/
+        
+        .productItemPrice{
+            font-size: 20px;
+        }
+
+
     /* --------------------------------INFO PAGE-------------------------------- */
 
         /* --------------------------------PRODUCT INFO-------------------------------- */
@@ -1376,10 +1419,8 @@ footer h2{
         margin-bottom: 5px;
     }
     
-    #footer1 p{
-        font-weight: lighter;
-        font-size: medium;
-        line-height: 20px;
+    #footer1 span{
+        font-size: 20px;
     }
     
     #footer2 {
@@ -1388,16 +1429,28 @@ footer h2{
         justify-content: center;
     }
     
-    #footer2 p{
-        font-weight: lighter;
-        font-size: m;
-        line-height: 20px;
+    #footer2 .creditBox{
+        display: flex;
+        flex-direction: row;
     }
     
-    #footer3 p{
+    #footer2 span, a{
+        font-size: 20px;
+    }
+    
+    #footer3{
         display: flex;
-        justify-content: space-around;
-        font-size: 150%;
-        margin-top: 10px;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+    }
+    
+    #footer3 span{
+        font-size: 20px;
+    }
+
+    #footer4 .socials{
+        flex-direction: row;
+        gap: 15px;
     }
 }
