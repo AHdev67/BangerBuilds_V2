@@ -33,7 +33,7 @@ class ProductController extends AbstractController
                 "orderBy" => null,
                 "filterByBrand" => null,
                 "filterByGen" => null,
-                "filterByGrade" => null
+                "filterByModel" => null
             ];
             $products = $paginator->paginate(
                 $category->getProducts(),
@@ -51,7 +51,7 @@ class ProductController extends AbstractController
                 "orderBy" => $form->get('orderBy')->getData(),
                 "filterByBrand" => $form->get('filterByBrand')->getData(),
                 "filterByGen" => null,
-                "filterByGrade" => null
+                "filterByModel" => null
             ];
 
             return $this->redirectToRoute('app_product', ['categoryId'=>$category->getId()]);
