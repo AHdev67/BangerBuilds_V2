@@ -529,7 +529,7 @@ main{
 }
 
 .productItemImg img{
-    text-overflow: ellipsis;
+    object-fit: cover;
     color: black;
 }
 
@@ -561,18 +561,6 @@ main{
 
 .productItemPrice{
     font-size: 37px;
-}
-
-.filterFormContainer{
-    background-color: var(--bgDark); 
-    padding: 25px;
-    color: white;
-    margin-bottom: 25px;
-}
-
-.filterMenu{
-    display: flex;
-    flex-direction: row;
 }
 
 .paginationContainer{
@@ -910,6 +898,29 @@ form div select option{
     flex-direction: row;
     justify-content: flex-start;
     gap: 10px;
+}
+
+.custom-checkbox {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 25px;
+}
+
+.custom-checkbox label {
+    margin: 5px;
+}
+
+.filterFormContainer{
+    background-color: var(--bgDark); 
+    padding: 25px;
+    color: white;
+    margin-bottom: 25px;
+}
+
+.filterMenu{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
 }
 
 /* --------------------------------TABLES-------------------------------- */
