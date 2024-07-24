@@ -36,9 +36,13 @@ img{
     font-size: 15px;
 }
 
-input {
+input{
     outline:none;
-   }
+}
+
+summary{
+    font-size: 15px;
+}
 
 .hidden {
     display: none;
@@ -323,7 +327,7 @@ nav{
     background-color: var(--validateColor);
     margin: 15px;
     padding: 15px;
-    font-size: 30px;
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
     border-radius: 7px;
@@ -333,7 +337,7 @@ nav{
     background-color: var(--warningColor);
     margin: 15px;
     padding: 15px;
-    font-size: 30px;
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
     border-radius: 7px;
@@ -609,13 +613,15 @@ h2{
 .pagination {
     display: flex;
     align-items: center;
+    gap: 5px;
     list-style: none;
     padding: 0;
     margin: 0;
+    font-size: 15px;
 }
  
 .pagination a, .pagination span {
-    padding: 10px 15px;
+    padding: 5px 5px;
     text-decoration: none;
     font-weight: 700;
     transition: ease-in-out background-color 0.2s, color 0.2s ;
@@ -623,8 +629,8 @@ h2{
  
 .pagination .current, .pagination a:hover {
     background-color: var(--secondary-color);
-    height: 70px;
-    width: 70px;
+    height: 30px;
+    width: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -648,11 +654,12 @@ h2{
     margin-top: 50px;
     margin-bottom: 50px;
     min-width: 100%;
+    font-size: 15px;
 }
 
 .cartTable tr td{
     background-color: inherit;
-    border: 1px solid;
+    border: none;
     padding: 5px;
 }
 
@@ -675,6 +682,7 @@ h2{
     margin-top: 50px;
     margin-bottom: 50px;
     padding: 25px;
+    font-size: 15px;
 }
 
 .centerContainer{
@@ -921,7 +929,7 @@ form div select option{
 .custom-checkbox {
     display: flex;
     flex-direction: row;
-    margin-bottom: 25px;
+    margin-bottom: 5px;
 }
 
 .custom-checkbox label {
@@ -940,7 +948,7 @@ form div select option{
 .filterMenu{
     display: flex;
     flex-direction: row;
-    gap: 15px;
+    gap: px;
 }
 
 /* --------------------------------TABLES-------------------------------- */
@@ -983,7 +991,8 @@ tfoot{
 
 .productMain{
     display: flex;
-    gap: 50px;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .productGallery{
@@ -1019,10 +1028,11 @@ tfoot{
 .productInfo {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 25px;
     width: 100%;
     background-color: var(--bgLight);
     padding: 25px;
+    font-size: 15px;
 }
 
 .productInfoAlt{
@@ -1037,7 +1047,7 @@ tfoot{
 .infoList{
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 25px;
 }
 
 .infoListAlt{
