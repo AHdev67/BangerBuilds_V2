@@ -38,7 +38,7 @@ class ProductController extends AbstractController
             $products = $paginator->paginate(
                 $category->getProducts(),
                 $request->query->getInt('page', 1), /*page number*/
-                8 /*limit per page*/
+                10 /*limit per page*/
             );
         }
 
@@ -50,8 +50,8 @@ class ProductController extends AbstractController
             $filters = [
                 "orderBy" => $form->get('orderBy')->getData(),
                 "filterByBrand" => $form->get('filterByBrand')->getData(),
-                "filterByGen" => null,
-                "filterByModel" => null
+                "filterByGen" => $form->get('filterByGeneration')->getData(),
+                "filterByModel" => $form->get('filterByModel')->getData(),
             ];
 
             return $this->redirectToRoute('app_product', ['categoryId'=>$category->getId()]);
