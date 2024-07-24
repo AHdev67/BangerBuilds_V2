@@ -21,9 +21,41 @@
         {{ form_start(formFilters) }}
             {{ form_row(formFilters.orderBy) }}
             <div class="filterMenu">
-                {{ form_row(formFilters.filterByBrand) }}
-                {{ form_row(formFilters.filterByGeneration) }}
-                {{ form_row(formFilters.filterByModel) }}
+                <details>
+                    <summary><b>{{ formFilters.filterByBrand.vars.label|trans({}, formFilters.filterByBrand.vars.translation_domain) }}</b></summary>
+                    <div>
+                        {% for child in formFilters.filterByBrand %}
+                            <div class="custom-checkbox">
+                                <label>{{ form_label(child) }}</label>
+                                {{ form_widget(child) }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </details>
+
+                <details>
+                    <summary><b>{{ formFilters.filterByGeneration.vars.label|trans({}, formFilters.filterByGeneration.vars.translation_domain) }}</b></summary>
+                    <div>
+                        {% for child in formFilters.filterByGeneration %}
+                            <div class="custom-checkbox">
+                                <label>{{ form_label(child) }}</label>
+                                {{ form_widget(child) }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </details>
+
+                <details>
+                    <summary><b>{{ formFilters.filterByModel.vars.label|trans({}, formFilters.filterByModel.vars.translation_domain) }}</b></summary>
+                    <div>
+                        {% for child in formFilters.filterByModel %}
+                            <div class="custom-checkbox">
+                                <label>{{ form_label(child) }}</label>
+                                {{ form_widget(child) }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </details>
 
             </div>
         {{ form_end(formFilters) }}
