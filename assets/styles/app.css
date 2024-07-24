@@ -944,11 +944,14 @@ form div select option{
     border-radius: 7px;
 }
 
-
 .filterMenu{
     display: flex;
-    flex-direction: row;
-    gap: px;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filterMenu summary{
+    margin-bottom: 10px;
 }
 
 /* --------------------------------TABLES-------------------------------- */
