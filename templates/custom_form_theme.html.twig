@@ -1,0 +1,14 @@
+{# templates/custom_form_theme.html.twig #}
+
+{% use 'form_div_layout.html.twig' %}
+
+{% block choice_widget_expanded %}
+    <div {{ block('widget_container_attributes') }}>
+        {% for child in form %}
+            <div class="custom-checkbox">
+                {{ form_label(child) }}
+                {{ form_widget(child) }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
