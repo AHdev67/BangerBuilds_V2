@@ -76,7 +76,7 @@ class AddGenerationFieldSubscriber implements EventSubscriberInterface
         }
 
         $form->add('filterByGeneration', ChoiceType::class, [
-            'label' => 'Generation :',
+            'label' => 'Generation',
             'choices' => $choices,
             'required' => false,
             'expanded' => true,

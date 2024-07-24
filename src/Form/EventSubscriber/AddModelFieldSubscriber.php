@@ -44,7 +44,7 @@ class AddModelFieldSubscriber implements EventSubscriberInterface
 
         switch ($category->getName()) {
             case 'Processor':
-                $label = "CPU model :";
+                $label = "CPU model";
                 $choices = [
                     'Intel Core i9' => 'i9',
                     'Intel Core i7' => 'i7',
@@ -62,7 +62,7 @@ class AddModelFieldSubscriber implements EventSubscriberInterface
                 break;
 
             case 'Video card':
-                $label = "GPU chipset :";
+                $label = "GPU chipset";
                 $choices = [
 
                     //NVIDIA
@@ -103,6 +103,8 @@ class AddModelFieldSubscriber implements EventSubscriberInterface
                 ];
                 break;
             // Add more categories and choices as needed
+            default :
+                $label = "label";
         }
 
         $form->add('filterByModel', ChoiceType::class, [

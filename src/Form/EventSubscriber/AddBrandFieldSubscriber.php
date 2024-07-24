@@ -61,7 +61,7 @@ class AddBrandFieldSubscriber implements EventSubscriberInterface
         }
 
         $form->add('filterByBrand', ChoiceType::class, [
-            'label' => 'Manufacturer :',
+            'label' => "Manufacturer",
             'choices' => $choices,
             'required' => false,
             'expanded' => true,
