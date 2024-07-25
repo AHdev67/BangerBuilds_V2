@@ -64,6 +64,10 @@ span{
     text-align: center;
 }
 
+.btnContainer{
+    margin-bottom: 50px;
+}
+
 .neutralBtn{
     background-color: var(--bgDark);
     color: white;
@@ -179,6 +183,7 @@ nav{
         display: flex;
         gap: 15px;
         align-items: center;
+        justify-content: center;
     }
 
     #cart{
@@ -356,10 +361,10 @@ main{
 
 }
 
-.homeMain{
+.altMain{
     margin-left: 0;
     margin-right: 0;
-    padding: 0;
+    padding: 10px 0px 0px;
 }
 
 h1{
@@ -373,8 +378,8 @@ h1{
 }
 
 .mainTitleAlt{
-    font-size: 25px;
-    margin-bottom: 50px;
+    font-size: 30px;
+    margin-bottom: 40px;
 }
 
 .banner{
@@ -384,6 +389,11 @@ h1{
     align-items: center;
     margin-bottom: 50px;
     position: relative;
+}
+
+.titleContainer{
+    display: flex;
+    margin-left: 3vw;
 }
 
 .quote{
@@ -474,8 +484,8 @@ h2{
 }
 
 .homeCard{
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 7px; 
     overflow: hidden;
@@ -525,8 +535,8 @@ h2{
 }
 
 .rowCard{
-    width: 200px;
-    height: 300px;
+    width: 250px;
+    height: 350px;
     background-color: #ffffff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 7px;
@@ -571,31 +581,28 @@ h2{
 .productItemInfo{
     display: grid;
     row-gap: 5px;
+    font-size: 15px;
 }
 
 .productItemInfo .label{
     grid-column: 1;
     grid-row: 1;
-    font-size: 15px;
 }
 
 .productItemInfo .desc{
     grid-column: 1;
     grid-row: 2;
     color: var(--bgDark);
-    font-size: 15px;
 }
 
 .productItemInfo .inStock{
     grid-column: 1;
     grid-row: 3;
-    font-size: 15px;
 }
 
 .productItemInfo .itemStars{
     grid-column: 1;
     grid-row: 4;
-    font-size: 15px;
 }
 
 .productItemPrice{
@@ -747,6 +754,8 @@ ul{
 }
 
 .cardList{
+    background-color: var(--bgLight);
+    padding: 15px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -756,9 +765,14 @@ ul{
 }
 
 .card{
-    width: 150px;
-    border-radius: 7px;
+    width: 140px;
+    height: 140px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 7px; 
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .cardLarge{
@@ -768,25 +782,22 @@ ul{
 }
 
 .cardImg{
-    height: 150px;
+    height: 100%;
     width: inherit;
-}
-
-.cardImg img{
-    font-size: 15px;
+    background-color: #ffffff;
+    overflow: hidden;
 }
 
 .cardImgLarge{
     height: 300px;
     width: inherit;
-    background-color: var(--bgLight);
+    background-color: #ffffff;
 }
 
 .cardTitle{
     padding: 10px;
     background-color: var(--bgDark);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 7px;
     color: white;
     font-size: 15px;
     font-weight: bolder;
@@ -973,6 +984,14 @@ tbody{
 
 tfoot{
     border-top: 1px solid black;
+}
+
+.cartTable tbody td{
+    background-color: white;
+}
+
+.cartTable tfoot td{
+    padding: 15px;
 }
 
 /* --------------------------------PRODUCT INFO-------------------------------- */
@@ -1213,6 +1232,23 @@ footer h2{
         font-size: 20px;
     }
 
+    .btn{
+        font-size: 20px;
+    }
+    
+    .qttBtn{
+        width: 25px;
+        height: 25px;
+    }
+    
+    .editBtn{
+        font-size: 20px;
+    }
+    
+    .deleteBtn{
+        font-size: 20px;
+    }
+
     /* --------------------------------HEADER-------------------------------- */
     nav{
         padding-left: 50px;
@@ -1241,12 +1277,15 @@ footer h2{
             display: flex;
             flex-direction: column;
             gap: 0;
+            font-size: 30px;
         }
 
         /* ----------------------------USER BUTTONS---------------------------- */
         #sideMenu{
             grid-column: 3;
             grid-row: 1;
+            font-size: 20px;
+            gap: 30px;
         }
 
         #cartCounter{
@@ -1272,7 +1311,7 @@ footer h2{
 
         #searchbar{
             height: 30px;
-            width: 800px;
+            width: 900px;
             border-style: none;
             font-size: 20px;
             color: white;
@@ -1293,7 +1332,7 @@ footer h2{
         #suggestionList{
             top: 55px;
             max-height: 350px;
-            width: 830px;
+            width: 930px;
         }
     
         #suggestionList li{
@@ -1329,6 +1368,7 @@ footer h2{
             padding-right: 0;
             width: 100%;
             box-shadow: none;
+            font-size: 20px;    
         }
         
         .hideMenu {
@@ -1344,7 +1384,6 @@ footer h2{
         
         .menuItem{
             color: white;
-            font-size: larger;
         }
 
     /* --------------------------------MAIN-------------------------------- */
@@ -1355,6 +1394,10 @@ footer h2{
     }
 
     /* --------------------------------HOMEPAGE-------------------------------- */
+    .swiper{
+        height: 600px;
+    }
+
     .swiper-button-prev{
         height: 5vw;
         width: 5vw;
@@ -1365,13 +1408,69 @@ footer h2{
         width: 5vw;
     }
 
+    .pagination{
+        gap: 15px;
+    }
+
+    .mainTitle{
+        font-size: 50px;
+    }
+
+    .quote{
+        font-size: 25px;
+    }
+
+    .citation{
+        font-size: 30px;
+    }
+
+    .homeCard{
+        height: 250px;
+        width: 250px;
+    }
+
+    .homeCardLabel, .homeCardPrice{
+        font-size: 20px;
+    }
+
     /* --------------------------------LIST PAGE---------------------------------*/
-        /* --------------------------------PRODUCTS LIST---------------------------------*/
-        
+
+        /* --------------------------------CATEGORIES LIST--------------------------------- */
+        .cardList{
+            padding: 25px;
+            gap: 50px;
+        }
+
+        .card{
+            height: 300px;
+            width: 300px;
+        }
+
+        .cardTitle{
+            font-size: 20px;
+        }
+
+        /* --------------------------------PRODUCTS LIST--------------------------------- */
+        .mainTitleAlt{
+            font-size: 50px;
+        }
+
         .productItemPrice{
             font-size: 20px;
         }
 
+        .productLi{
+            padding: 15px;
+        }
+
+        .productItemImg{
+            height: 200px;
+            width: 200px;
+        }
+
+        .productItemInfo{
+            font-size: 20px;
+        }
 
     /* --------------------------------INFO PAGE-------------------------------- */
 
@@ -1382,7 +1481,12 @@ footer h2{
             padding: 25px;
             display: flex;
             flex-direction: row;
+            justify-content: flex-start;
             gap: 25px;
+        }
+
+        .productMain{
+            flex-direction: row;
         }
 
         .galleryMenu{
@@ -1406,10 +1510,18 @@ footer h2{
             height: 620px;
         }
 
+        .productTitle{
+            font-size: 50px;
+        }
+
         .productInfo {
             display: flex;
             flex-direction: column;
             gap: 50px;
+        }
+
+        .infoList{
+            font-size: 20px;
         }
 
         .productInfo ul{
@@ -1423,6 +1535,36 @@ footer h2{
             display: flex;
             flex-direction: column;
         }
+
+        .subTitle{
+            font-size: 35px;
+        }
+
+        .description{
+            font-size: 20px;
+        }
+
+        .specs{
+            font-size: 20px;
+        }
+
+        .review{
+            font-size: 20px;
+        }
+
+    /* --------------------------------CART---------------------------------- */
+    .cartTable{
+        font-size: 20px;
+    }
+
+    .cartTable tbody td{
+        padding: 25px;
+    }
+
+    .altSection{
+        font-size: 20px;
+    }
+
     /* --------------------------------FORMS-------------------------------- */
     
     form div label{
