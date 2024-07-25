@@ -4,9 +4,12 @@
 
 {% block body %}
 <main>
-    <a href="{{ path('app_home') }}" class="returnBtn btn">
-        <i class="fa-solid fa-arrow-left"></i> Continue shopping
-    </a>
+    <div class="btnContainer">
+        <a href="{{ path('app_home') }}" class="returnBtn btn">
+            <i class="fa-solid fa-arrow-left"></i> Continue shopping
+        </a>
+    </div>
+    
 
     <h1 class="mainTitle">Your shopping cart :</h1> 
     {% if app.session.get('cart') %}
@@ -62,15 +65,6 @@
                             {% endif %}
                         </td>
                     </tr>
-                    {# {% else %}
-                    <tr>
-                        <td class="itemLabel">Err: Invalid object in cart</td>
-                        <td class="qtt"><a href="{{ path('up_quantity', {'itemId': item.product.id}) }}"><button class="qttBtn"><i class="fa-solid fa-plus"></i></button></a>
-                            {{ item.qtt }}
-                        <a href="{{ path('down_quantity', {'itemId': item.product.id}) }}"><button class="qttBtn"><i class="fa-solid fa-minus"></i></button></a></td>
-                        <td>Err: Invalid object in cart</td>
-                        <td><a href="{{ path('remove_item', {'itemId': item.product.id}) }}"><i class="fa-solid fa-trash"></i></a></td>
-                    </tr> #}
                 {% endfor %}
 
             </tbody>

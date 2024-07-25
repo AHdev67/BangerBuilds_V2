@@ -3,11 +3,13 @@
 {% block title %}List of prebuilt PCs{% endblock %}
 
 {% block body %}
-<main>
-    <h1 class="mainTitle">
-        Our prebuilt PCs, made with love
-    </h1>
-
+<main class="altMain">
+    <div class="titleContainer">
+        <h1 class="mainTitle">
+            Our prebuilt PCs, made with love
+        </h1>
+    </div>
+    
     <ul class="cardList">
 
         {% for prebuilt in prebuilts|sort((b, a) => a.total <=> b.total) %}

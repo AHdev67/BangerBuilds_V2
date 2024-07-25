@@ -4,17 +4,19 @@
 
 {% block body %}
 <main>
-    {% if edit %}
-        <a href="{{ path('show_build', {'buildId': build.id}) }}" class="returnBtn btn">
-            <i class="fa-solid fa-arrow-left"></i> Cancel edit
-        </a>
-    {% else %}
-        <a href="{{ path('app_home') }}" class="returnBtn btn">
-            <i class="fa-solid fa-arrow-left"></i> Return to homepage
-        </a>
-    {% endif %}
-
-    <h1 style="margin-top: 50px;">Create a new PC build</h1>
+    <div class="btnContainer">
+        {% if edit %}
+            <a href="{{ path('show_build', {'buildId': build.id}) }}" class="returnBtn btn">
+                <i class="fa-solid fa-arrow-left"></i> Cancel edit
+            </a>
+        {% else %}
+            <a href="{{ path('app_home') }}" class="returnBtn btn">
+                <i class="fa-solid fa-arrow-left"></i> Return to homepage
+            </a>
+        {% endif %}
+    </div>
+    
+    <h1 class="mainTitleAlt">Create a new PC build</h1>
 
     <div class="formContainer">
 

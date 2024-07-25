@@ -82,13 +82,13 @@
         </section>
 
         <section class="productDesc">
-            <h2>Description</h2>
+            <h2 class="subTitle">Description</h2>
             <p class="description">
                 {{ product.description }}
             </p>
             
             <div class="productSpecs">
-                <h2>Specifications</h2>
+                <h2 class="subTitle">Specifications</h2>
                 <table class="specs">
                     <tbody>
                         {% for key, spec in specs %}
@@ -115,7 +115,7 @@
 
         <section class="productReviews" id="reviewSection">
             <div class="reviewsHeader">
-                <h2>User reviews</h2>
+                <h2 class="subTitle">User reviews</h2>
 
                 <a href="{{ path('new_review', {'productId': product.id}) }}" class="neutralBtn btn">
                     Review this product
