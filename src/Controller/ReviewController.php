@@ -24,7 +24,7 @@ class ReviewController extends AbstractController
     }
 
     #[Route('/product/{productId}/newReview', name: 'new_review')]
-    #[Route('/product/{id}/edit', name: 'edit_review')]
+    #[Route('/product/{productId}/review/{id}/edit', name: 'edit_review')]
     public function newEdit(#[MapEntity(id: 'productId')] Product $product, Review $review = null, Request $request, EntityManagerInterface $entityManager): Response
     {
         if (!$review) {
@@ -52,5 +52,15 @@ class ReviewController extends AbstractController
             'formAddReview' => $form,
             'product' => $product
         ]);
+    }
+
+    #[Route('/review/{id}/delete', name: 'delete_review')]
+    public function delete(Review $review, EntityManagerInterface $entityManager)
+    {
+        $product = $review->getReviewedProduct();
+        $entityManager->remove($review);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('show_product', ['productId'=>$product->getId()]);
     }
 }
