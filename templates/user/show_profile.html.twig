@@ -36,23 +36,24 @@
             <section class="history">
                 <h2>Your builds</h2>
                 {% for build in app.user.builds %}
-                    <ul class="historyItem">
-                        <li><h3>{{ build.name }}</h3></li>
-                        <li class="optGroupX">
-                            <a href="{{ path('edit_build', {'id': build.id}) }}" class="btn editBtn"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="{{ path('delete_build', {'id': build.id}) }}" class="btn deleteBtn"><i class="fa-solid fa-trash"></i></a>
-                        </li>
-                        <li><b>Components : </b></li>
-                            <a href="{{ path('show_build', {'buildId': build.id}) }}">
-                                <ul class="itemContent">
-                                {% for buildComponent in build.buildComponents %}
-                                    <li><b>{{ buildComponent.component.category }} : </b>{{ buildComponent.component.label }} | <b>{{ buildComponent.component.price }}</b>$</li>
-                                {% endfor %}
-                                </ul>
-                            </a>
-                        <li><b>Total : </b>{{ build.total }}$</li>
-                    </ul>
-                    
+                    {% if build.isPrebuilt == false %}
+                        <ul class="historyItem">
+                            <li><h3>{{ build.name }}</h3></li>
+                            <li class="optGroupX">
+                                <a href="{{ path('edit_build', {'id': build.id}) }}" class="btn editBtn"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="{{ path('delete_build', {'id': build.id}) }}" class="btn deleteBtn"><i class="fa-solid fa-trash"></i></a>
+                            </li>
+                            <li><b>Components : </b></li>
+                                <a href="{{ path('show_build', {'buildId': build.id}) }}">
+                                    <ul class="itemContent">
+                                    {% for buildComponent in build.buildComponents %}
+                                        <li><b>{{ buildComponent.component.category }} : </b>{{ buildComponent.component.label }} | <b>{{ buildComponent.component.price }}</b>$</li>
+                                    {% endfor %}
+                                    </ul>
+                                </a>
+                            <li><b>Total : </b>{{ build.total }}$</li>
+                        </ul>
+                    {% endif %}
                 {% endfor %}
             </section>
 

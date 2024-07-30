@@ -140,7 +140,12 @@
                         {{ review.content }}
                     </p>
                     <p>
-                        By : <b>{{ review.author }}</b>
+                        By : <b>{{ review.author }}</b> <br><br>
+                        {% if review.author == app.user %}
+                            <a href="{{ path('edit_review', {'productId': product.id,'id': review.id}) }}" class="editBtn btn"><i class="fa-solid fa-pen-to-square"></i></a> 
+                            <a href="{{ path('delete_review', {'id': review.id}) }}" class="btn deleteBtn"><i class="fa-solid fa-trash"></i></a>
+                        {% endif %}
+                        
                     </p>
                 </div>
             {% endfor %}
