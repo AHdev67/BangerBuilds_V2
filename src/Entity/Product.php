@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JsonSerializable;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
-class Product implements JsonSerializable
+class Product
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -279,20 +279,5 @@ class Product implements JsonSerializable
         }
 
         return $totalRating / $count;
-    }
-
-    public function jsonSerialize()
-    {
-        return [
-            'id' => $this->getId(),
-            'category' => $this->getCategory()->getId(),
-            'label' => $this->getLabel(),
-            'price' => $this->getPrice(),
-            'inStock' => $this->isInStock(),
-            'restockDelay' => $this->getRestockDelay(),
-            'specs' => $this->getSpecs(),
-            'image' => $this->getImage(),
-            'description' => $this->getDescription()
-        ];
     }
 }
