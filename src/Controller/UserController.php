@@ -5,9 +5,11 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Build;
 use App\Entity\Product;
+use App\Form\UserEditType;
 use App\Repository\BuildRepository;
 use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -30,6 +32,37 @@ class UserController extends AbstractController
             'orders' => $orders,
             'builds' => $builds
         ]);
+    }
+
+    #[route('/user/edit', name: 'edit_user')]
+    public function editUser(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(UserEditType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_user');
+        }
+
+        return $this->render('user/edit_user.html.twig', [
+            'formEditUser' => $form->createView(),
+            'edit' => $user->getId(),
+            'user' => $user,
+        ]);
+    }
+
+    #[route('/user/delete', name: 'delete_user')]
+    public function deleteUser(EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        $entityManager->remove($user);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_home');
     }
 
     //  RETURNS THE SHOPPING CART OF CURRENT USER
