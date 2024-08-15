@@ -113,4 +113,16 @@ class ProductRepository extends ServiceEntityRepository
                 ->getResult();
         });
     }
+
+    public function findTop5Products(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p, AVG(r.rating) as avgScore')
+            ->leftJoin('p.reviews', 'r')
+            ->groupBy('p.id')
+            ->orderBy('avgScore', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
 }
