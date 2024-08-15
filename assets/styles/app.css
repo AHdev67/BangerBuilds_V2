@@ -76,14 +76,17 @@ span{
     color: white;
 }
 
+.neutralBtnAlt{
+    background-color: var(--bgLight);
+}
+
 .qttBtn{
     width: 25px;
     height: 25px;
 }
 
 .editBtn{
-    background-color: var(--bgDark);
-    color: white;
+    background-color: var(--bgLight);
     width: 30px;
     height: 30px;
     font-size: 15px;
@@ -125,8 +128,14 @@ span{
 
 .optGroupX{
     display: flex;
-    gap: 50px;
+    gap: 25px;
     justify-content: flex-end;
+}
+
+.optGroupXAlt{
+    display: flex;
+    gap: 25px;
+    justify-content: flex-start;
 }
 
 .optGroupY{
@@ -384,6 +393,49 @@ main{
     background-size: cover;
 }
 
+.gridContainer{
+    display: grid;
+}
+
+.flexContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 3vw;
+}
+
+.breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: var(--bgLight);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 25px;
+    border: var(--bgDark) solid 1px;
+}
+
+.breadcrumb li {
+display: inline;
+font-size: 18px;
+}
+
+.breadcrumb li+li:before {
+padding: 8px;
+color: black;
+content: "/\00a0";
+}
+
+.breadcrumb li a {
+color: var(--bgDarker);
+text-decoration: none;
+}
+
+.breadcrumb li a:hover {
+color: #01447e;
+text-decoration: underline;
+}
+
 h1{
     background-color: inherit;
     margin-bottom: 10px;
@@ -396,7 +448,14 @@ h1{
 
 .mainTitleAlt{
     font-size: 30px;
+    margin-top: 20px;
     margin-bottom: 40px;
+}
+
+.mainTitleAlt2{
+    font-size: 25px;
+    margin-bottom: 30px;
+    padding-left: 15px;
 }
 
 .banner{
@@ -482,11 +541,15 @@ h2{
     font-size: 25px;
 }
 
+.sectionTitle{
+    color: white;
+}
+
 .homepageSection{
     display: flex;
     flex-direction: column;
     gap: 25px;
-    background-color: var(--bgLight);
+    background-color: var(--bgDark);
     padding: 25px;
     margin-bottom: 75px;
 }
@@ -528,12 +591,11 @@ h2{
 .homeCardDesc{
     display: flex;
     flex-direction: column;
-    gap: 2px;
 }
 
 .homeCardLabel{
     padding: 10px;
-    background-color: var(--bgDark);
+    background-color: var(--bgExtraDark);
     color: white;
     font-size: 15px;
     display: flex;
@@ -544,7 +606,7 @@ h2{
 
 .homeCardPrice{
     padding: 10px;
-    background-color: var(--bgDark);
+    background-color: var(--bgExtraDark);
     color: white;
     font-size: 15px;
     display: flex;
@@ -571,12 +633,13 @@ h2{
 }
 
 .productLi{
-    background-color: var(--bgLight);
+    background-color: var(--bgDark);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
+    color: white;
 }
 
 .productItemMain{
@@ -610,7 +673,6 @@ h2{
 .productItemInfo .desc{
     grid-column: 1;
     grid-row: 2;
-    color: var(--bgDark);
 }
 
 .productItemInfo .inStock{
@@ -672,22 +734,6 @@ h2{
     margin-bottom: 50px;
 }
 
-.cartTable{
-    background-color: var(--bgLight);
-    border: 1px solid;
-    border-collapse: collapse;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    min-width: 100%;
-    font-size: 15px;
-}
-
-.cartTable tr td{
-    background-color: inherit;
-    border: none;
-    padding: 5px;
-}
-
 .itemLabel{
     display: flex;
     flex-direction: column;
@@ -717,14 +763,15 @@ h2{
 }
 
 .generalInfo{
-    margin-left: 50px;
     margin-top: 25px;
     margin-bottom: 50px;
     width: 100%;
-    
+
 }
 
 .generalInfo h2{
+    padding-left: 15px;
+    font-size: 20px;
     margin-bottom: 25px;
 }
 
@@ -733,16 +780,18 @@ h2{
     flex-direction: column;
     gap: 25px;
     padding: 15px;
-    background-color: var(--bgLight);
+    background-color: var(--bgDark);
+    color: white;
+    font-size: 15px;
 }
 
 .history{
-    margin-left: 50px;
     width: 100%;
-    
 }
 
 .history h2{
+    padding-left: 15px;
+    font-size: 20px;
     margin-bottom: 25px;
 }
 
@@ -753,7 +802,9 @@ h2{
     gap: 10px;
     padding: 15px;
     margin-bottom: 30px;
-    background-color: var(--bgLight);
+    background-color: var(--bgDark);
+    color: white;
+    font-size: 15px;
 }
 
 .itemContent{
@@ -762,7 +813,8 @@ h2{
     flex-direction: column;
     gap: 10px;
     padding: 15px;
-    background-color: #eeeeee;
+    background-color: var(--bgLight);
+    color: black;
 }
 
 
@@ -772,7 +824,7 @@ ul{
 }
 
 .cardList{
-    background-color: var(--bgLight);
+    background-color: var(--bgDark);
     padding: 15px;
     display: flex;
     flex-direction: row;
@@ -780,6 +832,7 @@ ul{
     justify-content: space-evenly;
     list-style: none;
     gap: 25px;
+    margin-bottom: 50px;
 }
 
 .card{
@@ -814,7 +867,7 @@ ul{
 
 .cardTitle{
     padding: 10px;
-    background-color: var(--bgDark);
+    background-color: var(--bgExtraDark);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     color: white;
     font-size: 15px;
@@ -871,18 +924,17 @@ ul{
 /* --------------------------------FORMS-------------------------------- */
 .formContainer{
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    background-color:var(--bgLight);
+    background-color:var(--bgDark);
     padding: 15px;
-    border-radius: 10px;
+    margin-bottom: 50px;
 }
 
 .formContainer form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
     gap: 20px;
-    width: 75vw;
+    width: 100%;
 }
 
 form div{
@@ -893,8 +945,35 @@ form div{
 }
 
 .formSegment{
+    padding: 15px;
     padding-bottom: 25px;
-    border-bottom: #393939 solid 1px;
+    background-color: var(--bgLight);
+    border: 1px solid var(--bgDark);
+}
+
+#segment1{
+    grid-column: 1;
+    grid-row: 1;
+}
+
+#segment2{
+    grid-column: 1;
+    grid-row: 2;
+}
+
+#segment3{
+    grid-column: 1;
+    grid-row: 3;
+}
+
+#segment4{
+    grid-column: 1;
+    grid-row: 4;
+}
+
+#segment5{
+    grid-column: 1;
+    grid-row: 5;
 }
 
 .formSegment h2{
@@ -920,6 +999,7 @@ select{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    max-width: 78vw;
 }
 
 form div textarea{
@@ -966,10 +1046,9 @@ form div select option{
 }
 
 .filterFormContainer{
-    background-color: var(--bgDark); 
+    background-color: var(--bgExtraDark); 
     padding: 10px;
     color: white;
-    margin-bottom: 25px;
     border-radius: 7px;
 }
 
@@ -984,11 +1063,27 @@ form div select option{
 }
 
 /* --------------------------------TABLES-------------------------------- */
+.cartTable{
+    background-color: var(--bgDark);
+    border: 1px solid;
+    border-collapse: collapse;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    min-width: 100%;
+    font-size: 15px;
+}
+
+.cartTable tr td{
+    background-color: inherit;
+    border: none;
+    padding: 5px;
+}
 
 table tr th{
     padding: 15px;
     margin-left: 15px;
     text-align: start;
+    color: white;
 }
 
 table tr td{
@@ -997,15 +1092,12 @@ table tr td{
 }
 
 tbody{
-    border-top: 1px solid black;
+    border-top: 1px solid var(--bgDark);
+    background-color: var(--bgLight);
 }
 
 tfoot{
-    border-top: 1px solid black;
-}
-
-.cartTable tbody td{
-    background-color: white;
+    border-top: 1px solid var(--bgDark);
 }
 
 .cartTable tfoot td{
@@ -1041,6 +1133,7 @@ tfoot{
     flex-direction: column-reverse;
     justify-content: flex-end;
     gap: 25px;
+    border: var(--bgDark) solid 1px;
 }
 
 .galleryMenu{
@@ -1051,7 +1144,7 @@ tfoot{
 }
 
 .thumbnail{
-    border: solid black 1px;
+    border: solid var(--bgDark) 1px;
     background-color: white;
     width: 80px;
     height: 80px;
@@ -1072,6 +1165,8 @@ tfoot{
     background-color: var(--bgLight);
     padding: 25px;
     font-size: 15px;
+    border: var(--bgDark) solid 1px;
+
 }
 
 .productRating{
@@ -1113,6 +1208,8 @@ tfoot{
     margin-top: 25px;
     margin-bottom: 50px;
     font-size: 15px;
+    border: var(--bgDark) solid 1px;
+
 }
 
 .specs{
@@ -1148,6 +1245,8 @@ tfoot{
     flex-direction: column;
     gap: 10px;
     font-size: 15px;
+    border: var(--bgDark) solid 1px;
+
 }
 
 .reviewFooter{
@@ -1437,6 +1536,12 @@ footer h2{
         font-size: 50px;
     }
 
+    .mainTitleAlt2{
+        font-size: 50px;
+        margin-bottom: 30px;
+        padding-left: 15px;
+    }
+
     .quote{
         font-size: 25px;
     }
@@ -1463,8 +1568,8 @@ footer h2{
         }
 
         .card{
-            height: 300px;
-            width: 300px;
+            height: 250px;
+            width: 250px;
         }
 
         .cardTitle{
@@ -1472,12 +1577,22 @@ footer h2{
         }
 
         /* --------------------------------PRODUCTS LIST--------------------------------- */
+
+        .flexContainer{
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
         .mainTitleAlt{
             font-size: 50px;
         }
 
         .productItemPrice{
             font-size: 20px;
+        }
+
+        .productUl{
+            width: 100%;
         }
 
         .productLi{
@@ -1498,7 +1613,6 @@ footer h2{
         /* --------------------------------PRODUCT INFO-------------------------------- */
 
         .productGallery{
-            background-color: var(--bgLight);
             padding: 25px;
             display: flex;
             flex-direction: row;
@@ -1518,15 +1632,11 @@ footer h2{
         }
 
         .thumbnail{
-            border: solid black 1px;
-            background-color: white;
             width: 200px;
             height: 200px;
         }
 
         .mainImg{
-            border: solid black 1px;
-            background-color: white;
             width: 620px;
             height: 620px;
         }
@@ -1573,6 +1683,10 @@ footer h2{
             font-size: 20px;
         }
 
+        .generalInfo h2, .history h2{
+            font-size: 35px;
+        }
+
     /* --------------------------------CART---------------------------------- */
     .cartTable{
         font-size: 20px;
@@ -1587,7 +1701,33 @@ footer h2{
     }
 
     /* --------------------------------FORMS-------------------------------- */
+
+    #segment1{
+        grid-column: 1;
+        grid-row: 1/4;
+    }
     
+    #segment2{
+        grid-column: 2;
+        grid-row: 1;
+    }
+    
+    #segment3{
+        grid-column: 2;
+        grid-row: 2;
+    }
+    
+    #segment4{
+        grid-column: 2;
+        grid-row: 3
+    }
+
+    #segment5{
+        grid-column: 1/3;
+        grid-row: 4;
+    }
+    
+
     form div label{
         font-size: 20px;
     }
@@ -1597,9 +1737,10 @@ footer h2{
         padding: 5px;
     }
 
-    form div select{
+    select{
         font-size: 20px;
         padding: 5px;
+        max-width: 42vw;
     }
 
     form div textarea{
@@ -1611,12 +1752,19 @@ footer h2{
         font-size: 20px;
     }
     
-    
     .formRowDouble{
         flex-direction: row;
     }
     
     .submitBtn{
+        font-size: 20px;
+    }
+
+    .filterFormContainer{
+        width: 25vw;
+    }
+
+    summary{
         font-size: 20px;
     }
     /* --------------------------------TABLES-------------------------------- */
