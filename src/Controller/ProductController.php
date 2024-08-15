@@ -120,6 +120,7 @@ class ProductController extends AbstractController
     {
         if (!$product) {
             $product = new Product();
+            $product->setInStock(true);
         }
         
         $form = $this->createForm(ProductType::class, $product);
@@ -128,7 +129,7 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             $product = $form->getData();
-
+            
             $entityManager->persist($product);
             $entityManager->flush();
 
@@ -150,7 +151,7 @@ class ProductController extends AbstractController
         $entityManager->remove($product);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_product');
+        return $this->redirectToRoute('app_product', ['categoryId'=>$product->getCategory()->getId()]);
     }
 
 
