@@ -4,6 +4,25 @@
 
 {% block body %}
 <main>
+    <ul class="breadcrumb">
+        <li><a href="{{ path('app_home') }}">Home</a></li>
+        <li><a href="{{ path('app_category') }}">Categories</a></li>
+        <li>
+            <a href="{{ path('app_product', {'categoryId': product.category.id}) }}">
+                {% if product.category.name == "Headphones" or product.category.name == "Memory" %}
+                    {{ product.category.name }}
+                {% elseif product.category.name == "Power supply" %}
+                    Power supplies
+                {% elseif product.category.name == "Uninterruptible Power Supply" %}
+                    Uninteruptible Power Supplies
+                {% else %}
+                    {{ product.category.name }}s
+                {% endif %}
+            </a>
+        </li>
+        <li>{{ product.label }}</li>
+    </ul>
+
     <div class="productContainer">
         
         <section class="productMain">

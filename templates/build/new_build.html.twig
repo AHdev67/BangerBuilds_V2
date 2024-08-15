@@ -4,17 +4,17 @@
 
 {% block body %}
 <main>
-    <div class="btnContainer">
-        {% if edit %}
-            <a href="{{ path('show_build', {'buildId': build.id}) }}" class="returnBtn btn">
-                <i class="fa-solid fa-arrow-left"></i> Cancel edit
-            </a>
-        {% else %}
-            <a href="{{ path('app_home') }}" class="returnBtn btn">
-                <i class="fa-solid fa-arrow-left"></i> Return to homepage
-            </a>
-        {% endif %}
-    </div>
+    <ul class="breadcrumb">
+        <li><a href="{{ path('app_home') }}">Home</a></li>
+        <li>
+            {% if edit %}
+                Build edit
+            {% else %}
+                New build
+            {% endif %}
+        </li>
+    </ul>
+        
     
     <h1 class="mainTitleAlt">Create a new PC build</h1>
 
@@ -23,9 +23,8 @@
         {{ form_start(formBuild) }}
 
 {# ------------------------------------------------------------------------------------------------------------------------------------#}
-
             
-            <div class="formSegment">
+            <div class="formSegment" id="segment1">
                 <h2>Core components :</h2>
 
                 {{ form_row(formBuild.cpu) }}
@@ -38,8 +37,8 @@
                 {{ form_row(formBuild.case) }}
             </div>
 
-            
-            <div class="formSegment">
+             
+            <div class="formSegment" id="segment2">
                 <h2>Optional components :</h2>
 
                 {{ form_row(formBuild.opticalDrive) }}
@@ -50,27 +49,32 @@
             </div>
 
             
-            <div class="formSegment">
+            <div class="formSegment" id="segment3">
                 <h2>Software</h2>
 
                 {{ form_row(formBuild.operatingSystem) }}
             </div>
 
             
-            <div class="formSegment">
+            <div class="formSegment" id="segment4">
                 <h2>Services</h2>
 
                 {{ form_row(formBuild.service) }}
             </div>
 {# ------------------------------------------------------------------------------------------------------------------------------------- #}
-            {# {{ form_row(formBuild.buildComponents) }} #}
+            <div class="formSegment" id="segment5">
+                {{ form_row(formBuild.name) }}
 
-            {{ form_row(formBuild.name) }}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="custom-checkbox">
+                        <label>{{ form_label(formBuild.prebuilt) }}</label>
+                        {{ form_widget(formBuild.prebuilt) }}
+                    </div>
+                {% endif %}
 
-            {% if is_granted('ROLE_ADMIN') %}
-                {{ form_row(formBuild.prebuilt) }}
-            {% endif %}
-                    
+                {{ form_row(formBuild.save) }}
+            </div>
+            
         {{ form_end(formBuild) }}
     </div>
 </main>

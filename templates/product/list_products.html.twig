@@ -4,6 +4,22 @@
 
 {% block body %}
 <main>
+    <ul class="breadcrumb">
+        <li><a href="{{ path('app_home') }}">Home</a></li>
+        <li><a href="{{ path('app_category') }}">Categories</a></li>
+        <li>
+            {% if category.name == "Headphones" or category.name == "Memory" %}
+                {{ category.name }}
+            {% elseif category.name == "Power supply" %}
+                Power supplies
+            {% elseif category.name == "Uninterruptible Power Supply" %}
+                Uninteruptible Power Supplies
+            {% else %}
+                {{ category.name }}s
+            {% endif %}
+        </li>
+    </ul>
+
     <h1 class="mainTitleAlt">
         {% if category.name == "Headphones" or category.name == "Memory" %}
             {{ category.name }}
@@ -16,95 +32,97 @@
         {% endif %}
     </h1>
 
-
-    <div class="filterFormContainer">
-        {{ form_start(formFilters) }}
-            {{ form_row(formFilters.orderBy) }}
-            <div class="filterMenu">
-                <details>
-                    <summary><b>{{ formFilters.filterByBrand.vars.label|trans({}, formFilters.filterByBrand.vars.translation_domain) }}</b></summary>
-                    <div>
-                        {% for child in formFilters.filterByBrand %}
-                            <div class="custom-checkbox">
-                                <label>{{ form_label(child) }}</label>
-                                {{ form_widget(child) }}
-                            </div>
-                        {% endfor %}
-                    </div>
-                </details>
-
-                <details>
-                    <summary><b>{{ formFilters.filterByGeneration.vars.label|trans({}, formFilters.filterByGeneration.vars.translation_domain) }}</b></summary>
-                    <div>
-                        {% for child in formFilters.filterByGeneration %}
-                            <div class="custom-checkbox">
-                                <label>{{ form_label(child) }}</label>
-                                {{ form_widget(child) }}
-                            </div>
-                        {% endfor %}
-                    </div>
-                </details>
-
-                <details>
-                    <summary><b>{{ formFilters.filterByModel.vars.label|trans({}, formFilters.filterByModel.vars.translation_domain) }}</b></summary>
-                    <div>
-                        {% for child in formFilters.filterByModel %}
-                            <div class="custom-checkbox">
-                                <label>{{ form_label(child) }}</label>
-                                {{ form_widget(child) }}
-                            </div>
-                        {% endfor %}
-                    </div>
-                </details>
-
-            </div>
-        {{ form_end(formFilters) }}
-    </div>
-
-    <ul class="productUl">
-        {% for product in products|sort((b, a) => a.globalRating <=> b.globalRating) %}
-            <a href="{{ path('show_product', {'productId': product.id}) }}">
-                <li class="productLi">
-
-                    <div class="productItemMain">
-                        <figure class="productItemImg">
-                            <img src="" alt="This is a {{product.label}}">
-                        </figure>
-                        
-                        <div class="productItemInfo">
-                            <div class="label">
-                                <b>{{ product.label }}</b>
-                            </div>
-
-                            <p class="desc">
-                                Hello :)
-                            </p>
-
-                            <div class="inStock">Availability : 
-                                {% if product.inStock == 1 %}
-                                    <b>In stock</b>
-                                {% else %}
-                                <b>Out of stock</b>
-                                {% endif %}
-                            </div>
-
-                            <div class="itemStars"> 
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <span class="itemGlobalRating hidden">{{ product.globalRating }}</span>
+    <div class="flexContainer">
+        <div class="filterFormContainer">
+            {{ form_start(formFilters) }}
+                {{ form_row(formFilters.orderBy) }}
+                <div class="filterMenu">
+                    <details>
+                        <summary><b>{{ formFilters.filterByBrand.vars.label|trans({}, formFilters.filterByBrand.vars.translation_domain) }}</b></summary>
+                        <div>
+                            {% for child in formFilters.filterByBrand %}
+                                <div class="custom-checkbox">
+                                    <label>{{ form_label(child) }}</label>
+                                    {{ form_widget(child) }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </details>
+    
+                    <details>
+                        <summary><b>{{ formFilters.filterByGeneration.vars.label|trans({}, formFilters.filterByGeneration.vars.translation_domain) }}</b></summary>
+                        <div>
+                            {% for child in formFilters.filterByGeneration %}
+                                <div class="custom-checkbox">
+                                    <label>{{ form_label(child) }}</label>
+                                    {{ form_widget(child) }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </details>
+    
+                    <details>
+                        <summary><b>{{ formFilters.filterByModel.vars.label|trans({}, formFilters.filterByModel.vars.translation_domain) }}</b></summary>
+                        <div>
+                            {% for child in formFilters.filterByModel %}
+                                <div class="custom-checkbox">
+                                    <label>{{ form_label(child) }}</label>
+                                    {{ form_widget(child) }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </details>
+    
+                </div>
+            {{ form_end(formFilters) }}
+        </div>
+    
+        <ul class="productUl">
+            {% for product in products|sort((b, a) => a.globalRating <=> b.globalRating) %}
+                <a href="{{ path('show_product', {'productId': product.id}) }}">
+                    <li class="productLi">
+    
+                        <div class="productItemMain">
+                            <figure class="productItemImg">
+                                <img src="" alt="This is a {{product.label}}">
+                            </figure>
+                            
+                            <div class="productItemInfo">
+                                <div class="label">
+                                    <b>{{ product.label }}</b>
+                                </div>
+    
+                                <p class="desc">
+                                    Specifications
+                                </p>
+    
+                                <div class="inStock">Availability : 
+                                    {% if product.inStock == 1 %}
+                                        <b>In stock</b>
+                                    {% else %}
+                                    <b>Out of stock</b>
+                                    {% endif %}
+                                </div>
+    
+                                <div class="itemStars"> 
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <span class="itemGlobalRating hidden">{{ product.globalRating }}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-
-                    <div class="productItemPrice"><b>{{ product.price }}$</b></div>
-                </li>
-            </a>
-        {% endfor %}
-    </ul>
+                        
+    
+                        <div class="productItemPrice"><b>{{ product.price }}$</b></div>
+                    </li>
+                </a>
+            {% endfor %}
+        </ul>
+    </div>
+    
 
     <div class="paginationContainer">
         {{ knp_pagination_render(products) }}

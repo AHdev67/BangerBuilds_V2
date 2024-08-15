@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit profile information{% endblock %}
+
+{% block body %}
+<main>
+
+    <a href="{{ path('app_user') }}" class="returnBtn btn">
+        <i class="fa-solid fa-arrow-left"></i> Return to profile
+    </a>
+    
+    <div class="formContainer" style="margin-top: 50px;">
+
+        {{ form_start(formEditUser) }}
+            {{ form_row(formEditUser.username) }}
+            {{ form_row(formEditUser.email) }}
+        {{ form_end(formEditUser) }}
+    </div> 
+    
+</main>
+{% endblock %}

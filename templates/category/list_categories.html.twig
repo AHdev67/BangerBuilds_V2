@@ -3,10 +3,14 @@
 {% block title %}Hello CategoryController!{% endblock %}
 
 {% block body %}
-<main class="altMain">
-    <div class="titleContainer">
-        <h1 class="mainTitle">Components & Accessories</h1>
-    </div>
+<main>
+
+    <ul class="breadcrumb">
+        <li><a href="{{ path('app_home') }}">Home</a></li>
+        <li>Categories</li>
+    </ul>
+
+    <h1 class="mainTitle">Components & Accessories</h1>
     
 
     <ul class="cardList">

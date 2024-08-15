@@ -3,8 +3,10 @@
 {% block title %}Your profile{% endblock %}
 
 {% block body %}
-    <main>
-        <h1>Profile information</h1>
+    <main class="altMain">
+        
+        <h1 class="mainTitleAlt2">Profile information</h1>
+
         <div class="centerContainer">
             <section class="generalInfo">
                 <h2>Account information</h2>
@@ -12,7 +14,6 @@
                     <span>
                         {% if app.user.username %}
                             <b>Username : </b>{{ app.user.username }}
-                            <a href="" class="btn">Change username</a>
                         {% else %}
                             <b>You do not have a username yet. </b>
                             <a href="" class="btn">Set a username</a>
@@ -21,13 +22,11 @@
 
                     <span>
                         <b>Email : </b>{{ app.user.email }}
-                        <a href="" class="btn">Change email</a>
                     </span>
                     
-                    <span>
-                        <b>Password : </b>
-                        <a href="" class="btn">Change password</a>
-                        <a href="" class="btn">Retrieve password</a>
+                    <span class="optGroupXAlt">
+                        <a href="{{ path('edit_user') }}" class="neutralBtnAlt btn">Edit account information</a>
+                        <a href="" class="deleteBtnLarge btn">Delete account</a>
                     </span>
                     
                 </div>
@@ -83,8 +82,12 @@
                     {% endfor %}
             </section>
         </div>
-        <a href="{{ path('flush_cart') }}" class="deleteBtnLarge btn">
-            Emegency cart flush <i class="fa-solid fa-trash"></i>
-        </a>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('flush_cart') }}" class="deleteBtnLarge btn">
+                Emegency cart flush <i class="fa-solid fa-trash"></i>
+            </a>    
+        {% endif %}
+        
     </main>
 {% endblock %}
