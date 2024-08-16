@@ -369,7 +369,7 @@ nav{
 main{
     font-size: 30px;
     min-height: 100vh;
-    margin-top: 109PX;
+    margin-top: 109px;
     max-width: 100vw;
     padding: 10px;
     padding-left: 3vw;
@@ -391,6 +391,11 @@ main{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.mainFull{
+    margin-top: 0px;
+    padding-top: 50px;
 }
 
 .gridContainer{
@@ -655,8 +660,9 @@ h2{
 }
 
 .productItemImg img{
-    object-fit: cover;
-    color: black;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
 }
 
 .productItemInfo{
@@ -859,10 +865,22 @@ ul{
     overflow: hidden;
 }
 
+.cardImg img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
 .cardImgLarge{
     height: 300px;
     width: inherit;
     background-color: #ffffff;
+}
+
+.cardImgLarge img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
 }
 
 .cardTitle{
@@ -1127,13 +1145,12 @@ tfoot{
 }
 
 .productGallery{
-    background-color: var(--bgLight);
+    background-color: var(--bgDark);
     padding: 25px;
     display: flex;
     flex-direction: column-reverse;
     justify-content: flex-end;
     gap: 25px;
-    border: var(--bgDark) solid 1px;
 }
 
 .galleryMenu{
@@ -1150,11 +1167,23 @@ tfoot{
     height: 80px;
 }
 
+.thumbnail img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
 .mainImg{
     border: solid black 1px;
     background-color: white;
     width: 300px;
     height: 300px;
+}
+
+.mainImg img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
 }
 
 .productInfo {
@@ -1246,7 +1275,6 @@ tfoot{
     gap: 10px;
     font-size: 15px;
     border: var(--bgDark) solid 1px;
-
 }
 
 .reviewFooter{
