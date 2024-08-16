@@ -26,15 +26,15 @@
                 
                 <div class="swiper-slide">
                     <figure class="carouselItem">
-                        <img src="" alt="Promo banner 2">
-                    </figure>    
+                        <img src="{{ asset('images/promo2.png') }}" alt="Promo banner 2">
+                    </figure>
                 </div>
                     
-                <div class="swiper-slide">
+                {# <div class="swiper-slide">
                     <figure class="carouselItem">
                         <img src="" alt="Promo banner 3">
                     </figure>
-                </div>
+                </div> #}
             </div>
             <!-- If we need pagination -->
             <div class="swiper-pagination"></div>
@@ -58,7 +58,23 @@
                     </figure>
                     <div class="homeCardDesc">
                         <div class="homeCardLabel">
-                            {{popularCategories.categ1.name}}s
+                            {% if popularCategories.categ1.name == "Headphones" or popularCategories.categ1.name == "Memory" %}  
+
+                                {{ popularCategories.categ1.name }}
+
+                            {% elseif popularCategories.categ1.name == "Power supply" %}      
+
+                                Power supplies
+
+                            {% elseif popularCategories.categ1.name == "Uninterruptible Power Supply" %} 
+
+                                Uninteruptible Power Supplies
+
+                            {% else %}
+
+                                {{ popularCategories.categ1.name }}s
+                                
+                            {% endif %}
                         </div>
                         
                     </div>
@@ -72,7 +88,23 @@
                     </figure>
                     <div class="homeCardDesc">
                         <div class="homeCardLabel">
-                            {{popularCategories.categ2.name}}s
+                            {% if popularCategories.categ2.name == "Headphones" or popularCategories.categ2.name == "Memory" %}  
+
+                                {{ popularCategories.categ2.name }}
+
+                            {% elseif popularCategories.categ2.name == "Power supply" %}      
+
+                                Power supplies
+
+                            {% elseif popularCategories.categ2.name == "Uninterruptible Power Supply" %} 
+
+                                Uninteruptible Power Supplies
+
+                            {% else %}
+
+                                {{ popularCategories.categ2.name }}s
+                                
+                            {% endif %}
                         </div>
                         
                     </div>
@@ -86,7 +118,23 @@
                     </figure>
                     <div class="homeCardDesc">
                         <div class="homeCardLabel">
-                            {{popularCategories.categ3.name}}s
+                            {% if popularCategories.categ3.name == "Headphones" or popularCategories.categ3.name == "Memory" %}  
+
+                                {{ popularCategories.categ3.name }}
+
+                            {% elseif popularCategories.categ3.name == "Power supply" %}      
+
+                                Power supplies
+
+                            {% elseif popularCategories.categ3.name == "Uninterruptible Power Supply" %} 
+
+                                Uninteruptible Power Supplies
+
+                            {% else %}
+
+                                {{ popularCategories.categ3.name }}s
+                                
+                            {% endif %}
                         </div>
                         
                     </div>
@@ -100,7 +148,23 @@
                     </figure>
                     <div class="homeCardDesc">
                         <div class="homeCardLabel">
-                            {{popularCategories.categ4.name}}s
+                            {% if popularCategories.categ4.name == "Headphones" or popularCategories.categ4.name == "Memory" %}  
+
+                                {{ popularCategories.categ4.name }}
+
+                            {% elseif popularCategories.categ4.name == "Power supply" %}      
+
+                                Power supplies
+
+                            {% elseif popularCategories.categ4.name == "Uninterruptible Power Supply" %} 
+
+                                Uninteruptible Power Supplies
+
+                            {% else %}
+
+                                {{ popularCategories.categ4.name }}s
+                                
+                            {% endif %}
                         </div>
                         
                     </div>
@@ -123,7 +187,7 @@
                 <a href="{{ path('show_product', {'productId': product.id}) }}">
                     <div class="rowCard">
                         <figure class="homeCardImg">
-                            <img src="" alt="card image">
+                            <img src="{{ asset('images/product_images/' ~ product.images.img1) }}" alt="card image">
                         </figure>
                         <div class="homeCardDesc">
                             <div class="homeCardLabel">

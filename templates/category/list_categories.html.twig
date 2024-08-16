@@ -19,7 +19,7 @@
                 <a href="{{ path('app_product', {'categoryId': category.id}) }}">
                     <div class="card">
                         <figure class="cardImg">
-                            <img src="" alt="{{category.name}} image">
+                            <img src="{{ asset('images/icons/' ~ category.image) }}" alt="{{category.name}} image">
                         </figure>
 
                         <div class="cardTitle">
