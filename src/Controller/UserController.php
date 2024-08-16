@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class UserController extends AbstractController
 {
@@ -57,13 +58,23 @@ class UserController extends AbstractController
     }
 
     #[route('/user/delete', name: 'delete_user')]
-    public function deleteUser(EntityManagerInterface $entityManager): Response
+    public function deleteUser(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, Request $request): Response
     {
         $user = $this->getUser();
+
+        // Invalidate the session
+        $request->getSession()->invalidate();
+
+        // Clear the security token
+        $tokenStorage->setToken(null);
+
+        // Remove the user from the database
         $entityManager->remove($user);
         $entityManager->flush();
+
+        // Redirect to the homepage or login page
         return $this->redirectToRoute('app_home');
-    }
+        }
 
     //  RETURNS THE SHOPPING CART OF CURRENT USER
 
