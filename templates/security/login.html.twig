@@ -1,45 +1,53 @@
-{% extends 'base.html.twig' %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+        {% endblock %}
+    </head>
 
-{% block title %}Log in !{% endblock %}
+    <body>
 
-{% block body %}
-    <main>
-        <h1 class="mainTitle">Sign into your account</h1>
-        <div class="formContainer">
+        <main class="mainFull">
+            <h1 class="mainTitle">Sign into your account</h1>
 
-            <form method="post">
-                {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
 
-                {% if app.user %}
-                    <div class="mb-3">
-                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-                    </div>
-                {% endif %}
-                <div><label for="username">Email</label>
-                <input type="email" value="{{ last_username }}" name="_username" id="username" autocomplete="email" required autofocus></div>
-                <div><label for="password">Password</label>
-                <input type="password" name="_password" id="password" autocomplete="current-password" required></div>
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    {% endif %}
+                    <div><label for="username">Email</label>
+                    <input type="email" value="{{ last_username }}" name="_username" id="username" autocomplete="email" required autofocus></div>
+                    <div><label for="password">Password</label>
+                    <input type="password" name="_password" id="password" autocomplete="current-password" required></div>
 
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                {#
-                    Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-                    See https://symfony.com/doc/current/security/remember_me.html
+                    {#
+                        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                        See https://symfony.com/doc/current/security/remember_me.html
 
-                    <div class="checkbox mb-3">
-                        <label>
-                            <input type="checkbox" name="_remember_me"> Remember me
-                        </label>
-                    </div>
-                #}
+                        <div class="checkbox mb-3">
+                            <label>
+                                <input type="checkbox" name="_remember_me"> Remember me
+                            </label>
+                        </div>
+                    #}
 
-                <button type="submit" class="submitBtn btn">
-                    Sign in
-                </button>
-            </form>
-        </div>
-    </main>
+                    <button type="submit" class="submitBtn btn">
+                        Sign in
+                    </button>
+                </form>
+        </main>
 
-{% endblock %}
+    </body>
+</html>
