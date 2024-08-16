@@ -262,3 +262,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+//---------------------------------------------------------IMAGE GALLERY SCRIPT---------------------------------------------------------
+document.addEventListener('DOMContentLoaded', function () {
+    const thumbnails = document.querySelectorAll('.galleryMenu .thumbnail img');
+
+    const mainImage = document.querySelector('.mainImg img');
+
+    thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function() {
+            mainImage.src = this.src;
+        });
+    });
+});
