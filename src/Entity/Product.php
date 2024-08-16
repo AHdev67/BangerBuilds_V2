@@ -42,8 +42,11 @@ class Product
     #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'reviewedProduct', orphanRemoval: true)]
     private Collection $reviews;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $image = null;
+    // #[ORM\Column(length: 255, nullable: true)]
+    // private ?string $image = null;
+
+    #[ORM\Column]
+    private array $images = [];
 
     /**
      * @var Collection<int, OrderItem>
@@ -180,14 +183,14 @@ class Product
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImages(): ?array
     {
-        return $this->image;
+        return $this->images;
     }
 
-    public function setImage(?string $image): static
+    public function setImages(?array $images): static
     {
-        $this->image = $image;
+        $this->images = $images;
 
         return $this;
     }
