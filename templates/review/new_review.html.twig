@@ -2,6 +2,11 @@
 
 {% block title %}Review this product{% endblock %}
 
+{% block meta_description %}
+    Got something to say ? About OUR product ? Well go ahead then, say it.
+    Banger Builds - Express yourself, but only if you have nice things to say.
+{% endblock %}
+
 {% block body %}
 <main>
     <a href="{{ path('show_product', {'productId': product.id}) }}" class="returnBtn btn">

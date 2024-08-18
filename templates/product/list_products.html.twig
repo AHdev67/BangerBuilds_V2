@@ -2,6 +2,32 @@
 
 {% block title %}List of products{% endblock %}
 
+{% block meta_description %}
+    Here are all the 
+    {% if category.name == "Headphones" or category.name == "Memory" %}
+        {{ category.name }}
+    {% elseif category.name == "Power supply" %}
+        Power supplies
+    {% elseif category.name == "Uninterruptible Power Supply" %}
+        Uninteruptible Power Supplies
+    {% else %}
+        {{ category.name }}s
+    {% endif %} 
+    you could ever wish for. Take your time, pick the one that's right for you.
+
+    Banger Builds - Look at all these 
+    {% if category.name == "Headphones" or category.name == "Memory" %}
+        {{ category.name }}
+    {% elseif category.name == "Power supply" %}
+        Power supplies
+    {% elseif category.name == "Uninterruptible Power Supply" %}
+        Uninteruptible Power Supplies
+    {% else %}
+        {{ category.name }}s
+    {% endif %} 
+    !
+    {% endblock %}
+
 {% block body %}
 <main>
     <ul class="breadcrumb">
