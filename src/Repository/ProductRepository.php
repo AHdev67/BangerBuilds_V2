@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Product;
+use App\Entity\Category;
 use Doctrine\DBAL\Connection;
 use PhpParser\Builder\Function_;
 use PhpParser\Node\Expr\FuncCall;
@@ -52,6 +53,7 @@ class ProductRepository extends ServiceEntityRepository
     //    }
 
     /**
+     * @param Category $category
      * @return Product[] Returns an array of Product objects
      */
     public function findByCategory($category)
@@ -112,6 +114,18 @@ class ProductRepository extends ServiceEntityRepository
                 ->getQuery()
                 ->getResult();
         });
+    }
+
+    public function findByCategoryOrderedByRating(Category $category): array
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.reviews', 'r')  // Join with the reviews table
+            ->where('p.category = :category')
+            ->setParameter('category', $category)
+            ->groupBy('p.id')  // Group by product ID
+            ->orderBy('AVG(r.rating)', 'DESC')  // Order by average rating (use ASC for ascending)
+            ->getQuery()
+            ->getResult();
     }
 
     public function findTop5Products(): array
