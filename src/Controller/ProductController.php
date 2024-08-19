@@ -26,7 +26,7 @@ class ProductController extends AbstractController
     //  RETURNS LIST OF PRODUCTS BY CATEGORY
 
     #[Route('/category/{categoryId}/products', name: 'app_product')]
-    public function index(#[MapEntity(id: 'categoryId')] Category $category, Array $filters = null, PaginatorInterface $paginator, Request $request): Response
+    public function index(#[MapEntity(id: 'categoryId')] Category $category, ProductRepository $productRepository, Array $filters = null, PaginatorInterface $paginator, Request $request): Response
     {
         if (!$filters){
             $filters = [
@@ -36,7 +36,7 @@ class ProductController extends AbstractController
                 "filterByModel" => null
             ];
             $products = $paginator->paginate(
-                $category->getProducts(),
+                $productRepository->findByCategoryOrderedByRating($category),
                 $request->query->getInt('page', 1), /*page number*/
                 10 /*limit per page*/
             );
