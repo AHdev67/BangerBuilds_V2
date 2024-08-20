@@ -119,11 +119,11 @@ class ProductRepository extends ServiceEntityRepository
     public function findByCategoryOrderedByRating(Category $category): array
     {
         return $this->createQueryBuilder('p')
-            ->leftJoin('p.reviews', 'r')  // Join with the reviews table
+            ->leftJoin('p.reviews', 'r')
             ->where('p.category = :category')
             ->setParameter('category', $category)
-            ->groupBy('p.id')  // Group by product ID
-            ->orderBy('AVG(r.rating)', 'DESC')  // Order by average rating (use ASC for ascending)
+            ->groupBy('p.id')
+            ->orderBy('AVG(r.rating)', 'DESC')
             ->getQuery()
             ->getResult();
     }

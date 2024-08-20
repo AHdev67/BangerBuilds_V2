@@ -2,12 +2,10 @@
 
 namespace App\Controller;
 
-use DateTime;
 use App\Entity\Product;
 use App\Entity\Category;
 use App\Form\FilterType;
 use App\Form\ProductType;
-use PhpParser\Node\Stmt\Label;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,7 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
-use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProductController extends AbstractController
@@ -104,7 +101,7 @@ class ProductController extends AbstractController
 
             $formattedSpecs[$formattedKey] = $formattedValue;
         }
-
+        
         return $this->render('product/show_product.html.twig', [
             'product' => $product,
             'specs' => $formattedSpecs
