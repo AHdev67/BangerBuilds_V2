@@ -25,7 +25,7 @@
                 {% endif %}
             </a>
         </li>
-        <li>{{ product.label }}</li>
+        <li><strong>{{ product.label }}</strong></li>
     </ul>
 
     <div class="productContainer">
@@ -34,7 +34,8 @@
             <div class="productGallery">
                 <div class="galleryMenu">
                     <figure class="thumbnail">
-                        <img src="{{ asset('images/product_images/' ~ product.images.img1) }}" alt="Picture of the product">
+                        <img src="{{ asset('images/product_images/' ~ product.images.img1) }}" 
+                        alt="Front view of the {{ product.category.name }} model : {{ product.label }} ">
                     </figure>
 
                     <figure class="thumbnail">
