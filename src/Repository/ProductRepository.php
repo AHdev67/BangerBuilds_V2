@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Product;
 use App\Entity\Category;
 use Doctrine\DBAL\Connection;
+use Doctrine\ORM\QueryBuilder;
 use PhpParser\Builder\Function_;
 use PhpParser\Node\Expr\FuncCall;
 use Doctrine\Persistence\ManagerRegistry;
@@ -99,6 +100,84 @@ class ProductRepository extends ServiceEntityRepository
             ->setParameter('pattern', '%' . $gen . '%')
             ->getQuery()
             ->getResult();
+    }
+
+    public function getBaseQueryBuilderForCategory(Category $category): QueryBuilder
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.reviews', 'r')
+            ->where('p.category = :category')
+            ->setParameter('category', $category)
+            ->groupBy('p.id')
+            ->orderBy('AVG(r.rating)', 'DESC');
+    }
+
+    public function findByFilters(Category $category, array $filters): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.reviews', 'r')
+            ->where('p.category = :category')
+            ->setParameter('category', $category)
+            ->groupBy('p.id');
+
+        // Apply brand filter by searching in the label
+        if (!empty($filters['filterByBrand'])) {
+            $brandConditions = $qb->expr()->orX();
+
+            foreach ($filters['filterByBrand'] as $brand) {
+                $brandConditions->add(
+                    $qb->expr()->like('p.label', $qb->expr()->literal('%' . $brand . '%'))
+                );
+            }
+
+            $qb->andWhere($brandConditions);
+        }
+
+        // Apply generation filter by searching in the label
+        if (!empty($filters['filterByGen'])) {
+            $generationConditions = $qb->expr()->orX();
+
+            foreach ($filters['filterByGen'] as $generation) {
+                $generationConditions->add(
+                    $qb->expr()->like('p.label', $qb->expr()->literal('%' . $generation . '%'))
+                );
+            }
+
+            $qb->andWhere($generationConditions);
+        }
+
+        // Apply model filter by searching in the label
+        if (!empty($filters['filterByModel'])) {
+            $modelConditions = $qb->expr()->orX();
+
+            foreach ($filters['filterByModel'] as $model) {
+                $modelConditions->add(
+                    $qb->expr()->like('p.label', $qb->expr()->literal('%' . $model . '%'))
+                );
+            }
+
+            $qb->andWhere($modelConditions);
+        }
+
+        // Apply ordering
+        if (!empty($filters['orderBy'])) {
+            switch ($filters['orderBy']) {
+                case 'score_DESC':
+                    $qb->orderBy('AVG(r.rating)', 'DESC');
+                    break;
+                case 'price_ASC':
+                    $qb->orderBy('p.price', 'ASC');
+                    break;
+                case 'price_DESC':
+                    $qb->orderBy('p.price', 'DESC');
+                    break;
+                case 'brand_ASC':
+                    $qb->orderBy('p.label', 'ASC');
+                    break;
+            }
+        }
+
+        return $qb;
     }
 
     public function findProductsBySearchQuery(string $query)
