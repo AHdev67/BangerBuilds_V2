@@ -19,25 +19,60 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProductController extends AbstractController
 {
 
-
     //  RETURNS LIST OF PRODUCTS BY CATEGORY
 
+    // #[Route('/category/{categoryId}/products', name: 'app_product')]
+    // public function index(#[MapEntity(id: 'categoryId')] Category $category, ProductRepository $productRepository, Array $filters = null, PaginatorInterface $paginator, Request $request): Response
+    // {
+    //     if (!$filters){
+    //         $filters = [
+    //             "orderBy" => null,
+    //             "filterByBrand" => null,
+    //             "filterByGen" => null,
+    //             "filterByModel" => null
+    //         ];
+    //         $products = $paginator->paginate(
+    //             $productRepository->findByCategoryOrderedByRating($category),
+    //             $request->query->getInt('page', 1), /*page number*/
+    //             10 /*limit per page*/
+    //         );
+    //     }
+
+    //     $form = $this->createForm(FilterType::class, $filters, ['category' => $category]);
+
+    //     $form->handleRequest($request);
+
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $filters = [
+    //             "orderBy" => $form->get('orderBy')->getData(),
+    //             "filterByBrand" => $form->get('filterByBrand')->getData(),
+    //             "filterByGen" => $form->get('filterByGeneration')->getData(),
+    //             "filterByModel" => $form->get('filterByModel')->getData(),
+    //         ];
+
+    //         // ADD FILTERING INSTRUCTIONS HERE
+    //     }
+        
+    //     return $this->render('product/list_products.html.twig', [
+    //         'formFilters' => $form->createView(),
+    //         'filters' => $filters,
+    //         'category' => $category,
+    //         'products' => $products
+    //     ]);
+    // }
+
+    // NON FUNCTIONNAL VERSION OF APP_PRODUCTS USING FILTERING
+
     #[Route('/category/{categoryId}/products', name: 'app_product')]
-    public function index(#[MapEntity(id: 'categoryId')] Category $category, ProductRepository $productRepository, Array $filters = null, PaginatorInterface $paginator, Request $request): Response
+    public function index(#[MapEntity(id: 'categoryId')] Category $category, ProductRepository $productRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        if (!$filters){
-            $filters = [
-                "orderBy" => null,
-                "filterByBrand" => null,
-                "filterByGen" => null,
-                "filterByModel" => null
-            ];
-            $products = $paginator->paginate(
-                $productRepository->findByCategoryOrderedByRating($category),
-                $request->query->getInt('page', 1), /*page number*/
-                10 /*limit per page*/
-            );
-        }
+        // Initialize filters with null values
+        $filters = [
+            "orderBy" => null,
+            "filterByBrand" => null,
+            "filterByGen" => null,
+            "filterByModel" => null
+        ];
 
         $form = $this->createForm(FilterType::class, $filters, ['category' => $category]);
 
@@ -51,9 +86,17 @@ class ProductController extends AbstractController
                 "filterByModel" => $form->get('filterByModel')->getData(),
             ];
 
-            return $this->redirectToRoute('app_product', ['categoryId'=>$category->getId()]);
+            $queryBuilder = $productRepository->findByFilters($category, $filters);
+        } else {
+            $queryBuilder = $productRepository->getBaseQueryBuilderForCategory($category);
         }
-        
+
+        $products = $paginator->paginate(
+            $queryBuilder->getQuery(),
+            $request->query->getInt('page', 1),
+            10
+        );
+
         return $this->render('product/list_products.html.twig', [
             'formFilters' => $form->createView(),
             'filters' => $filters,
