@@ -22,10 +22,10 @@ class FilterType extends AbstractType
             ->add('orderBy', ChoiceType::class, [
                 'label' => 'Order products by :',
                 'choices' => [
-                    'Highest price' => 'price_ASC',
-                    'Lowest price' => 'price_DESC',
+                    'Score' => 'score_DESC',
+                    'Highest price' => 'price_DESC',
+                    'Lowest price' => 'price_ASC',
                     'Manufacturer' => 'brand_ASC',
-                    'Score' => 'score_ASC',
                 ],
             ])
 
