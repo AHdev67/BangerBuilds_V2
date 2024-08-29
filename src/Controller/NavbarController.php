@@ -43,14 +43,22 @@ class NavbarController extends AbstractController
     public function search(Request $request): JsonResponse
     {
         $searchQuery = strtolower($request->query->get('searchQuery'));
-        $results = [];
+        $results = $this->entityManager->getRepository(Product::class)->findProductsBySearchQuery($searchQuery);
 
         $this->logger->info('searching for : ', ['searchQuery' => $searchQuery]);
 
-        $results = $this->entityManager->getRepository(Product::class)->findProductsBySearchQuery($searchQuery);
-        $this->logger->info('Products fetched', ['products' => $results]);
+        // Extract only the necessary data to avoid circular references
+        $simpleResults = array_map(function($product) {
+            return [
+                'id' => $product->getId(),
+                'label' => $product->getLabel(),
+                // Add other necessary fields here
+            ];
+        }, $results);
 
-        return $this->json($results);
+        $this->logger->info('Products fetched', ['products' => $simpleResults]);
+
+        return $this->json($simpleResults);
     }
 
     #[Route('/search/{slug}', name: 'show_results')]
