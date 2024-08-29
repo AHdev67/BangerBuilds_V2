@@ -62,14 +62,22 @@ class UserController extends AbstractController
     {
         $user = $this->getUser();
 
+        $user->setUsername('deleted_user');
+        $user->setEmail('anon_' . $user->getId() . '@email.com');
+
+        $userReviews = $user->getReviews();
+        foreach ($userReviews as $review) {
+            $review -> setTitle('anonymized_review');
+            $review -> setContent('The author`s account has been closed, as such this review is no longer available.');
+        }
+
         // Invalidate the session
         $request->getSession()->invalidate();
 
         // Clear the security token
         $tokenStorage->setToken(null);
 
-        // Remove the user from the database
-        $entityManager->remove($user);
+        // Persist changes
         $entityManager->flush();
 
         // Redirect to the homepage or login page
