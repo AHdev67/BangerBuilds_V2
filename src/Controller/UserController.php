@@ -64,11 +64,21 @@ class UserController extends AbstractController
 
         $user->setUsername('deleted_user');
         $user->setEmail('anon_' . $user->getId() . '@email.com');
+        $user->setRoles(['DELETED_USER']);
 
         $userReviews = $user->getReviews();
         foreach ($userReviews as $review) {
             $review -> setTitle('anonymized_review');
             $review -> setContent('The author`s account has been closed, as such this review is no longer available.');
+        }
+
+        $userOrders = $user ->getOrders();
+        foreach ($userOrders as $order) {
+            $order->setLastName('anonymized_data');
+            $order->setFirstName('anonymized_data');
+            $order->setAdress('anonymized_data');
+            $order->setCity('anonymized_data');
+            $order->setPostalCode('anonymized_data');
         }
 
         // Invalidate the session
